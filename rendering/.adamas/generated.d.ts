@@ -124,6 +124,27 @@ export interface SceneGraph
         "@WaterBottle": {
             entityId: Entity
         }
+    },
+    "@FlightHelmet": {
+        entityId: Entity,
+        "@Hose_low": {
+            entityId: Entity
+        },
+        "@RubberWood_low": {
+            entityId: Entity
+        },
+        "@GlassPlastic_low": {
+            entityId: Entity
+        },
+        "@MetalParts_low": {
+            entityId: Entity
+        },
+        "@LeatherParts_low": {
+            entityId: Entity
+        },
+        "@Lenses_low": {
+            entityId: Entity
+        }
     }
 }
 }

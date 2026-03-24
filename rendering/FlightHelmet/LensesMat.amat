@@ -1,0 +1,83 @@
+{
+    "name": "LensesMat",
+    "uuid": "31f8e9a5-e52a-415b-bd8f-49f11b1f3e84",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1
+    },
+    "baseColorMap": "efe73bd8-35d4-48ee-9a2f-2a5f70d868d0",
+    "baseColorTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "normalScale": 1.4142135623730951,
+    "normalMap": "08a99ec6-e97a-49cc-9222-6923bf7670f3",
+    "normalTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "emission": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+    },
+    "emissionIntensity": 1,
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 1,
+    "roughness": 1,
+    "metallicRoughnessMap": "fe862c6e-e4fb-4f7c-9a9f-94b08d3f4079",
+    "metallicRoughnessTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "occlusionStrength": 1,
+    "occlusionMap": "fe862c6e-e4fb-4f7c-9a9f-94b08d3f4079",
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Blend",
+    "alphaCutoff": 0
+}

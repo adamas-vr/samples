@@ -335,3 +335,115 @@ declare module "adamasvr:assets/WaterBottle/texture (3).atex" {
 	const value: import("@adamasvr/sdk").TextureAsset;
 	export default value;
 }
+declare module "adamasvr:assets/FlightHelmet/GlassPlasticMat.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/LensesMat.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/LeatherPartsMat.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/GlassPlastic_low.amesh" {
+	const value: import("@adamasvr/sdk").MeshAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/Lenses_low.amesh" {
+	const value: import("@adamasvr/sdk").MeshAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/MetalPartsMat.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/HoseMat.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/RubberWoodMat.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/Hose_low.amesh" {
+	const value: import("@adamasvr/sdk").MeshAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/MetalParts_low.amesh" {
+	const value: import("@adamasvr/sdk").MeshAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/LeatherParts_low.amesh" {
+	const value: import("@adamasvr/sdk").MeshAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/RubberWood_low.amesh" {
+	const value: import("@adamasvr/sdk").MeshAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_RubberWoodMat_BaseColor.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_GlassPlasticMat_BaseColor.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_MetalPartsMat_BaseColor.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_LeatherPartsMat_BaseColor.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_LensesMat_BaseColor.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_RubberWoodMat_Normal.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_GlassPlasticMat_Normal.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_MetalPartsMat_Normal.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_LensesMat_Normal.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_LeatherPartsMat_Normal.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_RubberWoodMat_OcclusionRoughMetal.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_GlassPlasticMat_OcclusionRoughMetal.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_MetalPartsMat_OcclusionRoughMetal.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_LeatherPartsMat_OcclusionRoughMetal.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet_Materials_LensesMat_OcclusionRoughMetal.atex" {
+	const value: import("@adamasvr/sdk").TextureAsset;
+	export default value;
+}
+declare module "adamasvr:assets/FlightHelmet/FlightHelmet.afab" {
+	const value: import("@adamasvr/sdk").PrefabAsset;
+	export default value;
+}

@@ -1,0 +1,390 @@
+{
+    "name": "FlightHelmet",
+    "uuid": "e2a60656-0785-4849-8aae-8a742e817f54",
+    "dirty": false,
+    "assetType": "Prefab",
+    "rootEntity": "d9c1ab0a-b377-42da-9dba-c561f83b8618",
+    "entities": {
+        "__type": "Set",
+        "value": [
+            "d9c1ab0a-b377-42da-9dba-c561f83b8618",
+            "711b6428-4c5d-4b3f-af0b-98a04c93e306",
+            "816fb9df-6f55-477a-89c4-2062acf13698",
+            "02edf19e-decb-4d19-8209-069968b185a2",
+            "0460be7e-3081-43aa-b26f-451ee2270812",
+            "b241ade1-8799-4f6f-97ac-1225c8acc61c",
+            "e53003e4-0716-42c6-89f3-17cc2fe90f3d"
+        ]
+    },
+    "properties": {
+        "__type": "Map",
+        "value": [
+            [
+                "d9c1ab0a-b377-42da-9dba-c561f83b8618",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "FlightHelmet",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "711b6428-4c5d-4b3f-af0b-98a04c93e306",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Hose_low",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "816fb9df-6f55-477a-89c4-2062acf13698",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "RubberWood_low",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "02edf19e-decb-4d19-8209-069968b185a2",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "GlassPlastic_low",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "0460be7e-3081-43aa-b26f-451ee2270812",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "MetalParts_low",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "b241ade1-8799-4f6f-97ac-1225c8acc61c",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "LeatherParts_low",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "e53003e4-0716-42c6-89f3-17cc2fe90f3d",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Lenses_low",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ]
+        ]
+    },
+    "transforms": {
+        "__type": "Map",
+        "value": [
+            [
+                "711b6428-4c5d-4b3f-af0b-98a04c93e306",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "d9c1ab0a-b377-42da-9dba-c561f83b8618",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "816fb9df-6f55-477a-89c4-2062acf13698",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "d9c1ab0a-b377-42da-9dba-c561f83b8618",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "02edf19e-decb-4d19-8209-069968b185a2",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "d9c1ab0a-b377-42da-9dba-c561f83b8618",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "0460be7e-3081-43aa-b26f-451ee2270812",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "d9c1ab0a-b377-42da-9dba-c561f83b8618",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "b241ade1-8799-4f6f-97ac-1225c8acc61c",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "d9c1ab0a-b377-42da-9dba-c561f83b8618",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "e53003e4-0716-42c6-89f3-17cc2fe90f3d",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "d9c1ab0a-b377-42da-9dba-c561f83b8618",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "d9c1ab0a-b377-42da-9dba-c561f83b8618",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "00000000-0000-0000-0000-000000000000",
+                    "children": [
+                        "711b6428-4c5d-4b3f-af0b-98a04c93e306",
+                        "816fb9df-6f55-477a-89c4-2062acf13698",
+                        "02edf19e-decb-4d19-8209-069968b185a2",
+                        "0460be7e-3081-43aa-b26f-451ee2270812",
+                        "b241ade1-8799-4f6f-97ac-1225c8acc61c",
+                        "e53003e4-0716-42c6-89f3-17cc2fe90f3d"
+                    ],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ]
+        ]
+    },
+    "renderables": {
+        "__type": "Map",
+        "value": [
+            [
+                "711b6428-4c5d-4b3f-af0b-98a04c93e306",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "497a087d-cde2-4ff8-bac1-5a96badc765c",
+                    "materialList": [
+                        "c195a2d7-bbbd-4224-a594-98a6dcf8790f"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "816fb9df-6f55-477a-89c4-2062acf13698",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "db1a9d7a-a0ef-4a2e-a712-c726da42e74a",
+                    "materialList": [
+                        "f506aa36-51ff-4617-b14a-c32e9aec2a99"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": true
+                }
+            ],
+            [
+                "02edf19e-decb-4d19-8209-069968b185a2",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "00dd7b1d-fe15-440e-acd8-ac3437b855d1",
+                    "materialList": [
+                        "c6065efe-5e03-45ed-b2cf-4a3d4dee2332"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": true
+                }
+            ],
+            [
+                "0460be7e-3081-43aa-b26f-451ee2270812",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "79cfbc29-bda3-47c3-aaa8-bd478a92be0b",
+                    "materialList": [
+                        "d6ae8ed3-8d1f-45bd-8767-495b8ea7799d"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": true
+                }
+            ],
+            [
+                "b241ade1-8799-4f6f-97ac-1225c8acc61c",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "79e750a6-6721-47a1-92e1-e4a3c50d9d79",
+                    "materialList": [
+                        "05b94bc6-1d38-41dd-afeb-01f858365e98"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": true
+                }
+            ],
+            [
+                "e53003e4-0716-42c6-89f3-17cc2fe90f3d",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "cac79c7a-fa35-4f6a-aab7-20576a72ce45",
+                    "materialList": [
+                        "31f8e9a5-e52a-415b-bd8f-49f11b1f3e84"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 0,
+                    "culling": true
+                }
+            ]
+        ]
+    },
+    "grabbles": {
+        "__type": "Map",
+        "value": []
+    },
+    "rigidbodies": {
+        "__type": "Map",
+        "value": []
+    },
+    "lights": {
+        "__type": "Map",
+        "value": []
+    },
+    "cameras": {
+        "__type": "Map",
+        "value": []
+    },
+    "colliders": {
+        "__type": "Map",
+        "value": []
+    }
+}
