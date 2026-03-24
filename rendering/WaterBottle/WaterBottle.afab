@@ -1,0 +1,135 @@
+{
+    "name": "WaterBottle",
+    "uuid": "9cf83a6a-3afa-41b7-b7c0-4447e03d27c5",
+    "dirty": false,
+    "assetType": "Prefab",
+    "rootEntity": "04c1b760-b1fb-4436-929b-f66ccfe2bcd0",
+    "entities": {
+        "__type": "Set",
+        "value": [
+            "04c1b760-b1fb-4436-929b-f66ccfe2bcd0",
+            "c0da316b-b16a-4ea1-a185-0162faf044ac"
+        ]
+    },
+    "properties": {
+        "__type": "Map",
+        "value": [
+            [
+                "04c1b760-b1fb-4436-929b-f66ccfe2bcd0",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "WaterBottle",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "c0da316b-b16a-4ea1-a185-0162faf044ac",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "WaterBottle",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ]
+        ]
+    },
+    "transforms": {
+        "__type": "Map",
+        "value": [
+            [
+                "c0da316b-b16a-4ea1-a185-0162faf044ac",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "04c1b760-b1fb-4436-929b-f66ccfe2bcd0",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        -3.141592653589793,
+                        0,
+                        -3.141592653589793
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "04c1b760-b1fb-4436-929b-f66ccfe2bcd0",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "00000000-0000-0000-0000-000000000000",
+                    "children": [
+                        "c0da316b-b16a-4ea1-a185-0162faf044ac"
+                    ],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ]
+        ]
+    },
+    "renderables": {
+        "__type": "Map",
+        "value": [
+            [
+                "c0da316b-b16a-4ea1-a185-0162faf044ac",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "46377f56-2406-4980-bda8-272e22e59ce2",
+                    "materialList": [
+                        "4e45d721-d1d1-4dd3-8282-b6e4713b6ab4"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": true
+                }
+            ]
+        ]
+    },
+    "grabbles": {
+        "__type": "Map",
+        "value": []
+    },
+    "rigidbodies": {
+        "__type": "Map",
+        "value": []
+    },
+    "lights": {
+        "__type": "Map",
+        "value": []
+    },
+    "cameras": {
+        "__type": "Map",
+        "value": []
+    },
+    "colliders": {
+        "__type": "Map",
+        "value": []
+    }
+}

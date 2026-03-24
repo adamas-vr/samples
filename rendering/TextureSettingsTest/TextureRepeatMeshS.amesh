@@ -1,0 +1,28 @@
+{
+    "name": "TextureRepeatMeshS",
+    "uuid": "c217db81-de38-4f40-b370-05b3450dcaf5",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAwAEAAUAAAAGAAEAAwAHAAQA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "IqRnP6ZtsbQycgPA/t2eO6ZtsbQxsZO//t2eO6ZtsbQycgPA1T9DQKZtsbQycgPAO6YJQKZtsbQxsZO/O6YJQKZtsbQycgPAIqRnP6ZtsbQxsZO/1T9DQKZtsbQxsZO/"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "Uz68PzJQUT+Xq5s/uSoQP5ermz8yUFE/F+3uPh7LTj9NRFk+paUNP01EWT4ey04/Uz68P7kqED8X7e4+paUNPw=="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

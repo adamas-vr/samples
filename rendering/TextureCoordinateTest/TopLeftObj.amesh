@@ -1,0 +1,28 @@
+{
+    "name": "TopLeftObj",
+    "uuid": "03bfe143-74b9-4ca8-ac3f-59ec6b99f6f9",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAwABAAAA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "0cxMvsnMTD7okl+zm5mZv5iZmT/aFiu0mZmZv7zMTD7ZTgc03sxMvpqZmT82JbW0"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "kDM/NNoymTQAAIA/kDM/NNoymTQAAIA/kDM/NNoymTQAAIA/kDM/NNoymTQAAIA/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "y8zMPszMzD7a+qkzAAAAANr6qTPMzMw+y8zMPgAAAAA="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

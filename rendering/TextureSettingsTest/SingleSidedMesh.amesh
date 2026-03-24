@@ -1,0 +1,28 @@
+{
+    "name": "SingleSidedMesh",
+    "uuid": "e272652c-30ef-49a0-b6cd-2007becf3679",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAwAEAAUABgAHAAgAAAAJAAEAAwAKAAQABgALAAcA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "IqRnP6ZtsbRrDwZA/t2eO6ZtsbQEqT9A/t2eO6ZtsbRrDwZA1T9DQKZtsbRrDwZAO6YJQKZtsbQEqT9AO6YJQKZtsbRrDwZA/t2eO/XMzL1rDwZAIqRnP/XMzL0EqT9AIqRnP/XMzL1rDwZAIqRnP6ZtsbQEqT9A1T9DQKZtsbQEqT9A/t2eO/XMzL0EqT9A"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgD8AAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "F+3uPh7LTj9NRFk+paUNP01EWT4ey04/F+3uPh7LTj9NRFk+paUNP01EWT4ey04//IFMP7ySUj+EXAs/RG0RP4RcCz+8klI/F+3uPqWlDT8X7e4+paUNP/yBTD9EbRE/"
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

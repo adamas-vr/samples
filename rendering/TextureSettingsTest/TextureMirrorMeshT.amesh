@@ -1,0 +1,28 @@
+{
+    "name": "TextureMirrorMeshT",
+    "uuid": "d05e4892-5df6-4fd1-b35b-795cd6e45d3f",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAwAEAAUAAAAGAAEAAwAHAAQA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "IqRnP6ZtsbRpRqXA/t2eO6ZtsbSceYjA/t2eO6ZtsbRpRqXA1T9DQKZtsbRpRqXAO6YJQKZtsbSceYjAO6YJQKZtsbRpRqXAIqRnP6ZtsbSceYjA1T9DQKZtsbSceYjA"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "56tMP8x5Sr9uhgs/Lt4Hv26GCz/MeUq/t+BLP38DSz8+uwo/Bt4JPz67Cj9/A0s/56tMPy7eB7+34Es/Bt4JPw=="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

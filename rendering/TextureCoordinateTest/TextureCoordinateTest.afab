@@ -1,0 +1,339 @@
+{
+    "name": "TextureCoordinateTest",
+    "uuid": "08e7aa3a-4001-433c-927c-d5a876c10cc2",
+    "dirty": false,
+    "assetType": "Prefab",
+    "rootEntity": "12c1d783-72e7-4769-80dc-39cbd2fbc919",
+    "entities": {
+        "__type": "Set",
+        "value": [
+            "12c1d783-72e7-4769-80dc-39cbd2fbc919",
+            "f5ebfceb-da47-480e-baf6-e67eedf16e1f",
+            "9bd4a551-8110-496a-b2a8-7097f38d5eb4",
+            "91d36ea4-9cd0-4334-9aae-fa070f55adae",
+            "9385a05b-6127-42b7-8987-6f179eac1bca",
+            "a42eb8e6-0a4e-4ce2-b3cb-3e0908b207ae"
+        ]
+    },
+    "properties": {
+        "__type": "Map",
+        "value": [
+            [
+                "12c1d783-72e7-4769-80dc-39cbd2fbc919",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "TextureCoordinateTest",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "f5ebfceb-da47-480e-baf6-e67eedf16e1f",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "BackPlane",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "9bd4a551-8110-496a-b2a8-7097f38d5eb4",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "BottomRightObj",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "91d36ea4-9cd0-4334-9aae-fa070f55adae",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "BottomLeftObj",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "9385a05b-6127-42b7-8987-6f179eac1bca",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "TopRightObj",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "a42eb8e6-0a4e-4ce2-b3cb-3e0908b207ae",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "TopLeftObj",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ]
+        ]
+    },
+    "transforms": {
+        "__type": "Map",
+        "value": [
+            [
+                "f5ebfceb-da47-480e-baf6-e67eedf16e1f",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "12c1d783-72e7-4769-80dc-39cbd2fbc919",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "9bd4a551-8110-496a-b2a8-7097f38d5eb4",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "12c1d783-72e7-4769-80dc-39cbd2fbc919",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "91d36ea4-9cd0-4334-9aae-fa070f55adae",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "12c1d783-72e7-4769-80dc-39cbd2fbc919",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "9385a05b-6127-42b7-8987-6f179eac1bca",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "12c1d783-72e7-4769-80dc-39cbd2fbc919",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "a42eb8e6-0a4e-4ce2-b3cb-3e0908b207ae",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "12c1d783-72e7-4769-80dc-39cbd2fbc919",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "12c1d783-72e7-4769-80dc-39cbd2fbc919",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "00000000-0000-0000-0000-000000000000",
+                    "children": [
+                        "f5ebfceb-da47-480e-baf6-e67eedf16e1f",
+                        "9bd4a551-8110-496a-b2a8-7097f38d5eb4",
+                        "91d36ea4-9cd0-4334-9aae-fa070f55adae",
+                        "9385a05b-6127-42b7-8987-6f179eac1bca",
+                        "a42eb8e6-0a4e-4ce2-b3cb-3e0908b207ae"
+                    ],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ]
+        ]
+    },
+    "renderables": {
+        "__type": "Map",
+        "value": [
+            [
+                "f5ebfceb-da47-480e-baf6-e67eedf16e1f",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "94320286-f57a-43ed-912c-2c2d4ba79027",
+                    "materialList": [
+                        "14494d50-1791-434e-b7e2-26a60036be49"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "9bd4a551-8110-496a-b2a8-7097f38d5eb4",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "e9df8ebc-583a-4646-a63e-222c680b4360",
+                    "materialList": [
+                        "df9b4c34-8c09-4f2d-bc16-0ddcc3958e29"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "91d36ea4-9cd0-4334-9aae-fa070f55adae",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "d535de04-d311-4ffe-a1d9-6329ff5f8dd1",
+                    "materialList": [
+                        "1c199794-d9e9-440b-9f70-a25d770e838a"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "9385a05b-6127-42b7-8987-6f179eac1bca",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "46951b08-a533-4ac6-a876-06c1f770168e",
+                    "materialList": [
+                        "e799a3e4-05b9-4924-b860-fd91eeaeea60"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "a42eb8e6-0a4e-4ce2-b3cb-3e0908b207ae",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "03bfe143-74b9-4ca8-ac3f-59ec6b99f6f9",
+                    "materialList": [
+                        "07b62119-033c-434a-b23b-663eac0eee74"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ]
+        ]
+    },
+    "grabbles": {
+        "__type": "Map",
+        "value": []
+    },
+    "rigidbodies": {
+        "__type": "Map",
+        "value": []
+    },
+    "lights": {
+        "__type": "Map",
+        "value": []
+    },
+    "cameras": {
+        "__type": "Map",
+        "value": []
+    },
+    "colliders": {
+        "__type": "Map",
+        "value": []
+    }
+}

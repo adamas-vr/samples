@@ -1,0 +1,24 @@
+{
+    "name": "BackPlane",
+    "uuid": "94320286-f57a-43ed-912c-2c2d4ba79027",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAAADAAEA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "AQCAv/3/fz/SaVe9AQCAP/3/f7+qaVe9/f9/vwEAgL+qaVe9/f9/PwEAgD/SaVe9"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AgBAKAEAoLMAAIC/AgBAKAEAoLMAAIC/AgBAKAEAoLMAAIC/AgBAKAEAoLMAAIC/"
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

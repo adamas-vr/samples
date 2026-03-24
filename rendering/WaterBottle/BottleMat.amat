@@ -1,0 +1,84 @@
+{
+    "name": "BottleMat",
+    "uuid": "4e45d721-d1d1-4dd3-8282-b6e4713b6ab4",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1
+    },
+    "baseColorMap": "95bfe207-8868-456a-ac46-7d7ea2ff9c3b",
+    "baseColorTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "normalScale": 1.4142135623730951,
+    "normalMap": "43c1d963-789d-4c34-9961-cdf367868089",
+    "normalTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "emission": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+    },
+    "emissionIntensity": 1,
+    "emissionMap": "0c04ec87-e10f-4e9f-aee6-7a395acf91f7",
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 1,
+    "roughness": 1,
+    "metallicRoughnessMap": "086641eb-cf8c-4343-b525-ee21ea84e66b",
+    "metallicRoughnessTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "occlusionStrength": 1,
+    "occlusionMap": "086641eb-cf8c-4343-b525-ee21ea84e66b",
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Opaque",
+    "alphaCutoff": 0
+}

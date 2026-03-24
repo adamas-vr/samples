@@ -1,0 +1,28 @@
+{
+    "name": "TextureClampMeshS",
+    "uuid": "4ed19c13-6921-4b2b-a6dc-06b5a214e4af",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAwAEAAUAAAAGAAEAAwAHAAQA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "IqRnP6ZtsbR8R448/t2eO6ZtsbSl2Go//t2eO6ZtsbR8R4481T9DQKZtsbR8R448O6YJQKZtsbSl2Go/O6YJQKZtsbR8R448IqRnP6ZtsbSl2Go/1T9DQKZtsbSl2Go/"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "hq/NPzSnyz5o6rE/XCU5PmjqsT80p8s+AAB+P3pszD4AgHw/nJA6PgCAfD96bMw+hq/NP1wlOT4AAH4/nJA6Pg=="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

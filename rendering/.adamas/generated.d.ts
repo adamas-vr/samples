@@ -34,6 +34,96 @@ export interface SceneGraph
         "@Bed": {
             entityId: Entity
         }
+    },
+    "@MetalRoughSpheres": {
+        entityId: Entity,
+        "@New Entity": {
+            entityId: Entity,
+            "@Spheres001": {
+                entityId: Entity
+            },
+            "@Spheres002": {
+                entityId: Entity
+            },
+            "@Spheres003": {
+                entityId: Entity
+            },
+            "@Spheres004": {
+                entityId: Entity
+            },
+            "@Spheres": {
+                entityId: Entity
+            }
+        }
+    },
+    "@NormalTangentTest": {
+        entityId: Entity,
+        "@New Entity": {
+            entityId: Entity,
+            "@NormalTangentTest_low": {
+                entityId: Entity
+            }
+        }
+    },
+    "@TextureCoordinateTest": {
+        entityId: Entity,
+        "@BackPlane": {
+            entityId: Entity
+        },
+        "@BottomRightObj": {
+            entityId: Entity
+        },
+        "@BottomLeftObj": {
+            entityId: Entity
+        },
+        "@TopRightObj": {
+            entityId: Entity
+        },
+        "@TopLeftObj": {
+            entityId: Entity
+        }
+    },
+    "@TextureSettingsTest": {
+        entityId: Entity,
+        "@New Entity": {
+            entityId: Entity,
+            "@BackgroundMesh": {
+                entityId: Entity
+            },
+            "@LabelMesh": {
+                entityId: Entity
+            },
+            "@SingleSidedMesh": {
+                entityId: Entity
+            },
+            "@DoubleSidedMesh": {
+                entityId: Entity
+            },
+            "@TextureClampMeshS": {
+                entityId: Entity
+            },
+            "@TextureRepeatMeshS": {
+                entityId: Entity
+            },
+            "@TextureClampMeshT": {
+                entityId: Entity
+            },
+            "@TextureRepeatMeshT": {
+                entityId: Entity
+            },
+            "@TextureMirrorMeshS": {
+                entityId: Entity
+            },
+            "@TextureMirrorMeshT": {
+                entityId: Entity
+            }
+        }
+    },
+    "@WaterBottle": {
+        entityId: Entity,
+        "@WaterBottle": {
+            entityId: Entity
+        }
     }
 }
 }

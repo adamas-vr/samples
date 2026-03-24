@@ -1,0 +1,24 @@
+{
+    "name": "BackgroundMesh",
+    "uuid": "caf4b4e3-0b77-4acf-b6c1-1fe67d759d16",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAwAEAAUAAAAGAAEAAwAHAAQA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "byylQM3MzD02y7PAbyylwM3MzD1gg45AbyylwM3MzD02y7PAbyylwHiZGT42y7PAbyylQLWZGT5gg45AbyylQLWZGT42y7PAbyylQM3MzD1gg45AbyylwHiZGT5gg45A"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgD8AAAAA"
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

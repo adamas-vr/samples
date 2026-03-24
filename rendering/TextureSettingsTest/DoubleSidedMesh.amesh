@@ -1,0 +1,28 @@
+{
+    "name": "DoubleSidedMesh",
+    "uuid": "6a47b3f5-08ae-4e4d-a76e-b0014cb24c42",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAwAEAAUABgAHAAgAAAAJAAEAAwAKAAQABgALAAcA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "f96eO/XMzL03/og/JKRnP/XMzL1qMfw/JKRnP/XMzL03/og/1T9DQKZtsbQ3/og/O6YJQKZtsbRqMfw/O6YJQKZtsbQ3/og/JKRnPwkAiLQ3/og/f96eO+7/37RqMfw/f96eO+7/37Q3/og/f96eO/XMzL1qMfw/1T9DQKZtsbRqMfw/JKRnPwkAiLRqMfw/"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAI45DNAAAgL8AAAAAI45DNAAAgL8AAAAAI45DNAAAgL8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgL8AAAAAI45DNAAAgL8AAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "UGNkPuyuUD8joOo+dokPPyOg6j7srlA/F+3uPh7LTj9NRFk+paUNP01EWT4ey04//IFMP7ySUj+EXAs/RG0RP4RcCz+8klI/UGNkPnaJDz8X7e4+paUNP/yBTD9EbRE/"
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}
