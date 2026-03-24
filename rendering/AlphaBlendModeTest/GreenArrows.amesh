@@ -1,0 +1,28 @@
+{
+    "name": "GreenArrows",
+    "uuid": "a7bba2ed-2a25-4817-b55e-d1553bed6144",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAwAEAAUABgAHAAgA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "AADAPwAAAAAAAACAH4XLP1yPwr0AAACAH4XLP1yPwj0AAACAAAAAAMzZxj4AAACA8FG4PfU1lj4AAACA8FG4PaN99z4AAACAAABAQOrvxb4AAACAkMJFQMGT9r4AAACAkMJFQBNMlb4AAACA"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAgAAAAIAAAIA/AAAAgAAAAIAAAIA/AAAAgAAAAIAAAIA/AAAAgAAAAIAAAIA/AAAAgAAAAIAAAIA/AAAAgAAAAIAAAIA/AAAAgAAAAIAAAIA/AAAAgAAAAIAAAIA/AAAAgAAAAIAAAIA/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "pzlQP+69HD/BIFE/7qIdP8EgUT840Rs/pzlQP+69HD/BIFE/7qIdP8EgUT840Rs/pzlQP+69HD/BIFE/7qIdP8EgUT840Rs/"
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

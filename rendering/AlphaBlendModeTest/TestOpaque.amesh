@@ -1,0 +1,28 @@
+{
+    "name": "TestOpaque",
+    "uuid": "644ebcb4-8d80-4b3a-8b26-3a92843d015c",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAAADAAEA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "zcwMP/Qo/D8AAACAzcwMv9jMzD0AAACAzcwMP9jMzD0AAACAzcwMv/Qo/D8AAACA"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "zcwsP9DMTD0PAAA+9ih8P83MLD/2KHw/DwAAPtDMTD0="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

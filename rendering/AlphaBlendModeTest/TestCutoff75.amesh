@@ -1,0 +1,28 @@
+{
+    "name": "TestCutoff75",
+    "uuid": "8beb9087-b267-4843-96bd-534834a12d51",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAAADAAEA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "zcwMP/Qo/D8AAACAzcwMv9jMzD0AAACAzcwMP9jMzD0AAACAzcwMv/Qo/D8AAACA"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "zcwsP9DMTD0PAAA+9ih8P83MLD/2KHw/DwAAPtDMTD0="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

@@ -25,11 +25,123 @@
     "scene": {
         "entities": {
             "__type": "Set",
-            "value": []
+            "value": [
+                "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                "438d2ba8-4941-4e41-a214-66f8b7ac3428",
+                "6d66b570-f845-4b36-b044-80a841197393",
+                "0d717043-3193-4b9e-82b3-a864e400ef4d",
+                "bec30268-9cc8-4055-af3c-719038769fc5",
+                "72c0797e-04f7-490f-b80e-14ce08bd0674",
+                "842af2b1-604f-4379-9af5-f3b38e15851f",
+                "8e3f99e0-0a9d-4e78-9591-2ee96264a2a3",
+                "14bd6cbc-f6a5-4f51-9db3-f22cf0030d94",
+                "d93cfae0-2e46-4706-892d-dbf5d1c56327"
+            ]
         },
         "properties": {
             "__type": "Map",
-            "value": []
+            "value": [
+                [
+                    "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "AlphaBlendModeTest",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "438d2ba8-4941-4e41-a214-66f8b7ac3428",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "DecalOpaque",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "6d66b570-f845-4b36-b044-80a841197393",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "TestBlend",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "0d717043-3193-4b9e-82b3-a864e400ef4d",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "TestOpaque",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "bec30268-9cc8-4055-af3c-719038769fc5",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "GreenArrows",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "72c0797e-04f7-490f-b80e-14ce08bd0674",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "DecalBlend",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "842af2b1-604f-4379-9af5-f3b38e15851f",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "TestCutoff75",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "8e3f99e0-0a9d-4e78-9591-2ee96264a2a3",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "TestCutoffDefault",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "14bd6cbc-f6a5-4f51-9db3-f22cf0030d94",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "TestCutoff25",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "d93cfae0-2e46-4706-892d-dbf5d1c56327",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "Bed",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ]
+            ]
         },
         "transforms": {
             "__type": "Map",
@@ -40,7 +152,269 @@
                         "componentType": "Transform",
                         "enabled": true,
                         "parent": "00000000-0000-0000-0000-000000000000",
+                        "children": [
+                            "7c6738c4-0fee-4fa0-9a4e-8abe6126d023"
+                        ],
+                        "localPosition": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "438d2ba8-4941-4e41-a214-66f8b7ac3428",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
                         "children": [],
+                        "localPosition": [
+                            0,
+                            0,
+                            0.4090207517147064
+                        ],
+                        "localRotation": [
+                            -0.982795091588629,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "6d66b570-f845-4b36-b044-80a841197393",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                        "children": [],
+                        "localPosition": [
+                            -1.5,
+                            0,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "0d717043-3193-4b9e-82b3-a864e400ef4d",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                        "children": [],
+                        "localPosition": [
+                            -3,
+                            0,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "bec30268-9cc8-4055-af3c-719038769fc5",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                        "children": [],
+                        "localPosition": [
+                            0.5,
+                            1.068150520324707,
+                            0.004999999888241291
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "72c0797e-04f7-490f-b80e-14ce08bd0674",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                        "children": [],
+                        "localPosition": [
+                            0,
+                            0,
+                            0.4090209901332855
+                        ],
+                        "localRotation": [
+                            -0.982795091588629,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "842af2b1-604f-4379-9af5-f3b38e15851f",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                        "children": [],
+                        "localPosition": [
+                            3,
+                            0,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "8e3f99e0-0a9d-4e78-9591-2ee96264a2a3",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                        "children": [],
+                        "localPosition": [
+                            1.5,
+                            0,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "14bd6cbc-f6a5-4f51-9db3-f22cf0030d94",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                        "children": [],
+                        "localPosition": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "d93cfae0-2e46-4706-892d-dbf5d1c56327",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                        "children": [],
+                        "localPosition": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "7c6738c4-0fee-4fa0-9a4e-8abe6126d023",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "00000000-0000-0000-0000-000000000000",
+                        "children": [
+                            "bec30268-9cc8-4055-af3c-719038769fc5",
+                            "72c0797e-04f7-490f-b80e-14ce08bd0674",
+                            "438d2ba8-4941-4e41-a214-66f8b7ac3428",
+                            "842af2b1-604f-4379-9af5-f3b38e15851f",
+                            "8e3f99e0-0a9d-4e78-9591-2ee96264a2a3",
+                            "14bd6cbc-f6a5-4f51-9db3-f22cf0030d94",
+                            "6d66b570-f845-4b36-b044-80a841197393",
+                            "0d717043-3193-4b9e-82b3-a864e400ef4d",
+                            "d93cfae0-2e46-4706-892d-dbf5d1c56327"
+                        ],
                         "localPosition": [
                             0,
                             0,
@@ -63,7 +437,134 @@
         },
         "renderables": {
             "__type": "Map",
-            "value": []
+            "value": [
+                [
+                    "bec30268-9cc8-4055-af3c-719038769fc5",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "a7bba2ed-2a25-4817-b55e-d1553bed6144",
+                        "materialList": [
+                            "0c44cf43-8891-4130-81e9-aa1eac5407a8"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": false
+                    }
+                ],
+                [
+                    "72c0797e-04f7-490f-b80e-14ce08bd0674",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "6da151ef-7463-4180-b151-89ac7e93ac88",
+                        "materialList": [
+                            "c2144bd8-7d09-4981-891d-fd0e26bf3821"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 0,
+                        "culling": false
+                    }
+                ],
+                [
+                    "438d2ba8-4941-4e41-a214-66f8b7ac3428",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "f246d478-79b6-4f8e-9f61-07f6de2a2ceb",
+                        "materialList": [
+                            "0c44cf43-8891-4130-81e9-aa1eac5407a8"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": false
+                    }
+                ],
+                [
+                    "842af2b1-604f-4379-9af5-f3b38e15851f",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "8beb9087-b267-4843-96bd-534834a12d51",
+                        "materialList": [
+                            "71898f4e-6f66-46c1-921f-28191ad29eb8"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": false
+                    }
+                ],
+                [
+                    "8e3f99e0-0a9d-4e78-9591-2ee96264a2a3",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "b9b4fa2d-5f9a-461f-88a1-a492e925d539",
+                        "materialList": [
+                            "3be28fb6-acec-4196-8fee-fab8b50241da"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": false
+                    }
+                ],
+                [
+                    "14bd6cbc-f6a5-4f51-9db3-f22cf0030d94",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "61e7f570-26e3-43c5-b07f-159456776bbd",
+                        "materialList": [
+                            "76cfc9f0-4227-4b6e-9a27-46999da3002f"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": false
+                    }
+                ],
+                [
+                    "6d66b570-f845-4b36-b044-80a841197393",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "3fe7acbc-12f9-4da6-b685-c0ac3dad1ca7",
+                        "materialList": [
+                            "c2144bd8-7d09-4981-891d-fd0e26bf3821"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 0,
+                        "culling": false
+                    }
+                ],
+                [
+                    "0d717043-3193-4b9e-82b3-a864e400ef4d",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "644ebcb4-8d80-4b3a-8b26-3a92843d015c",
+                        "materialList": [
+                            "0c44cf43-8891-4130-81e9-aa1eac5407a8"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": false
+                    }
+                ],
+                [
+                    "d93cfae0-2e46-4706-892d-dbf5d1c56327",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "832d82b5-745a-4f6d-83b1-65b0532933ed",
+                        "materialList": [
+                            "babf6eda-6c20-488f-ae1d-9987f5628d14"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": true
+                    }
+                ]
+            ]
         },
         "grabbles": {
             "__type": "Map",

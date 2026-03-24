@@ -1,4 +1,85 @@
 {
     "__type": "Map",
-    "value": []
+    "value": [
+        [
+            "a7bba2ed-2a25-4817-b55e-d1553bed6144",
+            "AlphaBlendModeTest/GreenArrows.amesh"
+        ],
+        [
+            "6da151ef-7463-4180-b151-89ac7e93ac88",
+            "AlphaBlendModeTest/DecalBlend.amesh"
+        ],
+        [
+            "f246d478-79b6-4f8e-9f61-07f6de2a2ceb",
+            "AlphaBlendModeTest/DecalOpaque.amesh"
+        ],
+        [
+            "b9b4fa2d-5f9a-461f-88a1-a492e925d539",
+            "AlphaBlendModeTest/TestCutoffDefault.amesh"
+        ],
+        [
+            "3fe7acbc-12f9-4da6-b685-c0ac3dad1ca7",
+            "AlphaBlendModeTest/TestBlend.amesh"
+        ],
+        [
+            "61e7f570-26e3-43c5-b07f-159456776bbd",
+            "AlphaBlendModeTest/TestCutoff25.amesh"
+        ],
+        [
+            "8beb9087-b267-4843-96bd-534834a12d51",
+            "AlphaBlendModeTest/TestCutoff75.amesh"
+        ],
+        [
+            "644ebcb4-8d80-4b3a-8b26-3a92843d015c",
+            "AlphaBlendModeTest/TestOpaque.amesh"
+        ],
+        [
+            "0c44cf43-8891-4130-81e9-aa1eac5407a8",
+            "AlphaBlendModeTest/MatOpaque.amat"
+        ],
+        [
+            "3be28fb6-acec-4196-8fee-fab8b50241da",
+            "AlphaBlendModeTest/MatCutoffDefault.amat"
+        ],
+        [
+            "c2144bd8-7d09-4981-891d-fd0e26bf3821",
+            "AlphaBlendModeTest/MatBlend.amat"
+        ],
+        [
+            "71898f4e-6f66-46c1-921f-28191ad29eb8",
+            "AlphaBlendModeTest/MatCutoff75.amat"
+        ],
+        [
+            "832d82b5-745a-4f6d-83b1-65b0532933ed",
+            "AlphaBlendModeTest/Bed.amesh"
+        ],
+        [
+            "babf6eda-6c20-488f-ae1d-9987f5628d14",
+            "AlphaBlendModeTest/MatBed.amat"
+        ],
+        [
+            "76cfc9f0-4227-4b6e-9a27-46999da3002f",
+            "AlphaBlendModeTest/MatCutoff25.amat"
+        ],
+        [
+            "fe2b41f4-61f9-4424-97fd-84c9a8742c7e",
+            "AlphaBlendModeTest/texture.atex"
+        ],
+        [
+            "25797c45-f14a-42bc-aba4-e5b828962988",
+            "AlphaBlendModeTest/texture (1).atex"
+        ],
+        [
+            "be9cdf77-446b-4834-95fa-8d0f11c37634",
+            "AlphaBlendModeTest/texture (2).atex"
+        ],
+        [
+            "b8f184b7-13bb-468b-9f15-be03e713100e",
+            "AlphaBlendModeTest/AlphaBlendModeTest.afab"
+        ],
+        [
+            "7db4f040-f7d9-44f7-983a-975c9f904f9b",
+            "AlphaBlendModeTest/texture (3).atex"
+        ]
+    ]
 }

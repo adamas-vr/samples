@@ -1,0 +1,28 @@
+{
+    "name": "TestBlend",
+    "uuid": "3fe7acbc-12f9-4da6-b685-c0ac3dad1ca7",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAAADAAEA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "zcwMP/Qo/D8AAACAzcwMv9jMzD0AAACAzcwMP9jMzD0AAACAzcwMv/Qo/D8AAACA"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "zcwsP9DMTD0PAAA+9ih8P83MLD/2KHw/DwAAPtDMTD0="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

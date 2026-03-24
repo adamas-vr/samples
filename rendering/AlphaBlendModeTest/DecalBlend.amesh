@@ -1,0 +1,28 @@
+{
+    "name": "DecalBlend",
+    "uuid": "6da151ef-7463-4180-b151-89ac7e93ac88",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAIAAAADAAEA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "tvN9v9V46T0K1yM8v5+av9V46b0K1yM8tvN9v9V46b0K1yM8v5+av9V46T0K1yM8"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/AAAAgAAAAAAAAIA/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "H4V7P5qZKT/gemQ/hutBPx+Fez+G60E/4HpkP5qZKT8="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}
