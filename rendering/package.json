@@ -1,11 +1,12 @@
 {
-    "name": "rendering",
-    "version": "0.0.1",
-    "dependencies": {
-        "@adamasvr/sdk": "*",
-        "gl-matrix": "^3.4.4"
-    },
-    "devDependencies": {
-        "@types/node": "^24.10.1"
-    }
+	"name": "rendering",
+	"version": "0.0.1",
+	"dependencies": {
+		"@adamasvr/sdk": "*",
+		"gl-matrix": "^3.4.4"
+	},
+	"devDependencies": {
+		"@types/node": "^24.10.1",
+		"typescript": "^5.8.3"
+	}
 }

@@ -1,4 +1,4 @@
 
 node_modules
-.adamas/build.js
+*/.adamas/build.js
 .DS_Store
