@@ -15,17 +15,12 @@ import { projectBundle } from "adamasvr:editor";
 Project.FromBundle(projectBundle).Launch({
 	OnSetup: async (project, sceneGraph) => {
 		if (sceneGraph === undefined) return;
-		const display = sceneGraph["@Display"]["@New Entity"].entityId;
+		const display = sceneGraph["@Display"]["@Preview"].entityId;
 		const camera = sceneGraph["@Camera"]["@Film"].entityId;
-		// const button = sceneGraph["@grabble"]["@button"].entityId;
+		const capture = sceneGraph["@Display"]["@Capture"].entityId;
+		const button = sceneGraph["@Camera"].entityId;
 
-		const renderTexture = await TextureManager.CreateRenderTexture(
-			900,
-			1200,
-			16,
-			TextureDimension.Tex2D,
-			RenderTextureFormat.DefaultHDR,
-		);
+		const renderTexture = await TextureManager.CreateRenderTexture(900, 1200);
 
 		CameraManager.SetRenderTexture(camera, renderTexture);
 		const previewMat = await RenderableManager.GetMaterial(display, 0);
@@ -39,23 +34,9 @@ Project.FromBundle(projectBundle).Launch({
 		const captureMat = await RenderableManager.GetMaterial(capture, 0);
 		MaterialManager.SetTexture(captureMat, MaterialProperty.BaseColorMap, tex);
 
-		GrabInteractableManager.AddSelectEnteredCallback(camera, async () => {
-			const result = await TextureManager.ReadbackRGBAImage(renderTexture);
-			TextureManager.LoadRGBAImage(
-				tex,
-				result.data,
-				result.width,
-				result.height,
-			);
-
-			const size = TextureManager.GetTextureSize(renderTexture);
-			console.log(`Texture size ${size}`);
-			// TextureManager.LoadImage(tex, result.base64);
-
-			const rgba = TextureManager.ReadbackRGBAImage(renderTexture);
-			console.log(
-				`[RGBA data] Rect:<${rgba.width},${rgba.height}>; base65.length=${rgba.base64.length}`,
-			);
+		GrabInteractableManager.AddActivatedCallback(button, async () => {
+			const result = await TextureManager.ReadbackJPGImage(renderTexture);
+			TextureManager.LoadImage(tex, result.data);
 		});
 	},
 	OnTick: (project, timestep) => {},

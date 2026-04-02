@@ -207,3 +207,7 @@ declare module "adamasvr:assets/polaroid_camera/texture (1).atex" {
 	const value: import("@adamasvr/sdk").TextureAsset;
 	export default value;
 }
+declare module "adamasvr:assets/material-capture.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}

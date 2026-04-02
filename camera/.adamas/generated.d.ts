@@ -7,7 +7,10 @@ export interface SceneGraph
 {
     "@Display": {
         entityId: Entity,
-        "@New Entity": {
+        "@Preview": {
+            entityId: Entity
+        },
+        "@Capture": {
             entityId: Entity
         }
     },

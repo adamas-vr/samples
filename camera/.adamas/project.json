@@ -3,11 +3,11 @@
         "name": "camera",
         "projectId": "x2hhPRlx9COWVG_6zJNp5qr7IsCUa5gwaEiEkC3DQhA",
         "author": "Test T0 Account",
-        "version": "0.0.4",
+        "version": "0.0.12",
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-04-01T19:54:36.869Z",
-        "updateAt": "2026-04-02T01:16:52.987Z"
+        "updateAt": "2026-04-02T03:58:29.929Z"
     },
     "world": {
         "worldEntrance": false,
@@ -86,7 +86,8 @@
                 "0dcd2f40-26d5-4c53-8d16-f2b171ed5589",
                 "bff7d93f-8035-4073-bbe7-1b3611652e5c",
                 "8e644afe-2da9-4104-847c-1623ed944960",
-                "e28dee40-80fa-4a48-9f59-23c88efd452a"
+                "e28dee40-80fa-4a48-9f59-23c88efd452a",
+                "62ba8861-a104-4215-adc7-bf3bedb83052"
             ]
         },
         "properties": {
@@ -97,7 +98,7 @@
                     {
                         "componentType": "Property",
                         "enabled": true,
-                        "name": "New Entity",
+                        "name": "Preview",
                         "layer": 0,
                         "activeEntity": true
                     }
@@ -691,6 +692,16 @@
                         "layer": 0,
                         "activeEntity": true
                     }
+                ],
+                [
+                    "62ba8861-a104-4215-adc7-bf3bedb83052",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "Capture",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
                 ]
             ]
         },
@@ -757,7 +768,8 @@
                         "enabled": true,
                         "parent": "00000000-0000-0000-0000-000000000000",
                         "children": [
-                            "2620e8af-5dbc-4d09-84ff-ef957c44673e"
+                            "2620e8af-5dbc-4d09-84ff-ef957c44673e",
+                            "62ba8861-a104-4215-adc7-bf3bedb83052"
                         ],
                         "localPosition": [
                             0.19048579000356497,
@@ -2307,6 +2319,31 @@
                         ],
                         "isTransformSync": false
                     }
+                ],
+                [
+                    "62ba8861-a104-4215-adc7-bf3bedb83052",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "761471a8-fd5c-4d85-b6b5-abc30eb42bcf",
+                        "children": [],
+                        "localPosition": [
+                            -1.1328496938389572,
+                            0,
+                            -0.00019634092359347788
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            0.9,
+                            1.2,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
                 ]
             ]
         },
@@ -2787,6 +2824,20 @@
                         "receiveShadows": true,
                         "castShadows": 1,
                         "culling": false
+                    }
+                ],
+                [
+                    "62ba8861-a104-4215-adc7-bf3bedb83052",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "61b88e63-97b1-4703-826a-d0d7d625d433",
+                        "materialList": [
+                            "e880532f-7eed-4220-9afc-e9d259641845"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": true
                     }
                 ]
             ]
