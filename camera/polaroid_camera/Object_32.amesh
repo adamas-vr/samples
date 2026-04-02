@@ -1,0 +1,28 @@
+{
+    "name": "Object_32",
+    "uuid": "51490c64-4138-4b2a-a783-9aa81f6696a6",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AwACAAAAAwAAAAEA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "9QnOvmR7Nj9X/Mi49QnOvpt2Ob8uKcw4fuDMPmR7Nj/Htci4fuDMPpt2Ob8Eb8w4"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "jPAutObwDDkAAIA/jPAutObwDDkAAIA/jPAutObwDDkAAIA/jPAutObwDDkAAIA/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "AeKDPlbNGj8A4oM+8PXiPoxkrj5WzRo/jGSuPvD14j4="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

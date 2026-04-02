@@ -1,0 +1,2603 @@
+{
+    "name": "polaroid_camera",
+    "uuid": "29024087-7814-4503-a2f0-75c8e6227a93",
+    "dirty": false,
+    "assetType": "Prefab",
+    "rootEntity": "a3c23e39-5467-4d8f-80f3-3f41dfb0ff4b",
+    "entities": {
+        "__type": "Set",
+        "value": [
+            "a3c23e39-5467-4d8f-80f3-3f41dfb0ff4b",
+            "0b5aea74-bbae-4cb6-a70c-8413c32c784e",
+            "8566bdf0-1695-467e-bbda-a595151287ad",
+            "c5f35b6d-3b38-44e8-a9a4-0ede9f0ccccd",
+            "9818f580-36a5-4e35-abe3-53394e006034",
+            "9a778ecd-e561-45e2-88a4-91f3e3bbb472",
+            "1633bb2f-249f-4faf-893d-1c20daee4ab9",
+            "3fa0ac73-ab08-4343-8b3a-1a8e378db970",
+            "b256484c-d74d-4419-b00b-0069dc3093ff",
+            "5d3722a6-7952-42c8-9a96-a33eef8f53b4",
+            "fec8bb5d-5395-482e-936f-9e6d523eefa3",
+            "85679236-4441-440c-b475-7bd736cd2ce8",
+            "4dad6252-ec26-4f51-bd02-98948995fab1",
+            "4d14f3b3-ad77-492e-bedc-d71cb1ca6d20",
+            "d368cce7-08f4-40d2-b6bd-132c7372d6e7",
+            "daeab2f4-f327-4c9e-ac87-c70523f09eb9",
+            "f3c6b8d3-ede2-4914-a389-2efb92ad2bf3",
+            "56ed55bd-71f3-4a22-a553-5aac1df9841a",
+            "4c67bd04-0e7d-4a80-b38f-758d1531448a",
+            "ea7bd6e9-45e1-4a38-8a5d-3aa4ec611169",
+            "c547e866-0181-4fde-a651-315f672e2823",
+            "b0c4c7c9-a9c5-45fa-911c-d62c241dfe06",
+            "9e38681b-2da1-4ef1-97c2-f9105d6731f0",
+            "3ddfaa9e-a7ee-479d-9f75-ac8a67bb4902",
+            "7d173630-fb65-4183-a5d6-47f8083090ec",
+            "a8be05d0-9722-4a18-8738-5fdd1acadceb",
+            "c5db810f-b015-4501-967c-1da4bce4c797",
+            "d4681d69-d4c9-4870-bbaa-c67b4485b2c2",
+            "fa5beee2-2cc6-40b1-b5e9-e7a95978a189",
+            "85293bf9-cf4e-4f65-add5-a06f6066fb38",
+            "ffc6073e-218f-46b6-aa86-6b3216ebdbdc",
+            "c32fddde-f828-4319-98d5-dee79761c7bd",
+            "e9b66ac5-e6e8-46b4-b4e4-bfca103c2d6f",
+            "d83c8733-81ed-492a-abb7-43bc5ef5f481",
+            "f2bccfdf-a2c2-4fbf-8959-9eb884df4083",
+            "6d3e90eb-fda3-4f9e-a71d-e49def3b5dc9",
+            "2b1e59d9-a8f5-43db-a82a-a8b891142eb2",
+            "182a2720-a4e4-4028-9065-5d041efbde43",
+            "c9ca413c-fff0-4c56-86e9-500fb4bf90b4",
+            "04497b43-e6ea-40cb-84a8-5b20eeb5c21a",
+            "88ab1dab-7425-4d18-b63f-ffcc1188620d",
+            "2943f262-146d-4c67-8465-f6d763e0ffee",
+            "b399a08c-19fb-40ed-ac5f-0b3965944c8a",
+            "baa0f3e4-ff3f-41e2-988b-b200fa77e309",
+            "4039c117-5dfc-4e62-95da-8966b1c92b6d",
+            "fe30f34f-a175-4626-8772-839aa0de2ae8",
+            "0c21bb99-6a66-4bd0-96a8-769fa05d64dc",
+            "49afc165-59cd-493f-b1f2-7a1a0e34963a",
+            "91ca0654-bb6a-4a9c-b4ae-014581531ab5",
+            "b62baf8e-3bae-4ea4-ba2d-4bb5f057bbf7",
+            "1a181d4a-0364-42d9-a303-f0ce6c50a34f",
+            "7f36e079-e3dd-4c95-92ec-1d33c6e760cc",
+            "a3b592c0-f2f6-4e3a-9dc0-2a47ac18b5d8",
+            "5d78e9f0-a19b-4e84-a481-346bb5e22bdb",
+            "1fbef5dc-50df-4f22-9c54-d21bd5893752",
+            "19ab573e-2455-479c-9afb-dfbe3cd035e9"
+        ]
+    },
+    "properties": {
+        "__type": "Map",
+        "value": [
+            [
+                "a3c23e39-5467-4d8f-80f3-3f41dfb0ff4b",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "polaroid_camera",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "0b5aea74-bbae-4cb6-a70c-8413c32c784e",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Sketchfab_model",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "8566bdf0-1695-467e-bbda-a595151287ad",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "root",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "c5f35b6d-3b38-44e8-a9a4-0ede9f0ccccd",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "GLTF_SceneRootNode",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "9818f580-36a5-4e35-abe3-53394e006034",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Empty_18",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "9a778ecd-e561-45e2-88a4-91f3e3bbb472",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "2_0",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "1633bb2f-249f-4faf-893d-1c20daee4ab9",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "BotonFlash_1",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "3fa0ac73-ab08-4343-8b3a-1a8e378db970",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "CarcasaBlanca_2",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "b256484c-d74d-4419-b00b-0069dc3093ff",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "CarcasaNegra_3",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "5d3722a6-7952-42c8-9a96-a33eef8f53b4",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Colores_4",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "fec8bb5d-5395-482e-936f-9e6d523eefa3",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Cube_5",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "85679236-4441-440c-b475-7bd736cd2ce8",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Cube001_6",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "4dad6252-ec26-4f51-bd02-98948995fab1",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Cube003_7",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "4d14f3b3-ad77-492e-bedc-d71cb1ca6d20",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Cylinder_8",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "d368cce7-08f4-40d2-b6bd-132c7372d6e7",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "InterruptorAmarillo_9",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "daeab2f4-f327-4c9e-ac87-c70523f09eb9",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "InterruptorEncendido_10",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "f3c6b8d3-ede2-4914-a389-2efb92ad2bf3",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "InterruptorNegro_11",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "56ed55bd-71f3-4a22-a553-5aac1df9841a",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Lente_12",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "4c67bd04-0e7d-4a80-b38f-758d1531448a",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Logo_13",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "ea7bd6e9-45e1-4a38-8a5d-3aa4ec611169",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Objetivo_14",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "c547e866-0181-4fde-a651-315f672e2823",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "off_15",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "b0c4c7c9-a9c5-45fa-911c-d62c241dfe06",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Plane002_16",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "9e38681b-2da1-4ef1-97c2-f9105d6731f0",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "type_17",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "3ddfaa9e-a7ee-479d-9f75-ac8a67bb4902",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_5",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "7d173630-fb65-4183-a5d6-47f8083090ec",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_6",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "a8be05d0-9722-4a18-8738-5fdd1acadceb",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_9",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "c5db810f-b015-4501-967c-1da4bce4c797",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_12",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "d4681d69-d4c9-4870-bbaa-c67b4485b2c2",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_13",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "fa5beee2-2cc6-40b1-b5e9-e7a95978a189",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_14",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "85293bf9-cf4e-4f65-add5-a06f6066fb38",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_16",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "ffc6073e-218f-46b6-aa86-6b3216ebdbdc",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_17",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "c32fddde-f828-4319-98d5-dee79761c7bd",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_18",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "e9b66ac5-e6e8-46b4-b4e4-bfca103c2d6f",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_20",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "d83c8733-81ed-492a-abb7-43bc5ef5f481",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_22",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "f2bccfdf-a2c2-4fbf-8959-9eb884df4083",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_23",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "6d3e90eb-fda3-4f9e-a71d-e49def3b5dc9",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_24",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "2b1e59d9-a8f5-43db-a82a-a8b891142eb2",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_25",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "182a2720-a4e4-4028-9065-5d041efbde43",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_26",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "c9ca413c-fff0-4c56-86e9-500fb4bf90b4",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_28",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "04497b43-e6ea-40cb-84a8-5b20eeb5c21a",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_30",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "88ab1dab-7425-4d18-b63f-ffcc1188620d",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_32",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "2943f262-146d-4c67-8465-f6d763e0ffee",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_34",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "b399a08c-19fb-40ed-ac5f-0b3965944c8a",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_36",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "baa0f3e4-ff3f-41e2-988b-b200fa77e309",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_38",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "4039c117-5dfc-4e62-95da-8966b1c92b6d",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_40",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "fe30f34f-a175-4626-8772-839aa0de2ae8",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_42",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "0c21bb99-6a66-4bd0-96a8-769fa05d64dc",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_44",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "49afc165-59cd-493f-b1f2-7a1a0e34963a",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_46",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "91ca0654-bb6a-4a9c-b4ae-014581531ab5",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_47",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "b62baf8e-3bae-4ea4-ba2d-4bb5f057bbf7",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_48",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "1a181d4a-0364-42d9-a303-f0ce6c50a34f",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_50",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "7f36e079-e3dd-4c95-92ec-1d33c6e760cc",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_52",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "a3b592c0-f2f6-4e3a-9dc0-2a47ac18b5d8",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_54",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "5d78e9f0-a19b-4e84-a481-346bb5e22bdb",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_8",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "1fbef5dc-50df-4f22-9c54-d21bd5893752",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_11",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ],
+            [
+                "19ab573e-2455-479c-9afb-dfbe3cd035e9",
+                {
+                    "componentType": "Property",
+                    "enabled": true,
+                    "name": "Object_19",
+                    "layer": 0,
+                    "activeEntity": true
+                }
+            ]
+        ]
+    },
+    "transforms": {
+        "__type": "Map",
+        "value": [
+            [
+                "3ddfaa9e-a7ee-479d-9f75-ac8a67bb4902",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9a778ecd-e561-45e2-88a4-91f3e3bbb472",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "7d173630-fb65-4183-a5d6-47f8083090ec",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9a778ecd-e561-45e2-88a4-91f3e3bbb472",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "a8be05d0-9722-4a18-8738-5fdd1acadceb",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "1633bb2f-249f-4faf-893d-1c20daee4ab9",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "c5db810f-b015-4501-967c-1da4bce4c797",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "3fa0ac73-ab08-4343-8b3a-1a8e378db970",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "d4681d69-d4c9-4870-bbaa-c67b4485b2c2",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "3fa0ac73-ab08-4343-8b3a-1a8e378db970",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "fa5beee2-2cc6-40b1-b5e9-e7a95978a189",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "3fa0ac73-ab08-4343-8b3a-1a8e378db970",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "85293bf9-cf4e-4f65-add5-a06f6066fb38",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "b256484c-d74d-4419-b00b-0069dc3093ff",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "ffc6073e-218f-46b6-aa86-6b3216ebdbdc",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "b256484c-d74d-4419-b00b-0069dc3093ff",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "c32fddde-f828-4319-98d5-dee79761c7bd",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "b256484c-d74d-4419-b00b-0069dc3093ff",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "e9b66ac5-e6e8-46b4-b4e4-bfca103c2d6f",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "b256484c-d74d-4419-b00b-0069dc3093ff",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "d83c8733-81ed-492a-abb7-43bc5ef5f481",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "5d3722a6-7952-42c8-9a96-a33eef8f53b4",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "f2bccfdf-a2c2-4fbf-8959-9eb884df4083",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "5d3722a6-7952-42c8-9a96-a33eef8f53b4",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "6d3e90eb-fda3-4f9e-a71d-e49def3b5dc9",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "5d3722a6-7952-42c8-9a96-a33eef8f53b4",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "2b1e59d9-a8f5-43db-a82a-a8b891142eb2",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "5d3722a6-7952-42c8-9a96-a33eef8f53b4",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "182a2720-a4e4-4028-9065-5d041efbde43",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "5d3722a6-7952-42c8-9a96-a33eef8f53b4",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "c9ca413c-fff0-4c56-86e9-500fb4bf90b4",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "fec8bb5d-5395-482e-936f-9e6d523eefa3",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "04497b43-e6ea-40cb-84a8-5b20eeb5c21a",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "85679236-4441-440c-b475-7bd736cd2ce8",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "88ab1dab-7425-4d18-b63f-ffcc1188620d",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "4dad6252-ec26-4f51-bd02-98948995fab1",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "2943f262-146d-4c67-8465-f6d763e0ffee",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "4d14f3b3-ad77-492e-bedc-d71cb1ca6d20",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "b399a08c-19fb-40ed-ac5f-0b3965944c8a",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "d368cce7-08f4-40d2-b6bd-132c7372d6e7",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "baa0f3e4-ff3f-41e2-988b-b200fa77e309",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "daeab2f4-f327-4c9e-ac87-c70523f09eb9",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "4039c117-5dfc-4e62-95da-8966b1c92b6d",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "f3c6b8d3-ede2-4914-a389-2efb92ad2bf3",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "fe30f34f-a175-4626-8772-839aa0de2ae8",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "56ed55bd-71f3-4a22-a553-5aac1df9841a",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "0c21bb99-6a66-4bd0-96a8-769fa05d64dc",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "4c67bd04-0e7d-4a80-b38f-758d1531448a",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "49afc165-59cd-493f-b1f2-7a1a0e34963a",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "ea7bd6e9-45e1-4a38-8a5d-3aa4ec611169",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "91ca0654-bb6a-4a9c-b4ae-014581531ab5",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "ea7bd6e9-45e1-4a38-8a5d-3aa4ec611169",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "b62baf8e-3bae-4ea4-ba2d-4bb5f057bbf7",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "ea7bd6e9-45e1-4a38-8a5d-3aa4ec611169",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "1a181d4a-0364-42d9-a303-f0ce6c50a34f",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "c547e866-0181-4fde-a651-315f672e2823",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "7f36e079-e3dd-4c95-92ec-1d33c6e760cc",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "b0c4c7c9-a9c5-45fa-911c-d62c241dfe06",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "a3b592c0-f2f6-4e3a-9dc0-2a47ac18b5d8",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9e38681b-2da1-4ef1-97c2-f9105d6731f0",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "5d78e9f0-a19b-4e84-a481-346bb5e22bdb",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "1633bb2f-249f-4faf-893d-1c20daee4ab9",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "1fbef5dc-50df-4f22-9c54-d21bd5893752",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "3fa0ac73-ab08-4343-8b3a-1a8e378db970",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "19ab573e-2455-479c-9afb-dfbe3cd035e9",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "b256484c-d74d-4419-b00b-0069dc3093ff",
+                    "children": [],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "9a778ecd-e561-45e2-88a4-91f3e3bbb472",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "3ddfaa9e-a7ee-479d-9f75-ac8a67bb4902",
+                        "7d173630-fb65-4183-a5d6-47f8083090ec"
+                    ],
+                    "localPosition": [
+                        2.0508229732513428,
+                        1.7937144041061401,
+                        1.1810822486877441
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "5d3722a6-7952-42c8-9a96-a33eef8f53b4",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "d83c8733-81ed-492a-abb7-43bc5ef5f481",
+                        "f2bccfdf-a2c2-4fbf-8959-9eb884df4083",
+                        "6d3e90eb-fda3-4f9e-a71d-e49def3b5dc9",
+                        "2b1e59d9-a8f5-43db-a82a-a8b891142eb2",
+                        "182a2720-a4e4-4028-9065-5d041efbde43"
+                    ],
+                    "localPosition": [
+                        -1.5469107627868652,
+                        0.5427660942077637,
+                        2.786987066268921
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "fec8bb5d-5395-482e-936f-9e6d523eefa3",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "c9ca413c-fff0-4c56-86e9-500fb4bf90b4"
+                    ],
+                    "localPosition": [
+                        1.3143869638442993,
+                        2.7882583141326904,
+                        1.1831401586532593
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "85679236-4441-440c-b475-7bd736cd2ce8",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "04497b43-e6ea-40cb-84a8-5b20eeb5c21a"
+                    ],
+                    "localPosition": [
+                        1.6599410772323608,
+                        0.41052913665771484,
+                        -3.4378883838653564
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "4dad6252-ec26-4f51-bd02-98948995fab1",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "88ab1dab-7425-4d18-b63f-ffcc1188620d"
+                    ],
+                    "localPosition": [
+                        -1.7240469455718994,
+                        3.1637086868286133,
+                        1.1694014072418213
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "4d14f3b3-ad77-492e-bedc-d71cb1ca6d20",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "2943f262-146d-4c67-8465-f6d763e0ffee"
+                    ],
+                    "localPosition": [
+                        1.01020085811615,
+                        2.239729166030884,
+                        1.235733151435852
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "d368cce7-08f4-40d2-b6bd-132c7372d6e7",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "b399a08c-19fb-40ed-ac5f-0b3965944c8a"
+                    ],
+                    "localPosition": [
+                        1.6860520839691162,
+                        2.7882583141326904,
+                        1.1240479946136475
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "daeab2f4-f327-4c9e-ac87-c70523f09eb9",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "baa0f3e4-ff3f-41e2-988b-b200fa77e309"
+                    ],
+                    "localPosition": [
+                        -1.6348845958709717,
+                        3.550851345062256,
+                        0.3243331015110016
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "f3c6b8d3-ede2-4914-a389-2efb92ad2bf3",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "4039c117-5dfc-4e62-95da-8966b1c92b6d"
+                    ],
+                    "localPosition": [
+                        0.19980087876319885,
+                        1.304823398590088,
+                        2.607656955718994
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "56ed55bd-71f3-4a22-a553-5aac1df9841a",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "fe30f34f-a175-4626-8772-839aa0de2ae8"
+                    ],
+                    "localPosition": [
+                        -0.9781641364097595,
+                        3.3232157230377197,
+                        1.1691468954086304
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "4c67bd04-0e7d-4a80-b38f-758d1531448a",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "0c21bb99-6a66-4bd0-96a8-769fa05d64dc"
+                    ],
+                    "localPosition": [
+                        0.13303892314434052,
+                        0.3208688795566559,
+                        2.7874622344970703
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "ea7bd6e9-45e1-4a38-8a5d-3aa4ec611169",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "49afc165-59cd-493f-b1f2-7a1a0e34963a",
+                        "91ca0654-bb6a-4a9c-b4ae-014581531ab5",
+                        "b62baf8e-3bae-4ea4-ba2d-4bb5f057bbf7"
+                    ],
+                    "localPosition": [
+                        0.12734189629554749,
+                        2.916271209716797,
+                        1.2304255962371826
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "c547e866-0181-4fde-a651-315f672e2823",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "1a181d4a-0364-42d9-a303-f0ce6c50a34f"
+                    ],
+                    "localPosition": [
+                        -1.6221001148223877,
+                        3.3325650691986084,
+                        0.4665277600288391
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "b0c4c7c9-a9c5-45fa-911c-d62c241dfe06",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "7f36e079-e3dd-4c95-92ec-1d33c6e760cc"
+                    ],
+                    "localPosition": [
+                        1.7046421766281128,
+                        3.4546031951904297,
+                        1.1869927644729614
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "9e38681b-2da1-4ef1-97c2-f9105d6731f0",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "a3b592c0-f2f6-4e3a-9dc0-2a47ac18b5d8"
+                    ],
+                    "localPosition": [
+                        1.6859700679779053,
+                        0.2424703687429428,
+                        2.7874622344970703
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "1633bb2f-249f-4faf-893d-1c20daee4ab9",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "5d78e9f0-a19b-4e84-a481-346bb5e22bdb",
+                        "a8be05d0-9722-4a18-8738-5fdd1acadceb"
+                    ],
+                    "localPosition": [
+                        -0.9673665761947632,
+                        3.7136008739471436,
+                        1.1748325824737549
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "3fa0ac73-ab08-4343-8b3a-1a8e378db970",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "1fbef5dc-50df-4f22-9c54-d21bd5893752",
+                        "c5db810f-b015-4501-967c-1da4bce4c797",
+                        "d4681d69-d4c9-4870-bbaa-c67b4485b2c2",
+                        "fa5beee2-2cc6-40b1-b5e9-e7a95978a189"
+                    ],
+                    "localPosition": [
+                        0.001795053482055664,
+                        1.1384221315383911,
+                        0.39432182908058167
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "b256484c-d74d-4419-b00b-0069dc3093ff",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "9818f580-36a5-4e35-abe3-53394e006034",
+                    "children": [
+                        "85293bf9-cf4e-4f65-add5-a06f6066fb38",
+                        "ffc6073e-218f-46b6-aa86-6b3216ebdbdc",
+                        "c32fddde-f828-4319-98d5-dee79761c7bd",
+                        "19ab573e-2455-479c-9afb-dfbe3cd035e9",
+                        "e9b66ac5-e6e8-46b4-b4e4-bfca103c2d6f"
+                    ],
+                    "localPosition": [
+                        0.2536849081516266,
+                        1.6089694499969482,
+                        -0.026371246203780174
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "9818f580-36a5-4e35-abe3-53394e006034",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "c5f35b6d-3b38-44e8-a9a4-0ede9f0ccccd",
+                    "children": [
+                        "9a778ecd-e561-45e2-88a4-91f3e3bbb472",
+                        "1633bb2f-249f-4faf-893d-1c20daee4ab9",
+                        "3fa0ac73-ab08-4343-8b3a-1a8e378db970",
+                        "b256484c-d74d-4419-b00b-0069dc3093ff",
+                        "5d3722a6-7952-42c8-9a96-a33eef8f53b4",
+                        "fec8bb5d-5395-482e-936f-9e6d523eefa3",
+                        "85679236-4441-440c-b475-7bd736cd2ce8",
+                        "4dad6252-ec26-4f51-bd02-98948995fab1",
+                        "4d14f3b3-ad77-492e-bedc-d71cb1ca6d20",
+                        "d368cce7-08f4-40d2-b6bd-132c7372d6e7",
+                        "daeab2f4-f327-4c9e-ac87-c70523f09eb9",
+                        "f3c6b8d3-ede2-4914-a389-2efb92ad2bf3",
+                        "56ed55bd-71f3-4a22-a553-5aac1df9841a",
+                        "4c67bd04-0e7d-4a80-b38f-758d1531448a",
+                        "ea7bd6e9-45e1-4a38-8a5d-3aa4ec611169",
+                        "c547e866-0181-4fde-a651-315f672e2823",
+                        "b0c4c7c9-a9c5-45fa-911c-d62c241dfe06",
+                        "9e38681b-2da1-4ef1-97c2-f9105d6731f0"
+                    ],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "c5f35b6d-3b38-44e8-a9a4-0ede9f0ccccd",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "8566bdf0-1695-467e-bbda-a595151287ad",
+                    "children": [
+                        "9818f580-36a5-4e35-abe3-53394e006034"
+                    ],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        1.5707963267948963,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "8566bdf0-1695-467e-bbda-a595151287ad",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "0b5aea74-bbae-4cb6-a70c-8413c32c784e",
+                    "children": [
+                        "c5f35b6d-3b38-44e8-a9a4-0ede9f0ccccd"
+                    ],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "0b5aea74-bbae-4cb6-a70c-8413c32c784e",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "a3c23e39-5467-4d8f-80f3-3f41dfb0ff4b",
+                    "children": [
+                        "8566bdf0-1695-467e-bbda-a595151287ad"
+                    ],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        -1.5707963267948963,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ],
+            [
+                "a3c23e39-5467-4d8f-80f3-3f41dfb0ff4b",
+                {
+                    "componentType": "Transform",
+                    "enabled": true,
+                    "parent": "00000000-0000-0000-0000-000000000000",
+                    "children": [
+                        "0b5aea74-bbae-4cb6-a70c-8413c32c784e"
+                    ],
+                    "localPosition": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localRotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "localScale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "isTransformSync": false
+                }
+            ]
+        ]
+    },
+    "renderables": {
+        "__type": "Map",
+        "value": [
+            [
+                "3ddfaa9e-a7ee-479d-9f75-ac8a67bb4902",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "3233a8df-56f5-42a5-abac-b31291b27fbb",
+                    "materialList": [
+                        "1a9edfd6-4776-4fa5-b110-49a1629e7080"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "7d173630-fb65-4183-a5d6-47f8083090ec",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "87edd127-519f-4a7c-920c-c84f173edbb7",
+                    "materialList": [
+                        "e649fd2a-3618-43ae-93eb-44f38972f737"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "5d78e9f0-a19b-4e84-a481-346bb5e22bdb",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "3fa12da2-0120-4fa9-8074-7fce4611e915",
+                    "materialList": [
+                        "65574efb-3bcf-447c-9f33-bd9a3452f971"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "a8be05d0-9722-4a18-8738-5fdd1acadceb",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "ac239117-0b39-4c81-a47f-37c88b8dcac3",
+                    "materialList": [
+                        "5f39d4dc-f24c-4499-a09a-eb11ff52f717"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "1fbef5dc-50df-4f22-9c54-d21bd5893752",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "4b6d77f4-6c89-437a-b562-5f313572fbb1",
+                    "materialList": [
+                        "02b77917-b8c3-45e9-a503-08cde6ae7785"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "c5db810f-b015-4501-967c-1da4bce4c797",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "265c7136-5e1c-4d1f-87a2-4a905deb9c49",
+                    "materialList": [
+                        "65574efb-3bcf-447c-9f33-bd9a3452f971"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "d4681d69-d4c9-4870-bbaa-c67b4485b2c2",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "261b4d30-0471-44bc-aadb-ca42feedd72d",
+                    "materialList": [
+                        "65574efb-3bcf-447c-9f33-bd9a3452f971"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "fa5beee2-2cc6-40b1-b5e9-e7a95978a189",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "288447f1-445e-46dd-9995-a8f37b644064",
+                    "materialList": [
+                        "a4248917-9f0e-4479-98bc-d2dd799a3fa1"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "85293bf9-cf4e-4f65-add5-a06f6066fb38",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "2311ea19-99fa-484e-a20f-6bb35facce6e",
+                    "materialList": [
+                        "02b77917-b8c3-45e9-a503-08cde6ae7785"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "ffc6073e-218f-46b6-aa86-6b3216ebdbdc",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "5f87736b-af6a-402f-bfa7-8676b51d2420",
+                    "materialList": [
+                        "367cc594-3ee7-460f-9658-b8cd8c771dca"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "c32fddde-f828-4319-98d5-dee79761c7bd",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "c10c1b42-f09d-4650-b21f-d94ccad8a426",
+                    "materialList": [
+                        "5f39d4dc-f24c-4499-a09a-eb11ff52f717"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "19ab573e-2455-479c-9afb-dfbe3cd035e9",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "f435ce69-074a-44c2-bb93-a2e042c9612c",
+                    "materialList": [
+                        "d88c5fb0-d55b-4b79-8b6e-46f5289a7d49"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "e9b66ac5-e6e8-46b4-b4e4-bfca103c2d6f",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "2a54b3b4-800c-4056-8e8b-839565fe81a3",
+                    "materialList": [
+                        "e649fd2a-3618-43ae-93eb-44f38972f737"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "d83c8733-81ed-492a-abb7-43bc5ef5f481",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "f1a83478-abd3-4913-b2b8-79b7b6a0a78b",
+                    "materialList": [
+                        "47d5fb0b-082d-46ec-88b4-45d51f137b2e"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "f2bccfdf-a2c2-4fbf-8959-9eb884df4083",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "508966da-6904-4715-9962-da53c6b7826a",
+                    "materialList": [
+                        "598bfb03-4052-4080-896d-920e5099d219"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "6d3e90eb-fda3-4f9e-a71d-e49def3b5dc9",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "b80c18a8-aab8-42b8-aa15-85c68c391fb7",
+                    "materialList": [
+                        "0d1d87bb-0a73-448c-aa4f-7481aca233b4"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "2b1e59d9-a8f5-43db-a82a-a8b891142eb2",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "26cafbd6-23d6-425b-9c48-5512843d8bc0",
+                    "materialList": [
+                        "bcb5872f-e1af-435b-a429-706c6bf9d985"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "182a2720-a4e4-4028-9065-5d041efbde43",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "725d8dab-6acc-477e-ad55-5fedadbb404f",
+                    "materialList": [
+                        "a4248917-9f0e-4479-98bc-d2dd799a3fa1"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "c9ca413c-fff0-4c56-86e9-500fb4bf90b4",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "02d9d45e-e3db-45f3-b9cf-717ece5ea9ef",
+                    "materialList": [
+                        "65574efb-3bcf-447c-9f33-bd9a3452f971"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "04497b43-e6ea-40cb-84a8-5b20eeb5c21a",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "5ca691e4-5470-4567-9b42-4d02f8055de5",
+                    "materialList": [
+                        "02b77917-b8c3-45e9-a503-08cde6ae7785"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "88ab1dab-7425-4d18-b63f-ffcc1188620d",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "51490c64-4138-4b2a-a783-9aa81f6696a6",
+                    "materialList": [
+                        "d88c5fb0-d55b-4b79-8b6e-46f5289a7d49"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "2943f262-146d-4c67-8465-f6d763e0ffee",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "b277335c-11c4-4daf-8ade-7684c62722d9",
+                    "materialList": [
+                        "02b77917-b8c3-45e9-a503-08cde6ae7785"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "b399a08c-19fb-40ed-ac5f-0b3965944c8a",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "42009e73-242f-46a2-8776-653e027b07be",
+                    "materialList": [
+                        "0d1d87bb-0a73-448c-aa4f-7481aca233b4"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "baa0f3e4-ff3f-41e2-988b-b200fa77e309",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "4ddc0510-7ec3-4efd-b1de-e357af92a28d",
+                    "materialList": [
+                        "0d1d87bb-0a73-448c-aa4f-7481aca233b4"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "4039c117-5dfc-4e62-95da-8966b1c92b6d",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "6d7550c5-e37e-47ce-bbbe-2f2a005f4fcc",
+                    "materialList": [
+                        "e649fd2a-3618-43ae-93eb-44f38972f737"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "fe30f34f-a175-4626-8772-839aa0de2ae8",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "674ba900-cd03-4992-81be-7dfe206a976c",
+                    "materialList": [
+                        "d88c5fb0-d55b-4b79-8b6e-46f5289a7d49"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "0c21bb99-6a66-4bd0-96a8-769fa05d64dc",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "7f495a96-12d8-4234-a439-4390e8014c79",
+                    "materialList": [
+                        "9c458905-9739-44de-9f8f-ebc61458c416"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "49afc165-59cd-493f-b1f2-7a1a0e34963a",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "3ba91a02-49f4-4e0b-a42a-c2c5b97de289",
+                    "materialList": [
+                        "02b77917-b8c3-45e9-a503-08cde6ae7785"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "91ca0654-bb6a-4a9c-b4ae-014581531ab5",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "f43d419a-d6cf-4e1f-9151-375aadd51794",
+                    "materialList": [
+                        "d88c5fb0-d55b-4b79-8b6e-46f5289a7d49"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "b62baf8e-3bae-4ea4-ba2d-4bb5f057bbf7",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "b428457c-3171-4220-9402-88770ae5be03",
+                    "materialList": [
+                        "e649fd2a-3618-43ae-93eb-44f38972f737"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "1a181d4a-0364-42d9-a303-f0ce6c50a34f",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "89ca4559-9d21-4d1c-aaf9-82ec06a9f449",
+                    "materialList": [
+                        "0d1d87bb-0a73-448c-aa4f-7481aca233b4"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "7f36e079-e3dd-4c95-92ec-1d33c6e760cc",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "32304b52-b1a5-4227-852d-8e3710440d4d",
+                    "materialList": [
+                        "d88c5fb0-d55b-4b79-8b6e-46f5289a7d49"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ],
+            [
+                "a3b592c0-f2f6-4e3a-9dc0-2a47ac18b5d8",
+                {
+                    "componentType": "Renderable",
+                    "enabled": true,
+                    "mesh": "2fbaeca0-494d-4e2c-ac88-6445383bbab3",
+                    "materialList": [
+                        "5f39d4dc-f24c-4499-a09a-eb11ff52f717"
+                    ],
+                    "receiveShadows": true,
+                    "castShadows": 1,
+                    "culling": false
+                }
+            ]
+        ]
+    },
+    "grabbles": {
+        "__type": "Map",
+        "value": []
+    },
+    "rigidbodies": {
+        "__type": "Map",
+        "value": []
+    },
+    "lights": {
+        "__type": "Map",
+        "value": []
+    },
+    "cameras": {
+        "__type": "Map",
+        "value": []
+    },
+    "colliders": {
+        "__type": "Map",
+        "value": []
+    }
+}

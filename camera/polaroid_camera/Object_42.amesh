@@ -1,0 +1,28 @@
+{
+    "name": "Object_42",
+    "uuid": "674ba900-cd03-4992-81be-7dfe206a976c",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "CQAHAAgABwAJAAoABwAKAAYABgAKAAsABgALAAUABQALAAwABQAMAAQABAAMAA0ABAANAAMAAwANAAIAAgANAA4AAgAOAAEAAQAOAA8AAQAPAAAAAAAPABAAAAAQAB8AHwAQABEAHwARAB4AHgARABIAHgASAB0AHQASABMAHQATABwAHAATABQAHAAUABsAGwAUABUAGwAVABoAGgAVABYAGgAWABkAGQAWABcAGQAXABgA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "KEissJuC5D3scngyDVKyvJEe4D24cnIy5uQuvakd0z0urWAyK+h9vc//vT0g0UMyw5ShvcKUoT15+hwy0f+9vSnofT2iTtsxqR3TveTkLj3ypF4xkh7gvQ1SsjwAJjuvm4LkvRKbvTFEZ3+xkx7gvQZSsrwTjvmxqh3TveHkLr3eXDey0f+9vSnofb31Wm2yw5ShvcOUob0PV46yKeh9vdH/vb1jwqGy4OQuvasd071rMLCy/1GyvJMe4L0wE7myHcQWM5uC5L1IE7yyI1KyPJEe4L0uE7my8uQuPacd071oMLCyOeh9Pcz/vb1gwqGyyZShPbyUob0KV46y1v+9PRnofb3qWm2yrh3TPc/kLr3SXDeylB7gPdpRsrz1jfmxm4LkPbUg4TP7Zn+xjx7gPUhSsjzgIDuvox3TPQPlLj1GpV4xxv+9PUrofT3OTtsxtZShPc+UoT2L+hwyCeh9Pdv/vT0w0UMyvOQuPbId0z06rWAyslGyPJYe4D3AcnIy"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/+0Onpk3vLrQAAIA/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "9RrEPpIVDj+E3sI+j+gNP7S5wT6LnQ0/y7fAPmg3DT+w4r8+FLoMP5ZCvz5eKgw/od2+Ps2NCz+zt74+ZuoKP0LSvj5uRgo/Ryy/PjaoCT9Pwr8+zhUJP5SOwD7ZlAg/PYnBPk0qCD+pqMI+P9oHP8zhwz7Epwc/mijFPs2UBz+KcMY+FaIHP/qsxz4Xzwc/yNHIPhsaCD+z08k+PoAIP86oyj6S/Qg/6EjLPkeNCT/drcs+2SkKP8vTyz5AzQo/PLnLPjhxCz83X8s+cQ8MPy/Jyj7YoQw/6vzJPs0iDT8/Ask+Wo0NP9bixz5o3Q0/sqnGPuIPDj/kYsU+2SIOPw=="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}
