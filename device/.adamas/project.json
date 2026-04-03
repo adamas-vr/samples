@@ -7,7 +7,7 @@
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-04-02T22:09:06.823Z",
-        "updateAt": "2026-04-03T04:47:42.706Z"
+        "updateAt": "2026-04-03T21:01:51.440Z"
     },
     "world": {
         "worldEntrance": false,
@@ -834,7 +834,7 @@
                         "localPosition": [
                             0,
                             0,
-                            0
+                            0.03
                         ],
                         "localRotation": [
                             0,
@@ -866,7 +866,7 @@
                         "localPosition": [
                             0,
                             0,
-                            0
+                            0.03
                         ],
                         "localRotation": [
                             0,
