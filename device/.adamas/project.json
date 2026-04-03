@@ -3,11 +3,11 @@
         "name": "device",
         "projectId": "qVCqhu7TthudRdeGGfcxeaKLtM-LOLfxbeTm_mdpnm4",
         "author": "Test T0 Account",
-        "version": "0.0.5",
+        "version": "0.0.7",
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-04-02T22:09:06.823Z",
-        "updateAt": "2026-04-03T21:54:49.516Z"
+        "updateAt": "2026-04-03T23:53:01.394Z"
     },
     "world": {
         "worldEntrance": false,
@@ -893,7 +893,7 @@
                         "enabled": true,
                         "mesh": "63b93989-dd7f-482c-bfb3-4cd5307b5aab",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "e9f25d1c-9077-43ab-9f71-61a62329527e"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -907,7 +907,7 @@
                         "enabled": true,
                         "mesh": "96573831-7806-4700-8a99-6415342bd82c",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "9bf95e2b-d8f2-49d7-b362-e1b095c5f306"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -935,7 +935,7 @@
                         "enabled": true,
                         "mesh": "dea620e0-52ef-4beb-9047-aea2d6422f1d",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "9bf95e2b-d8f2-49d7-b362-e1b095c5f306"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -949,7 +949,7 @@
                         "enabled": true,
                         "mesh": "a0fa659e-8310-4190-8a26-00e980d7b7af",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "96848b98-4660-45cc-a454-00a66d717d1e"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -963,7 +963,7 @@
                         "enabled": true,
                         "mesh": "1703bb7f-9123-4365-9590-32a7e218b1a3",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "da4fc7f1-afa1-4d11-b41b-37171aa1b828"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -977,7 +977,7 @@
                         "enabled": true,
                         "mesh": "518f646a-587f-476c-ba3b-6a4fc7d4af4d",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "d7180782-c476-495e-8719-7b1332e87fd8"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -991,7 +991,7 @@
                         "enabled": true,
                         "mesh": "be95ace6-3b69-47fc-b5e6-444191287674",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "2aecaad5-982f-42bf-a667-3b5c6417e452"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -1005,7 +1005,7 @@
                         "enabled": true,
                         "mesh": "0dc749d6-e271-45af-8721-c2d00d7eb701",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "9bf95e2b-d8f2-49d7-b362-e1b095c5f306"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -1019,7 +1019,7 @@
                         "enabled": true,
                         "mesh": "e2a8f579-f65a-41ed-ac0f-41d05fe4fc7c",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "e24c2223-9f38-4c4c-94e2-42b5440ae296"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -1033,7 +1033,7 @@
                         "enabled": true,
                         "mesh": "faf011f9-92a1-4b5e-b6b3-f00abc7bcfd0",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "9bf95e2b-d8f2-49d7-b362-e1b095c5f306"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -1061,7 +1061,7 @@
                         "enabled": true,
                         "mesh": "a2775a51-6187-4415-a008-14b03e9d4c3b",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "9bf95e2b-d8f2-49d7-b362-e1b095c5f306"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -1075,7 +1075,7 @@
                         "enabled": true,
                         "mesh": "e2ef986b-4e87-4024-a764-bf3ddb8e4e73",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "69fca7f2-738c-4192-a16d-fbb5a7d7aa85"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -1089,7 +1089,7 @@
                         "enabled": true,
                         "mesh": "541fd5fc-ca6c-4653-a0c2-2bbc96927488",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "4d20e41f-0502-4c73-abbf-f6fe7b924dff"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -1103,7 +1103,7 @@
                         "enabled": true,
                         "mesh": "e5f2bd35-1954-4b72-af9c-bc89dc6acbdc",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "416e949c-6560-46d9-b8ca-88799ad50935"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -1131,7 +1131,7 @@
                         "enabled": true,
                         "mesh": "19414503-dfd9-4ba9-bdd8-653f082577f7",
                         "materialList": [
-                            "f34fd5a7-a77c-49a8-a8dc-0c7ffca1b47e"
+                            "9bf95e2b-d8f2-49d7-b362-e1b095c5f306"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,

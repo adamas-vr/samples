@@ -75,7 +75,7 @@ declare module "adamasvr:assets/controller/Trigger001.amesh" {
 	const value: import("@adamasvr/sdk").MeshAsset;
 	export default value;
 }
-declare module "adamasvr:assets/controller/aiAmbientOcclusion1.amat" {
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1 copy 2.amat" {
 	const value: import("@adamasvr/sdk").MaterialAsset;
 	export default value;
 }
@@ -84,6 +84,46 @@ declare module "adamasvr:assets/controller/controller.afab" {
 	export default value;
 }
 declare module "adamasvr:assets/controller/wire_204204204.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1 copy.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1 copy 9.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1 copy 8.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1 copy 7.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1 copy 6.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1 copy 5.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1 copy 4.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1 copy 3.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/controller/aiAmbientOcclusion1 copy 10.amat" {
 	const value: import("@adamasvr/sdk").MaterialAsset;
 	export default value;
 }
