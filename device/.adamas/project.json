@@ -3,11 +3,11 @@
         "name": "device",
         "projectId": "qVCqhu7TthudRdeGGfcxeaKLtM-LOLfxbeTm_mdpnm4",
         "author": "Test T0 Account",
-        "version": "0.0.2",
+        "version": "0.0.5",
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-04-02T22:09:06.823Z",
-        "updateAt": "2026-04-03T21:01:51.440Z"
+        "updateAt": "2026-04-03T21:54:49.516Z"
     },
     "world": {
         "worldEntrance": false,
@@ -315,7 +315,7 @@
                         "parent": "40719817-e836-4dda-add2-124429c7b47b",
                         "children": [],
                         "localPosition": [
-                            0.012636564671993256,
+                            0.013,
                             -0.02855699695646763,
                             0.027326611801981926
                         ],
@@ -834,7 +834,7 @@
                         "localPosition": [
                             0,
                             0,
-                            0.03
+                            0.04
                         ],
                         "localRotation": [
                             0,
@@ -866,7 +866,7 @@
                         "localPosition": [
                             0,
                             0,
-                            0.03
+                            0.04
                         ],
                         "localRotation": [
                             0,
