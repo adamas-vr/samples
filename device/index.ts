@@ -22,7 +22,9 @@ type ButtonVisualizer = {
 	material: number;
 };
 
-const loadButtonVisualizer = async (entity: Entity): Promise<ButtonVisualizer> => {
+const loadButtonVisualizer = async (
+	entity: Entity,
+): Promise<ButtonVisualizer> => {
 	const material = await RenderableManager.GetMaterial(entity);
 	const defaultColor = await MaterialManager.GetColor(
 		material,
@@ -47,10 +49,7 @@ const setButtonActive = async (
 	);
 };
 
-const rotateThumbstick = async (
-	entity: Entity,
-	axis: vec2,
-): Promise<void> => {
+const rotateThumbstick = async (entity: Entity, axis: vec2): Promise<void> => {
 	const absoluteRotation = quat.create();
 	quat.fromEuler(
 		absoluteRotation,
@@ -137,17 +136,17 @@ Project.FromBundle(projectBundle).Launch({
 			[
 				DevicePath.RIGHT_PRIMARY_BUTTON,
 				await loadButtonVisualizer(
-					sceneGraph["@Right_Controller"]["@XRController_Thumbstick_Buttons001"][
-						"@Button_A001"
-					].entityId,
+					sceneGraph["@Right_Controller"][
+						"@XRController_Thumbstick_Buttons001"
+					]["@Button_A001"].entityId,
 				),
 			],
 			[
 				DevicePath.RIGHT_SECONDARY_BUTTON,
 				await loadButtonVisualizer(
-					sceneGraph["@Right_Controller"]["@XRController_Thumbstick_Buttons001"][
-						"@Button_B001"
-					].entityId,
+					sceneGraph["@Right_Controller"][
+						"@XRController_Thumbstick_Buttons001"
+					]["@Button_B001"].entityId,
 				),
 			],
 		]);
