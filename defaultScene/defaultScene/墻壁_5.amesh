@@ -1,0 +1,28 @@
+{
+    "name": "墻壁_5",
+    "uuid": "46cbd2a1-e3c6-4746-a20d-0f830b206834",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AgAFAAsAAgALAAgABgAJABUABgAVABIAFAAXABEAFAARAA4ADAAPAAMADAADAAAABwATAA0ABwANAAEAFgAKAAQAFgAEABAA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "em5lvshBpb7QlrJAem5lvshBpb7QlrJAem5lvshBpb7QlrJAem5lvg4M5T7QlrJAem5lvg4M5T7QlrJAem5lvg4M5T7QlrJAem5lvshBpb7QlrLAem5lvshBpb7QlrLAem5lvshBpb7QlrLAem5lvg4M5T7QlrLAem5lvg4M5T7QlrLAem5lvg4M5T7QlrLAyfOUvchBpb7QlrJAyfOUvchBpb7QlrJAyfOUvchBpb7QlrJAyfOUvQ4M5T7QlrJAyfOUvQ4M5T7QlrJAyfOUvQ4M5T7QlrJAyfOUvchBpb7QlrLAyfOUvchBpb7QlrLAyfOUvchBpb7QlrLAyfOUvQ4M5T7QlrLAyfOUvQ4M5T7QlrLAyfOUvQ4M5T7QlrLA"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAAAAAAIA/AAAAAAAAgL8AAAAAAACAvwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAAAAAACAvwAAAAAAAAAAAAAAAAAAAAAAAIC/AAAAAAAAgL8AAAAAAACAvwAAAAAAAAAAAAAAAAAAAAAAAIC/AAAAAAAAgD8AAAAAAACAvwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAgL8AAAAAAACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAAAAAAAAAAAAAAAAAIC/AAAAAAAAgL8AAAAAAACAPwAAAAAAAAAAAAAAAAAAAAAAAIC/AAAAAAAAgD8AAAAAAACAPwAAAAAAAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "AADAPgAAAAAAAAA+AACAPgAAwD4AAIA/AAAgPwAAAAAAAGA/AACAPgAAID8AAIA/AADAPgAAQD8AAAA+AAAAPwAAwD4AAEA/AAAgPwAAQD8AAGA/AAAAPwAAID8AAEA/AADAPgAAgD4AAMA+AACAPgAAwD4AAIA+AAAgPwAAgD4AACA/AACAPgAAID8AAIA+AADAPgAAAD8AAMA+AAAAPwAAwD4AAAA/AAAgPwAAAD8AACA/AAAAPwAAID8AAAA/"
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+{
+    "name": "LED",
+    "uuid": "e7daed8d-a414-48fc-a86e-2117a571dab5",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1
+    },
+    "baseColorTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "normalScale": 1,
+    "normalTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "emission": {
+        "0": 1,
+        "1": 0.7500331997871399,
+        "2": 0.5
+    },
+    "emissionIntensity": 3.0116000175476074,
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 0,
+    "roughness": 1,
+    "metallicRoughnessTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "occlusionStrength": 1,
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Opaque",
+    "alphaCutoff": 0
+}

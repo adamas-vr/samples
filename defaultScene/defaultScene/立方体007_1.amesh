@@ -1,0 +1,28 @@
+{
+    "name": "立方体007_1",
+    "uuid": "de443460-8206-4b92-bd0d-a86d4ac1278c",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AgABAAAAAgAAAAMABgAFAAQABgAEAAcACgAJAAgACgAIAAsA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "5ftcPkhK7z562xs85ftcPkhK7z5y2xu87MqsPkhK7z5y2xu87MqsPkhK7z562xs80NqFP3bWJD962xs80NqFP3bWJD9y2xu8D26VP3bWJD9y2xu8D26VP3bWJD962xs8ob8JQH0cCz962xs8ob8JQH0cCz9y2xu8QIkRQH0cCz9y2xu8QIkRQH0cCz962xs8"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "kwFiPiBl9T2u02o+KGX1Pa7Taj6wHDM+lAFiPrAcMz5CSJY+aHvhPVCxmj5we+E9T7GaPtQnKT5CSJY+1CcpPj3gxT6swwI+SknKPqzDAj5KSco+WC07Pj3gxT5YLTs+"
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

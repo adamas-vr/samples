@@ -1,0 +1,28 @@
+{
+    "name": "Cube035_1",
+    "uuid": "17c510ed-7984-4521-805b-cd0047814194",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "HAAZAAcAHAAHAAsAHwAdAA4AHwAOABAAAAAaABUAAAAVAAgAFwAAAAgAFwAIAAEAAgAEAAYACwANAA8AEAARABIAEwAUABYAAQAIAAoAAQAKAAMACwAHAAQACwAEAA0AEAAOAAwAEAAMABEACAAVABMACAATAAkAGwAWABUAGwAVABoABQAYABcABQAXAAEADwAeABwADwAcAAsAEgAgAB8AEgAfABAA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "eBCfPo+rVUCjrPm/0I0qv9AMoD/f8hpA0I0qv9AMoD/f8hpAVQAsvw5Inz/q6RpAVQAsvw5Inz/q6RpA0I0qv7MDnz+YRhtA0I0qv7MDnz+YRhtA0I0qv7MDnz+YRhtAwo0qv4+rVUCjrPm/RwAsv+NOVUBy1vm/RwAsv+NOVUBy1vm/140qvzGkfMA/xxtAXAAsv5ijfMCeahtAXAAsv5ijfMCeahtA140qvzgAfcDCahtA140qvzgAfcDCahtA1I0qvxfye8BC9ve9WQAsv3aVe8As4/e91I0qv9yUe8ChuwG+RwAsvwg4VUDp9SzAwo0qv6qUVUAU9izAwo0qv6qUVUAU9izAwo0qv903VUCKUi3AXBCfPtAMoD/f8hpAXBCfPrMDnz+YRhtAXBCfPrMDnz+YRhtAexCfPqqUVUAU9izAexCfPt03VUCKUi3ATBCfPjGkfMA/xxtATBCfPjgAfcDCahtATBCfPjgAfcDCahtAUxCfPhfye8BC9ve9UxCfPtyUe8ChuwG+"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAPS4eT+eYGE+TmqtvidSOD9aDxs/TmqtvidSOD9aDxs/2xJev9cIiD5PV9c+2xJev9cIiD5PV9c+GWqtvm1Ncz78D2k/GWqtvm1Ncz78D2k/GWqtvm1Ncz78D2k/6369vif+Zz+HT1E+VzVovyBF0j4jo709VzVovyBF0j4jo709lQKvvgM3r77jD2A/UUFgv1gNr76GLq4+UUFgv1gNr76GLq4+XQGvvr99YL8tAq0+XQGvvr99YL8tAq0+uOSuvkGVX7+zwrG+bCVgv13Erb4QBbC+B+WuvvD5q74AtmC/riVgv0aWrj6OM6++1ueuvov7Xz+Oua++1ueuvov7Xz+Oua++0OWuvhkUrj4oTmC/AAAAAOtaPz92Dio/AAAAAACxjj5123U/AAAAAACxjj5123U/AAAAAPlUbD+GzsS+AAAAAEgRwz4wsWy/AAAAAAEmxL79d2w/AAAAADL0bL/QysE+AAAAADL0bL/QysE+AAAAAOPea78EAse+AAAAAHHgwL77I22/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "DqNVP0A+FT9ILT8/JeB/P8ftVj/QDWU9AAw/P/Prfz+AzFY/MENnPUctPz8AAIA/gMxWP2AIaD3H7VY/YAhoPUctPz9APhU/AAw/P8Q2FT8BDD8/f0UVP8btVj960gU/AQS+PSioaD6AzFY/NdIFP8r5vD00qWg+x+1WP8DzBT/K+bw9AMwDOgAEvj0AyAM6y/m8PQAAAAAADD8/ISkEP0YtPz9ACAQ/Ry0/PyEpBD9GLT8/QAgEPw6jVT8l4H8/DqNVPwAAgD+OY20/YAhoPQ6jVT8hKQQ/DqNVP0AIBD+OY20/etIFPxS5lDs0qWg+jmNtP8DzBT8VuZQ7AMgDOhW5lDsAAAAA"
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

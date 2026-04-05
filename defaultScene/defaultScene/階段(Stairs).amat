@@ -1,0 +1,82 @@
+{
+    "name": "階段(Stairs)",
+    "uuid": "2c646b10-b820-4e7f-9504-490ebd67b9c2",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1
+    },
+    "baseColorMap": "3dd4b45d-c93f-4fe6-ab6a-c49992150a04",
+    "baseColorTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "normalScale": 1.4142135623730951,
+    "normalMap": "da76f6f8-1c51-46d7-93a6-fa48d6536169",
+    "normalTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "emission": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+    },
+    "emissionIntensity": 1,
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 0,
+    "roughness": 1,
+    "metallicRoughnessMap": "f1305775-7be1-4c3e-a780-71da4ab6e29f",
+    "metallicRoughnessTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "occlusionStrength": 1,
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Opaque",
+    "alphaCutoff": 0
+}

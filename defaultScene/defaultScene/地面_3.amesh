@@ -1,0 +1,28 @@
+{
+    "name": "地面_3",
+    "uuid": "c21e6ca3-6028-43b0-a76a-aef56d70de01",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AgADAAEAAgABAAAA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "RGFsQBKI1j3PlrLARGFsQBKI1j3PlrJARGFswBKI1j3PlrLARGFswBKI1j3PlrJA"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "ADP3PgAAgD8AM/c+AKAxPoDsdT8AAIA/gOx1PwCgMT4="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

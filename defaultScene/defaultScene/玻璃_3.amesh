@@ -1,0 +1,28 @@
+{
+    "name": "玻璃_3",
+    "uuid": "4a9865c0-a035-47fa-87e1-9da9b558e601",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAACAAMAAAADAAEABAAFAAcABAAHAAYA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "wa18PwtjaL+QUPI/2q18Pw5jaD+MUPK/0618vwdjaL+MUPI/xa18vw5jaD+QUPK/wa18Px+ZZL+QUPI/2q18P/osbD+MUPK/0618vxuZZL+MUPI/xa18v/osbD+QUPK/"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAANnUZr+bYt2+AAAAANnUZr+bYt2+AAAAANnUZr+bYt2+AAAAANnUZr+bYt2+AAAAANnUZj+bYt0+AAAAANnUZj+bYt0+AAAAANnUZj+bYt0+AAAAANnUZj+bYt0+"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPw=="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

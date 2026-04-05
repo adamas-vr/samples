@@ -1,0 +1,80 @@
+{
+    "name": "Fabric_02",
+    "uuid": "6ae7aa2c-3479-491c-aa00-85af07284ac5",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1
+    },
+    "baseColorMap": "3964c5b7-0c01-4cc0-949f-e64e4775c673",
+    "baseColorTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "normalScale": 1,
+    "normalTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "emission": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+    },
+    "emissionIntensity": 1,
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 0,
+    "roughness": 1,
+    "metallicRoughnessTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "occlusionStrength": 1,
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Opaque",
+    "alphaCutoff": 0
+}

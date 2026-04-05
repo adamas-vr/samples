@@ -1,0 +1,28 @@
+{
+    "name": "立方体051_1",
+    "uuid": "e3ab5193-a78e-4665-9ea1-2be43f826c89",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "BAAJAAgACAAHAAYABgAFAA4ADgANAAwADAALAAoACgATABIAEgARABAAEAAPAAEAAQAAAAIAAgADAAQABAAIAAYABgAOAAwADAAKABIAEgAQAAEAAQACAAQABAAGAAwADAASAAEADAABAAQA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "LYpKvM8XCToTxAxAJcMXvM8XCToszgxAwXFtvM8XCTrBrAxAJmKCvM8XCTrZiQxA+26HvM8XCToSVwxAJcMXvM8XCToyzgzALYpKvM8XCToYxAzAtHFtvM8XCTrGrAzAJGKCvM8XCTrfiQzA+26HvM8XCToXVwzA+26HPM8XCToXVwzAJGKCPM8XCTrfiQzAtHFtPM8XCTrGrAzALYpKPM8XCToYxAzAJMMXPM8XCToyzgzAJMMXPM8XCToszgxALYpKPM8XCToTxAxAwXFtPM8XCTrBrAxAJmKCPM8XCTrZiQxA+26HPM8XCToSVwxA"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "KaA5PrAvgT7NREs+LhOBPmp/LT56cYE+42QlPvjTgT564iE+QGOCPsxESz7S7P4+KaA5PlLQ/j5rfy0+ho7+PuJkJT4ILP4+euIhPsCc/T7FDq8+wJz9PoxNrT4ILP4+SkCpPoKO/j7sL6M+UtD+Pphdmj7U7P4+m12aPioTgT7sL6M+qi+BPktAqT5+cYE+j02tPvjTgT7CDq8+QGOCPg=="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+{
+    "name": "Frame",
+    "uuid": "d7d87999-8717-4715-9596-ed9d63d3548d",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": {
+        "0": 0.20000000298023224,
+        "1": 0.20000000298023224,
+        "2": 0.20000000298023224,
+        "3": 1
+    },
+    "baseColorTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "normalScale": 1,
+    "normalTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "emission": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+    },
+    "emissionIntensity": 1,
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 0.800000011920929,
+    "roughness": 0.5,
+    "metallicRoughnessTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "occlusionStrength": 1,
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Opaque",
+    "alphaCutoff": 0
+}

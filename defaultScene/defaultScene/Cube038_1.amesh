@@ -1,0 +1,28 @@
+{
+    "name": "Cube038_1",
+    "uuid": "d8f40cc1-c7ba-45d4-b79a-31c745789fed",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AQAKAAAAAQAAABgACgAVABsACgAbAAAAEwAMAB8AEwAfACAACwAEABoACwAaAB0AAgAFAAcACwANAA8AEQASABQAFQAWABcABgAIAAoABgAKAAEADwAHAAQADwAEAAsAEAAOAAwAEAAMABMACQAWABUACQAVAAoAGQADAAEAGQABABgAHgANAAsAHgALAB0AIQAUABMAIQATACAAFwAcABsAFwAbABUA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "jIWfvtrQVUD/8ba/GqsqP2ZXoD8xUDxAGqsqP2ZXoD8xUDxAGqsqP0lOnz/qozxAGqsqP0lOnz/qozxAGqsqP0lOnz/qozxAnx0sP6SSnz88RzxAnx0sP6SSnz88RzxArR0sPy50VUDOG7e/rR0sPy50VUDOG7e/KKsqP9rQVUD/8ba/EqsqP+Z+fMCQJD1AEqsqPzvbfMAUyDxAEqsqPzvbfMAUyDxAlx0sP5l+fMDwxzxAlx0sP5l+fMDwxzxAnh0sP91ve8B4mAvAnh0sP91ve8B4mAvAGasqP37Me8DDmAvAGasqP37Me8DDmAvAGasqP5Fve8AY9QvAKqsqP/W5VUDCmAvArx0sP1NdVUCWmAvAKqsqPyhdVUA39QvAqYWfvmZXoD8xUDxAqYWfvklOnz/qozxAqYWfvklOnz/qozxAjIWfvvW5VUDCmAvAjIWfvihdVUA39QvAt4WfvuZ+fMCQJD1At4WfvjvbfMAUyDxAt4WfvjvbfMAUyDxAqYWfvn7Me8DDmAvAqYWfvpFve8AY9QvA"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAPS4eT+eYGE+TmqtPidSOD9aDxs/TmqtPidSOD9aDxs/GWqtPm1Ncz78D2k/GWqtPm1Ncz78D2k/GWqtPm1Ncz78D2k/2xJeP9cIiD5PV9c+2xJeP9cIiD5PV9c+VzVoPyBF0j4jo709VzVoPyBF0j4jo7096369Pif+Zz+HT1E+kfOuPj/Mrr6pJ2A/6fKuPiVOYL/8Bq4+6fKuPiVOYL/8Bq4+gzRgP0Lmrr6dl64+gzRgP0Lmrr6dl64+oiVgP7RUrr4Nda++oiVgP7RUrr4Nda++B+WuPr3dX78FVLC+B+WuPr3dX78FVLC+buSuPnF1rb4lbWC/1ueuPov7Xz+Oua++oydgP7GKrj4WNa++0OWuPhkUrj4oTmC/AAAAAOtaPz92Dio/AAAAAACxjj5123U/AAAAAACxjj5123U/AAAAAPlUbD+GzsS+AAAAAEgRwz4wsWy/AAAAAMnJw74Xi2w/AAAAAMG2bL9A9sI+AAAAAMG2bL9A9sI+AAAAAN4wbL+ae8W+AAAAAHxowr7l02y/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "z4dpPwB7cD/OQVU/Mm0QP8PXfz+HKBQ/zkFVP4BQED+/138/gFMUP8D1fz9+UxQ/0CNVP5BiED/A9X8/YkgUP9AjVT94dHA/0CNVP7+BcD/PQVU/AHtwP8HXfz8B4n8/4KpqP84XFD/B138/AACAP+CMaj+rFxQ/wPV/P9zhfz/fjGo/xFQrPuCMaj/AVCs+36pqPwDeKj7gqmo/wFQrPt+qaj8A3io+z0FVP1rifz/QI1U/WuJ/P89BVT8AAIA/0IdpPzJtED/Qh2k/gFAQP8CRaz9/UxQ/0IdpP1rifz/Qh2k/AACAP8CRaz8B4n8/wJFrPwAAgD/g8H4/zxcUP+Dwfj/EVCs+4PB+PwDeKj4="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

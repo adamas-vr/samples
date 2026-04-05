@@ -1,0 +1,82 @@
+{
+    "name": "Carpet_1",
+    "uuid": "bdb5ae07-ff29-4352-b3f5-0d8ba3caac45",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1
+    },
+    "baseColorMap": "abdc4e1a-a021-4cf0-b1ba-899de2b83e2f",
+    "baseColorTransform": {
+        "offset": [
+            1.999999999999998,
+            1.00000008742278
+        ],
+        "scale": [
+            2,
+            2
+        ],
+        "rotation": -1.5707963705062866
+    },
+    "normalScale": 1.4142135623730951,
+    "normalMap": "08245d1a-ede0-4f02-adb5-eac2a5d10628",
+    "normalTransform": {
+        "offset": [
+            1.999999999999998,
+            1.00000008742278
+        ],
+        "scale": [
+            2,
+            2
+        ],
+        "rotation": -1.5707963705062866
+    },
+    "emission": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+    },
+    "emissionIntensity": 1,
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 0,
+    "roughness": 1,
+    "metallicRoughnessMap": "0c19cf32-0f13-4434-8a67-2b044bf27cba",
+    "metallicRoughnessTransform": {
+        "offset": [
+            1.999999999999998,
+            1.00000008742278
+        ],
+        "scale": [
+            2,
+            2
+        ],
+        "rotation": -1.5707963705062866
+    },
+    "occlusionStrength": 1,
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Opaque",
+    "alphaCutoff": 0
+}

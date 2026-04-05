@@ -1,0 +1,28 @@
+{
+    "name": "立方体021_1",
+    "uuid": "c23b14f8-bee3-486b-bf59-324a3c1d6b62",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "MgAwADUAMgA1ADcALQArAC8ALQAvADIAKAAlACoAKAAqAC0AIwAhACYAIwAmACgAHwAcACEAHwAhACMAGQAXAB0AGQAdAB8AFAASABYAFAAWABoADwANABEADwARABQACAAKAAwACAAMAA8ABgAEADcABgA3ADQACgAIAAIACgACAAAAMgA3ADgAMgA4ADMAMQA2ADUAMQA1ADAALQAyADMALQAzAC4ALAAxAC8ALAAvACsAKAAtAC4AKAAuACkAJwAsACoAJwAqACUAIwAoACkAIwApACQAIgAnACYAIgAmACEAHwAjACQAHwAkACAAHgAiACEAHgAhABwAGQAfACAAGQAgABsAGAAeAB0AGAAdABcAFAAaABsAFAAbABUAEwAYABYAEwAWABIADwAUABUADwAVABAADgATABEADgARAA0ACAAPABAACAAQAAkACwAOAAwACwAMAAoABgA0ADYABgA2AAcABQA4ADcABQA3AAQACgAAAAEACgABAAsACQADAAIACQACAAgA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "24KDwPzpCbzpkHM/24KDwJWUt7y0DHU/24KDwI3pCTzpkHM/24KDwF6Utzy0DHU/bMtaP43pCTyX8pfANUdcP16UtzyX8pfAbMtaPwrqCbyX8pfANUdcP5yUt7yX8pfAUILCPY3pCTz7lHM/9wbDPV6UtzzFEHU/UILCPQrqCbz7lHM/9wbDPZyUt7zFEHU/V79qPvzpCbxdn3A/V79qPvzpCbxdn3A/MchrPpWUt7ziFnI/V79qPo3pCTxdn3A/MchrPl6UtzziFnI/Yp62PvzpCbyg4Wc/Yp62PvzpCbyg4Wc/NaO3PpWUt7zuR2k/Yp62Po3pCTyg4Wc/NaO3Pl6UtzzuR2k/MtbzPvzpCbyvm1k/MtbzPvzpCbyvm1k/gFP1PpWUt7zm5Vo/MtbzPo3pCTyvm1k/MtbzPo3pCTyvm1k/gFP1Pl6Utzzm5Vo/dZUVPwrqCbyRPEY/dZUVPwrqCbyRPEY/jIoWP5uUt7yoYEc/dZUVP43pCTyRPEY/jIoWP16UtzyoYEc/E3ctPxjqCbzzWi4/KZsuP6KUt7wKUC8/E3ctP3/pCTzyWi4/KZsuP1iUtzwJUC8/MNZAPwrqCbyWsBI/MNZAPwrqCbyWsBI/aCBCP5uUt7w8bxM/MNZAP43pCTyWsBI/aCBCP16Utzw8bxM/IRxPP/zpCbxfKeg+IRxPP/zpCbxfKeg+b4JQP5WUt7wyLuk+IRxPP43pCTxfKeg+b4JQP16UtzwyLuk+39lXP/zpCbyo6qY+39lXP/zpCbyo6qY+YlFZP5WUt7wVb6c+39lXP43pCTyo6qY+YlFZP16UtzwVb6c+fc9aP/zpCbwhV0Q+fc9aP/zpCbwhV0Q+RktcP5WUt7x1mUQ+fc9aP43pCTwhV0Q+RktcP16Utzx1mUQ+"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAHbHRz6pFHs/AAAAAPzvwz4vg2w/AAAAAHbHR76pFHs/AAAAAPzvw74vg2w/qRR7P3bHR74AAAAAf4VsP87kw74AAAAAqRR7P3bHRz4AAAAAf4VsP87kwz4AAAAAxHIsPd4ESb6QyXo/RZwiPVYYxL7jQmw/xHIsPd4EST6QyXo/RZwiPVYYxD7jQmw/0JMtPhupSj7gJ3c/0JMtPhupSj7gJ3c/D4kjPnKcxD5hz2g/0JMtPhupSr7gJ3c/D4kjPnKcxL5hz2g/GKyrPuSlSj68zGs/GKyrPuSlSj68zGs/s66hPmmZxD4PH14/GKyrPuSlSr68zGs/s66hPmmZxL4PH14/l+76PnamSj6wUVk/l+76PnamSj6wUVk/x2bsPuaQxD4LtUw/l+76PnamSr6wUVk/l+76PnamSr6wUVk/x2bsPuaQxL4LtUw/Yk0hPzqlSj73OUA/Yk0hPzqlSj73OUA/qvEXPzCRxD4OFDU/Yk0hPzqlSr73OUA/qvEXPzCRxL4OFDU/9zlAPzqlSj5iTSE/DhQ1PzCRxD6q8Rc/9zlAPzqlSr5iTSE/DhQ1PzCRxL6q8Rc/sFFZP3amSj6X7vo+sFFZP3amSj6X7vo+C7VMP+aQxD7HZuw+sFFZP3amSr6X7vo+C7VMP+aQxL7HZuw+vMxrP+SlSj4YrKs+vMxrP+SlSj4YrKs+PiFePz2OxD5KsKE+vMxrP+SlSr4YrKs+PiFePz2OxL5KsKE+4Cd3PxupSj7Qky0+4Cd3PxupSj7Qky0+Yc9oP3KcxD4PiSM+4Cd3PxupSr7Qky0+Yc9oP3KcxL4PiSM+kMl6P94EST7Eciw9kMl6P94EST7Eciw940JsP1YYxD5FnCI9kMl6P94ESb7Eciw940JsP1YYxL5FnCI9"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "IaL5PgAAAACqquo+AAAAAO4uAz8AAAAAqqoKPwAAAADvLgM/AAAAP6qqCj8AAAA/IaL5PgAAAD+qquo+AAAAP+8uAz9QKFY+qqoKP1AoVj4hovk+UChWPqqq6j5QKFY+IKL5PmBsXT4hovk+YGxdPqqq6j5gbF0+7i4DP2BsXT6qqgo/YGxdPiCi+T7od2Q+IaL5Puh3ZD6qquo+6HdkPu4uAz/od2Q+qqoKP+h3ZD4govk+KBRrPiGi+T4oFGs+qqrqPigUaz7uLgM/IBRrPu4uAz8kFGs+qqoKPyAUaz4iovk+qA1xPiOi+T6oDXE+qqrqPqgNcT7wLgM/qA1xPqyqCj+oDXE+IaL5PiKFhj6qquo+JIWGPu8uAz8ghYY+qqoKPx6Fhj4hovk+VCCJPiKi+T5UIIk+qqrqPlQgiT7vLgM/VCCJPqqqCj9UIIk+IKL5PoACjD4hovk+gAKMPqqq6j6CAow+7i4DP4ACjD6qqgo/fgKMPiCi+T5AFY8+IaL5PkAVjz6qquo+QBWPPu4uAz9AFY8+qqoKPz4Vjz4iovk+pkCSPiKi+T6oQJI+qqrqPqhAkj7vLgM/pkCSPquqCj+kQJI+"
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

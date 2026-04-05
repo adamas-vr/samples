@@ -1,0 +1,28 @@
+{
+    "name": "Cube031_1",
+    "uuid": "054345c3-bb55-45db-a7b1-f74435845754",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AQAGAAUAAQAFAAIACQAAAAIACQACAAoAEAASABEAEAARAAsACAAPAA0ACAANAAQADAAOABAADAAQAAsABQAGAAcABQAHAAMA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "ei3zvqPQVUBeCfm/ei3zvqPQVUBeCfm/ry3zPqPQVUBeCfm/li3zPt1Nnz87mBtAli3zPt1Nnz87mBtAli3zPvlWoD+CRBtAly3zvvlWoD+CRBtAly3zvt1Nnz87mBtAly3zvt1Nnz87mBtAei3zvr65VUBypCzAsy3zPr65VUBypCzAhC3zPiTbfMBlvBtAhC3zPh1/fMDhGBxAhC3zPh1/fMDhGBxApi3zvh1/fMDhGBxApi3zvh1/fMDhGBxApi3zviTbfMBlvBtAiy3zPgTNe8Djwe29ny3zvgTNe8Djwe29"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAPS4eT+eYGE+AAAAAPS4eT+eYGE+AAAAAPS4eT+eYGE+AAAAAACxjj5123U/AAAAAACxjj5123U/AAAAAOtaPz92Dio/AAAAAOtaPz92Dio/AAAAAACxjj5123U/AAAAAACxjj5123U/AAAAAPlUbD+GzsS+AAAAAPlUbD+GzsS+AAAAADL0bL/QysE+AAAAAAEmxL79d2w/AAAAAAEmxL79d2w/AAAAAAEmxL79d2w/AAAAAAEmxL79d2w/AAAAADL0bL/QysE+AAAAAOPea78EAse+AAAAAOPea78EAse+"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "/AJWPwDMbj/9AlY/AMxuP6MtQD8AzG4/pC1AP4AIBD/NwW0/QNByPaQtQD9cKAQ//QJWP1woBD/9AlY/gAgEP3TsVz9A0HI9/QJWPyPffz+jLUA/I99/P12zdDtAnWg+XbN0OwQhaT7MwW0/fHYGP2VQtj0AIWk+dOxXP3x2Bj9lULY9PJ1oPmCzdDsAxAM6ZVC2PQDAAzo="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

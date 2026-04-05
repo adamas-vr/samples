@@ -1,0 +1,82 @@
+{
+    "name": "Marble_Black",
+    "uuid": "efdff8ff-3b8a-40cb-aa1b-a8415bbb2d03",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1
+    },
+    "baseColorMap": "8426792e-f20a-42b5-83bd-7fa89b29fff3",
+    "baseColorTransform": {
+        "offset": [
+            0,
+            -1
+        ],
+        "scale": [
+            2,
+            2
+        ],
+        "rotation": 0
+    },
+    "normalScale": 1.4142135623730951,
+    "normalMap": "98a563bd-4f16-4788-b159-6568e1028e38",
+    "normalTransform": {
+        "offset": [
+            0,
+            -1
+        ],
+        "scale": [
+            2,
+            2
+        ],
+        "rotation": 0
+    },
+    "emission": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+    },
+    "emissionIntensity": 1,
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 0,
+    "roughness": 1,
+    "metallicRoughnessMap": "3e5833a4-bbb8-4ada-be1f-f9e42459707b",
+    "metallicRoughnessTransform": {
+        "offset": [
+            0,
+            -1
+        ],
+        "scale": [
+            2,
+            2
+        ],
+        "rotation": 0
+    },
+    "occlusionStrength": 1,
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Opaque",
+    "alphaCutoff": 0
+}

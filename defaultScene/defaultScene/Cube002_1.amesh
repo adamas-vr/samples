@@ -1,0 +1,28 @@
+{
+    "name": "Cube002_1",
+    "uuid": "b8c9cd9d-5eb6-4efd-b28e-9ccfe268457e",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AgADAAEAAgABAAAA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "NIjWPUcgH8DPlrLANIjWPUcgH8DPlrJA+YfWPcWILEDPlrLA+YfWPcWILEDPlrJA"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAAAAAAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgD8AAAAAAICzPIDm8T4AAIA/gObxPgCAszw="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}

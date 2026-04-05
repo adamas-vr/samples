@@ -1,0 +1,82 @@
+{
+    "name": "壁(Wall)",
+    "uuid": "2ea863fe-d869-49f4-b5ca-c8fc1ecebe0d",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1
+    },
+    "baseColorMap": "e7bfeea9-af54-484c-9176-e7bd116ac6f8",
+    "baseColorTransform": {
+        "offset": [
+            -7.999999999999992,
+            1.00000034969112
+        ],
+        "scale": [
+            8,
+            8
+        ],
+        "rotation": 1.5707963705062866
+    },
+    "normalScale": 1.4142135623730951,
+    "normalMap": "97eacf1b-6efe-4bb6-85ad-3320347449f8",
+    "normalTransform": {
+        "offset": [
+            -7.999999999999992,
+            1.00000034969112
+        ],
+        "scale": [
+            8,
+            8
+        ],
+        "rotation": 1.5707963705062866
+    },
+    "emission": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+    },
+    "emissionIntensity": 1,
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 0,
+    "roughness": 1,
+    "metallicRoughnessMap": "5a72a2a4-19a2-44fd-808e-2146301753dc",
+    "metallicRoughnessTransform": {
+        "offset": [
+            -7.999999999999992,
+            1.00000034969112
+        ],
+        "scale": [
+            8,
+            8
+        ],
+        "rotation": 1.5707963705062866
+    },
+    "occlusionStrength": 1,
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Opaque",
+    "alphaCutoff": 0
+}

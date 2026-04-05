@@ -1,0 +1,28 @@
+{
+    "name": "立方体022_1",
+    "uuid": "9ef30b5b-bb9a-43a7-9801-0e7ae5d6805f",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAADAAIAAAACAAEABAAHAAYABAAGAAUA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "ckbdvlnSULwz8ti9ckbdPlnSULww8ti9ckbdPlnSULyMLvC9ckbdvlnSULyPLvC9ckbdvr57YL4aq6u+ckbdPr57YL4Zq6u+ckbdPr57YL4werG+ckbdvr57YL4xerG+"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAA"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "eSoHPmBrMj13Kgc+lLLpPsedAT6Usuk+yJ0BPmBrMj15Kgc+YGsyPXcqBz6Usuk+x50BPpSy6T7InQE+YGsyPQ=="
+            },
+            "morphPosition": [],
+            "morphNormal": []
+        }
+    ]
+}
