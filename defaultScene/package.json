@@ -2,7 +2,7 @@
 	"name": "defaultScene",
 	"version": "0.0.1",
 	"dependencies": {
-		"@adamasvr/sdk": "file:../../Git/adamas/runtime-interface",
+		"@adamasvr/sdk": "file:../../runtime-interface",
 		"gl-matrix": "^3.4.4"
 	},
 	"devDependencies": {
