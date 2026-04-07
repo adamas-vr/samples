@@ -1,0 +1,26 @@
+{
+    "name": "quad",
+    "uuid": "cfd788eb-f684-4d6a-9351-e1849249d19c",
+    "dirty": false,
+    "assetType": "Mesh",
+    "meshPrimitives": [
+        {
+            "indices": {
+                "__type": "Uint16Array",
+                "value": "AAABAAMAAAADAAIA"
+            },
+            "vertices": {
+                "__type": "Float32Array",
+                "value": "AAAAvwAAAL8uvbuyAAAAPwAAAL8uvbuyAAAAvwAAAD8uvbsyAAAAPwAAAD8uvbsy"
+            },
+            "normals": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/"
+            },
+            "uvs": {
+                "__type": "Float32Array",
+                "value": "AAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAACAPwAAAAA="
+            }
+        }
+    ]
+}

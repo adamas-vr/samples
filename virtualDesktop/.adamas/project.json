@@ -1,0 +1,196 @@
+{
+    "metadata": {
+        "name": "virtualDesktop",
+        "projectId": "v02w9Jt5u1vt79vtJwQRDyUzZu_TVLouskPHh7rWez8",
+        "author": "Test T0 Account",
+        "version": "0.0.1",
+        "isPublic": false,
+        "description": "No project description.",
+        "createdAt": "2026-04-07T05:28:30.106Z",
+        "updateAt": "2026-04-07T07:47:39.689Z"
+    },
+    "world": {
+        "worldEntrance": false,
+        "environmentIntensity": 0.5,
+        "spawnRotation": [
+            0,
+            0,
+            0
+        ],
+        "spawnPosition": [
+            0,
+            0,
+            0
+        ]
+    },
+    "scene": {
+        "entities": {
+            "__type": "Set",
+            "value": [
+                "5dae26ba-973d-4dff-9186-b8b46b8c55e8"
+            ]
+        },
+        "properties": {
+            "__type": "Map",
+            "value": [
+                [
+                    "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "Display",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ]
+            ]
+        },
+        "transforms": {
+            "__type": "Map",
+            "value": [
+                [
+                    "00000000-0000-0000-0000-000000000000",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "00000000-0000-0000-0000-000000000000",
+                        "children": [
+                            "5dae26ba-973d-4dff-9186-b8b46b8c55e8"
+                        ],
+                        "localPosition": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ],
+                [
+                    "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "00000000-0000-0000-0000-000000000000",
+                        "children": [],
+                        "localPosition": [
+                            0,
+                            1,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ]
+            ]
+        },
+        "renderables": {
+            "__type": "Map",
+            "value": [
+                [
+                    "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "cfd788eb-f684-4d6a-9351-e1849249d19c",
+                        "materialList": [
+                            "0db31d7e-3121-4db3-99ec-c086ca560504"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": true
+                    }
+                ]
+            ]
+        },
+        "grabbles": {
+            "__type": "Map",
+            "value": [
+                [
+                    "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
+                    {
+                        "componentType": "Grabble",
+                        "enabled": true,
+                        "movementType": 2,
+                        "dynamicAttach": true,
+                        "allowHoverActivate": false,
+                        "trackPosition": true,
+                        "trackRotation": true,
+                        "throwOnDetach": false
+                    }
+                ]
+            ]
+        },
+        "rigidbodies": {
+            "__type": "Map",
+            "value": [
+                [
+                    "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
+                    {
+                        "componentType": "Rigid Body",
+                        "enabled": true,
+                        "isKinematic": true,
+                        "angularDamping": 0.05,
+                        "linearDamping": 0.05,
+                        "mass": 1,
+                        "useGravity": false
+                    }
+                ]
+            ]
+        },
+        "lights": {
+            "__type": "Map",
+            "value": []
+        },
+        "cameras": {
+            "__type": "Map",
+            "value": []
+        },
+        "colliders": {
+            "__type": "Map",
+            "value": [
+                [
+                    "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    1,
+                                    0.1
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            ]
+        }
+    }
+}
