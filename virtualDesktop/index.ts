@@ -39,7 +39,7 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 
 	await TransformManager.SetLocalScale(
 		screenEntity,
-		vec3.fromValues(1, screenHeight / screenWidth, 1),
+		vec3.fromValues(1, -screenHeight / screenWidth, 1),
 	);
 
 	const material = await RenderableManager.GetMaterial(screenEntity);
@@ -67,7 +67,7 @@ function startCaptureLoop(): void {
 
 		uploadInFlight = true;
 
-		const capture = robot.screen.capture(0, 0, screenWidth, screenHeight);
+		const capture = robot.screen.capture();
 		const rgba = convertBgrxToRgba(capture.image);
 
 		void TextureManager.LoadRGBAImage(
