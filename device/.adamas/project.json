@@ -3,11 +3,11 @@
         "name": "device",
         "projectId": "qVCqhu7TthudRdeGGfcxeaKLtM-LOLfxbeTm_mdpnm4",
         "author": "Test T0 Account",
-        "version": "0.0.7",
+        "version": "0.0.8",
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-04-02T22:09:06.823Z",
-        "updateAt": "2026-04-03T23:53:01.394Z"
+        "updateAt": "2026-04-07T04:37:31.494Z"
     },
     "world": {
         "worldEntrance": false,

@@ -3,11 +3,11 @@
         "name": "rendering",
         "projectId": "AN9UmYn8UR-oZBkCuPmFlhmhq4PQaV8F9whJweETylc",
         "author": "Test T0 Account",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-03-24T17:57:18.523Z",
-        "updateAt": "2026-04-02T00:13:48.161Z"
+        "updateAt": "2026-04-07T04:36:27.451Z"
     },
     "world": {
         "worldEntrance": false,

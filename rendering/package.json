@@ -2,7 +2,7 @@
 	"name": "rendering",
 	"version": "0.0.1",
 	"dependencies": {
-		"@adamasvr/sdk": "*",
+		"@adamasvr/sdk": "file:../../runtime-interface",
 		"gl-matrix": "^3.4.4"
 	},
 	"devDependencies": {
