@@ -3,11 +3,12 @@
         "name": "camera",
         "projectId": "x2hhPRlx9COWVG_6zJNp5qr7IsCUa5gwaEiEkC3DQhA",
         "author": "Test T0 Account",
-        "version": "0.0.14",
+        "version": "0.0.15",
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-04-01T19:54:36.869Z",
-        "updateAt": "2026-04-07T04:34:57.803Z"
+        "updateAt": "2026-04-08T02:08:53.622Z",
+        "previewImagePath": "projects/mRyzCTylNndl230ivYiXtmzqwhX2/1775082980606-Screenshot%202026-04-01%20at%203.36.04%C3%A2%C2%80%C2%AFPM.png"
     },
     "world": {
         "worldEntrance": false,

@@ -3,11 +3,12 @@
         "name": "defaultScene",
         "projectId": "-PEQuaCHjGq2ZWaFM6kvui5nnkYLWtnJceonaeBFda0",
         "author": "Test T0 Account",
-        "version": "0.0.14",
+        "version": "0.1.0",
         "isPublic": true,
         "description": "The home space.",
         "createdAt": "2026-03-24T16:51:17.472Z",
-        "updateAt": "2026-04-07T03:29:21.968Z"
+        "updateAt": "2026-04-08T02:07:46.089Z",
+        "previewImagePath": "projects/mRyzCTylNndl230ivYiXtmzqwhX2/1774931429016-Screenshot%202026-03-30%20at%209.30.15%C3%A2%C2%80%C2%AFPM.png"
     },
     "world": {
         "worldEntrance": true,
