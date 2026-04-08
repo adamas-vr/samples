@@ -3,11 +3,11 @@
         "name": "virtualDesktop",
         "projectId": "v02w9Jt5u1vt79vtJwQRDyUzZu_TVLouskPHh7rWez8",
         "author": "Test T0 Account",
-        "version": "0.0.5",
+        "version": "0.0.6",
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-04-07T05:28:30.106Z",
-        "updateAt": "2026-04-07T22:29:54.731Z"
+        "updateAt": "2026-04-08T01:24:02.505Z"
     },
     "world": {
         "worldEntrance": false,
