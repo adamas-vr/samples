@@ -7,7 +7,7 @@
         "isPublic": false,
         "description": "No project description.",
         "createdAt": "2026-05-05T19:09:12.404Z",
-        "updateAt": "2026-05-06T04:56:09.184Z"
+        "updateAt": "2026-05-06T20:41:28.825Z"
     },
     "world": {
         "worldEntrance": false,
@@ -26,57 +26,17 @@
     "scene": {
         "entities": {
             "__type": "Set",
-            "value": [
-                "32de14ad-1d89-4d54-b350-95b1615cd15e"
-            ]
+            "value": []
         },
         "properties": {
             "__type": "Map",
-            "value": [
-                [
-                    "32de14ad-1d89-4d54-b350-95b1615cd15e",
-                    {
-                        "componentType": "Property",
-                        "enabled": true,
-                        "name": "UI Panel",
-                        "layer": 0,
-                        "activeEntity": true
-                    }
-                ]
-            ]
+            "value": []
         },
         "transforms": {
             "__type": "Map",
             "value": [
                 [
                     "00000000-0000-0000-0000-000000000000",
-                    {
-                        "componentType": "Transform",
-                        "enabled": true,
-                        "parent": "00000000-0000-0000-0000-000000000000",
-                        "children": [
-                            "32de14ad-1d89-4d54-b350-95b1615cd15e"
-                        ],
-                        "localPosition": [
-                            0,
-                            0,
-                            0
-                        ],
-                        "localRotation": [
-                            0,
-                            0,
-                            0
-                        ],
-                        "localScale": [
-                            1,
-                            1,
-                            1
-                        ],
-                        "isTransformSync": false
-                    }
-                ],
-                [
-                    "32de14ad-1d89-4d54-b350-95b1615cd15e",
                     {
                         "componentType": "Transform",
                         "enabled": true,
@@ -104,22 +64,7 @@
         },
         "renderables": {
             "__type": "Map",
-            "value": [
-                [
-                    "32de14ad-1d89-4d54-b350-95b1615cd15e",
-                    {
-                        "componentType": "Renderable",
-                        "enabled": true,
-                        "mesh": "8e97addb-b7ed-4788-b97d-a05a16d8fcdf",
-                        "materialList": [
-                            "e583ff5e-528d-43cb-81c3-4a22ac8cd5be"
-                        ],
-                        "receiveShadows": true,
-                        "castShadows": 1,
-                        "culling": false
-                    }
-                ]
-            ]
+            "value": []
         },
         "grabbles": {
             "__type": "Map",
