@@ -1,9 +1,10 @@
-import { EntityManager, Project } from "@adamasvr/sdk";
+import { EntityManager, Project, TransformManager } from "@adamasvr/sdk";
 import { projectBundle } from "adamasvr:editor";
 
 import * as ImGui from "imgui-adamas";
 import * as ImGui_Impl from "./imgui_impl_adamas_node";
 import { ShowDemoWindow } from "./imgui_demo";
+import { vec3 } from "gl-matrix";
 
 let show_demo_window = true;
 let initialized = false;
@@ -16,6 +17,14 @@ Project.FromBundle(projectBundle).Launch({
 		ImGui.CHECKVERSION();
 		ImGui.CreateContext();
 		ui_entity = await EntityManager.Create("ImGui Host");
+		await TransformManager.SetLocalScale(
+			ui_entity,
+			vec3.fromValues(1.28, 0.72, 1),
+		);
+		await TransformManager.SetLocalPosition(
+			ui_entity,
+			vec3.fromValues(0, 1.35, 0),
+		);
 
 		const io = ImGui.GetIO();
 		io.Fonts.AddFontDefault();
@@ -26,7 +35,6 @@ Project.FromBundle(projectBundle).Launch({
 			targetEntity: ui_entity,
 			displayWidth: 1280,
 			displayHeight: 720,
-			followHead: false,
 			preferredHand: "right",
 		});
 

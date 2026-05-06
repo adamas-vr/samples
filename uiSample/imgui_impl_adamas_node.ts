@@ -33,10 +33,6 @@ export interface AdamasInitOptions {
 	targetEntity: Entity;
 	displayWidth?: number;
 	displayHeight?: number;
-	followHead?: boolean;
-	panelDistance?: number;
-	panelOffset?: [number, number, number];
-	panelSizeMeters?: [number, number];
 	preferredHand?: "left" | "right" | "either";
 	leftClickHand?: "left" | "right";
 	rightClickHand?: "left" | "right";
@@ -49,10 +45,6 @@ export interface AdamasInitOptions {
 const DEFAULT_OPTIONS: Required<Omit<AdamasInitOptions, "targetEntity">> = {
 	displayWidth: 1280,
 	displayHeight: 720,
-	followHead: false,
-	panelDistance: 0.25,
-	panelOffset: [0, -0.05, 0],
-	panelSizeMeters: [1.28, 0.72],
 	preferredHand: "right",
 	leftClickHand: "right",
 	rightClickHand: "left",
@@ -81,7 +73,6 @@ function createRuntime(options: AdamasInitOptions) {
 		fontTextureId: null as TextureId | null,
 		textureRegistry: new Map<TextureId, CpuTexture>(),
 		nextTextureId: 1,
-		headEntity: null as Entity | null,
 		leftHandEntity: null as Entity | null,
 		rightHandEntity: null as Entity | null,
 		targetEntity: null as Entity | null,
@@ -101,8 +92,6 @@ function createRuntime(options: AdamasInitOptions) {
 			: "right") as "left" | "right",
 		subscriptions: [] as DeviceSubscription[],
 		renderQueue: Promise.resolve(),
-		panelPosition: vec3.create(),
-		panelRotation: quat.create(),
 	};
 }
 
@@ -371,32 +360,16 @@ function currentButtonValue(
 	return runtime.input.rightSecondaryButton;
 }
 
-async function subscribeDeviceValue<T>(
+async function subscribeDeviceValue<T extends number | vec2>(
 	devicePath: string,
-	guard: (value: unknown) => value is T,
 	setter: (value: T) => void,
 ): Promise<void> {
-	const current = await Device.GetValue(devicePath);
-	if (guard(current)) {
-		setter(current);
-	}
+	setter((await Device.GetValue(devicePath)) as T);
 	const subscription = await Device.SubscribeValueChange(
 		devicePath,
-		(value) => {
-			if (guard(value)) {
-				setter(value);
-			}
-		},
+		(value) => setter(value as T),
 	);
 	runtime.subscriptions.push(subscription);
-}
-
-function isNumber(value: unknown): value is number {
-	return typeof value === "number";
-}
-
-function isVec2(value: unknown): value is vec2 {
-	return Array.isArray(value) || ArrayBuffer.isView(value);
 }
 
 async function ensurePanelEntity(): Promise<void> {
@@ -427,27 +400,6 @@ async function ensurePanelEntity(): Promise<void> {
 		runtime.targetMaterial,
 		MaterialProperty.Culling,
 		0,
-	);
-
-	const [widthMeters, heightMeters] = runtime.options.panelSizeMeters;
-	await TransformManager.SetLocalScale(
-		runtime.targetEntity,
-		vec3.fromValues(widthMeters, heightMeters, 1),
-	);
-	vec3.set(
-		runtime.panelPosition,
-		runtime.options.panelOffset[0],
-		1.4 + runtime.options.panelOffset[1],
-		-runtime.options.panelDistance + runtime.options.panelOffset[2],
-	);
-	quat.identity(runtime.panelRotation);
-	await TransformManager.SetWorldPosition(
-		runtime.targetEntity,
-		runtime.panelPosition,
-	);
-	await TransformManager.SetWorldRotation(
-		runtime.targetEntity,
-		runtime.panelRotation,
 	);
 }
 
@@ -508,63 +460,13 @@ async function ensureFontTexture(): Promise<void> {
 	ImGui.GetIO().Fonts.TexID = id;
 }
 
-async function updatePanelPose(): Promise<void> {
-	if (runtime.targetEntity === null) {
-		return;
-	}
-	if (runtime.options.followHead && runtime.headEntity !== null) {
-		const headPosition = await TransformManager.GetWorldPosition(
-			runtime.headEntity,
-		);
-		const headRotation = await TransformManager.GetWorldRotation(
-			runtime.headEntity,
-		);
-		const forward = vec3.transformQuat(
-			vec3.create(),
-			vec3.fromValues(0, 0, -1),
-			headRotation,
-		);
-		const right = vec3.transformQuat(
-			vec3.create(),
-			vec3.fromValues(1, 0, 0),
-			headRotation,
-		);
-		const up = vec3.transformQuat(
-			vec3.create(),
-			vec3.fromValues(0, 1, 0),
-			headRotation,
-		);
-		const offset = runtime.options.panelOffset;
-		const worldOffset = vec3.create();
-		vec3.scaleAndAdd(worldOffset, worldOffset, right, offset[0]);
-		vec3.scaleAndAdd(worldOffset, worldOffset, up, offset[1]);
-		vec3.scaleAndAdd(worldOffset, worldOffset, forward, offset[2]);
-		vec3.scaleAndAdd(
-			runtime.panelPosition,
-			headPosition,
-			forward,
-			runtime.options.panelDistance,
-		);
-		vec3.add(runtime.panelPosition, runtime.panelPosition, worldOffset);
-		quat.copy(runtime.panelRotation, headRotation);
-		await TransformManager.SetWorldPosition(
-			runtime.targetEntity,
-			runtime.panelPosition,
-		);
-		await TransformManager.SetWorldRotation(
-			runtime.targetEntity,
-			runtime.panelRotation,
-		);
-	}
-}
-
 async function updateMouseFromHands(): Promise<void> {
 	const io = ImGui.GetIO();
 	const hand = choosePointerHand();
 	const handEntity =
 		hand === "left" ? runtime.leftHandEntity : runtime.rightHandEntity;
 
-	if (handEntity === null) {
+	if (handEntity === null || runtime.targetEntity === null) {
 		io.MousePos.x = -Number.MAX_VALUE;
 		io.MousePos.y = -Number.MAX_VALUE;
 		return;
@@ -572,6 +474,13 @@ async function updateMouseFromHands(): Promise<void> {
 
 	const origin = await TransformManager.GetWorldPosition(handEntity);
 	const rotation = await TransformManager.GetWorldRotation(handEntity);
+	const panelPosition = await TransformManager.GetWorldPosition(
+		runtime.targetEntity,
+	);
+	const panelRotation = await TransformManager.GetWorldRotation(
+		runtime.targetEntity,
+	);
+	const panelScale = await TransformManager.GetLocalScale(runtime.targetEntity);
 	const direction = vec3.normalize(
 		vec3.create(),
 		vec3.transformQuat(vec3.create(), vec3.fromValues(0, 0, -1), rotation),
@@ -580,7 +489,7 @@ async function updateMouseFromHands(): Promise<void> {
 	const planeNormal = vec3.transformQuat(
 		vec3.create(),
 		vec3.fromValues(0, 0, 1),
-		runtime.panelRotation,
+		panelRotation,
 	);
 	const denominator = vec3.dot(direction, planeNormal);
 	if (Math.abs(denominator) < 1e-5) {
@@ -589,7 +498,7 @@ async function updateMouseFromHands(): Promise<void> {
 		return;
 	}
 
-	const originToPlane = vec3.sub(vec3.create(), runtime.panelPosition, origin);
+	const originToPlane = vec3.sub(vec3.create(), panelPosition, origin);
 	const distance = vec3.dot(originToPlane, planeNormal) / denominator;
 	if (distance <= 0) {
 		io.MousePos.x = -Number.MAX_VALUE;
@@ -598,15 +507,13 @@ async function updateMouseFromHands(): Promise<void> {
 	}
 
 	const hit = vec3.scaleAndAdd(vec3.create(), origin, direction, distance);
-	const panelLocal = vec3.sub(vec3.create(), hit, runtime.panelPosition);
-	const inverseRotation = quat.invert(quat.create(), runtime.panelRotation);
+	const panelLocal = vec3.sub(vec3.create(), hit, panelPosition);
+	const inverseRotation = quat.invert(quat.create(), panelRotation);
 	vec3.transformQuat(panelLocal, panelLocal, inverseRotation);
 
-	const [panelWidthMeters, panelHeightMeters] = runtime.options.panelSizeMeters;
-	const x =
-		(panelLocal[0] / panelWidthMeters + 0.5) * runtime.options.displayWidth;
+	const x = (panelLocal[0] / panelScale[0] + 0.5) * runtime.options.displayWidth;
 	const y =
-		(0.5 - panelLocal[1] / panelHeightMeters) * runtime.options.displayHeight;
+		(0.5 - panelLocal[1] / panelScale[1]) * runtime.options.displayHeight;
 	const inside =
 		x >= 0 &&
 		x <= runtime.options.displayWidth &&
@@ -629,55 +536,45 @@ async function ensureInitialized(): Promise<void> {
 	runtime.initializing = true;
 	try {
 		const localUser = await User.GetLocalUser();
-		runtime.headEntity = await localUser.GetHeadEntity();
 		runtime.leftHandEntity = await localUser.GetLeftHandEntity();
 		runtime.rightHandEntity = await localUser.GetRightHandEntity();
 
-		await subscribeDeviceValue(
+		await subscribeDeviceValue<number>(
 			DevicePath.LEFT_TRIGGER,
-			isNumber,
 			(value) => (runtime.input.leftTrigger = value),
 		);
-		await subscribeDeviceValue(
+		await subscribeDeviceValue<number>(
 			DevicePath.RIGHT_TRIGGER,
-			isNumber,
 			(value) => (runtime.input.rightTrigger = value),
 		);
-		await subscribeDeviceValue(
+		await subscribeDeviceValue<number>(
 			DevicePath.LEFT_PRIMARY_BUTTON,
-			isNumber,
 			(value) => (runtime.input.leftPrimaryButton = value),
 		);
-		await subscribeDeviceValue(
+		await subscribeDeviceValue<number>(
 			DevicePath.RIGHT_PRIMARY_BUTTON,
-			isNumber,
 			(value) => (runtime.input.rightPrimaryButton = value),
 		);
-		await subscribeDeviceValue(
+		await subscribeDeviceValue<number>(
 			DevicePath.LEFT_SECONDARY_BUTTON,
-			isNumber,
 			(value) => (runtime.input.leftSecondaryButton = value),
 		);
-		await subscribeDeviceValue(
+		await subscribeDeviceValue<number>(
 			DevicePath.RIGHT_SECONDARY_BUTTON,
-			isNumber,
 			(value) => (runtime.input.rightSecondaryButton = value),
 		);
-		await subscribeDeviceValue(
+		await subscribeDeviceValue<vec2>(
 			DevicePath.LEFT_PRIMARY_2D_AXIS,
-			isVec2,
 			(value) => vec2.copy(runtime.input.leftPrimaryAxis, value),
 		);
-		await subscribeDeviceValue(
+		await subscribeDeviceValue<vec2>(
 			DevicePath.RIGHT_PRIMARY_2D_AXIS,
-			isVec2,
 			(value) => vec2.copy(runtime.input.rightPrimaryAxis, value),
 		);
 
 		await ensurePanelEntity();
 		await ensureOutputTexture();
 		await ensureFontTexture();
-		await updatePanelPose();
 		runtime.initialized = true;
 	} finally {
 		runtime.initializing = false;
@@ -842,7 +739,6 @@ export function Shutdown(): void {
 			runtime.outputTexture = null;
 			runtime.targetMaterial = null;
 			runtime.targetEntity = null;
-			runtime.headEntity = null;
 			runtime.leftHandEntity = null;
 			runtime.rightHandEntity = null;
 			runtime.textureRegistry.clear();
@@ -888,7 +784,6 @@ export function NewFrame(time: number): void {
 
 	void runtime.renderQueue.then(async () => {
 		if (!runtime.shutdown) {
-			await updatePanelPose();
 			await updateMouseFromHands();
 		}
 	});
