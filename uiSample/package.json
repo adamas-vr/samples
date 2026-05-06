@@ -1,13 +1,13 @@
 {
-    "name": "uiSample",
-    "version": "0.0.1",
-    "dependencies": {
-        "@adamasvr/sdk": "0.3.4",
-        "gl-matrix": "^3.4.4",
-        "imgui-adamas": "file:../../../../Desktop/imgui-adamas"
-    },
-    "devDependencies": {
-        "@types/node": "^24.10.1",
-        "typescript": "^5.8.3"
-    }
+	"name": "uiSample",
+	"version": "0.0.1",
+	"dependencies": {
+		"@adamasvr/sdk": "0.3.4",
+		"gl-matrix": "^3.4.4",
+		"imgui-adamas": "file:../../imgui-adamas"
+	},
+	"devDependencies": {
+		"@types/node": "^24.10.1",
+		"typescript": "^5.8.3"
+	}
 }

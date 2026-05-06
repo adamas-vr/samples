@@ -26,7 +26,6 @@ Project.FromBundle(projectBundle).Launch({
 			targetEntity: ui_entity,
 			displayWidth: 1280,
 			displayHeight: 720,
-			panelDistance: 1.25,
 			followHead: false,
 			preferredHand: "right",
 		});
