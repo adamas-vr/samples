@@ -44,7 +44,7 @@ const DEFAULT_OPTIONS: Required<Omit<AdamasInitOptions, "targetEntity">> = {
 	displayHeight: 720,
 	scrollSpeed: 0.25,
 	scrollDeadzone: 0.2,
-	clearColor: [0, 0, 0, 1],
+	clearColor: [0, 0, 0, 0],
 };
 
 function createRuntime(options: AdamasInitOptions) {
@@ -79,6 +79,7 @@ function createRuntime(options: AdamasInitOptions) {
 			rightPrimaryAxis: vec2.fromValues(0, 0),
 		},
 		preferredHand: null as Hand | null,
+		cursorPosition: null as { x: number; y: number } | null,
 		subscriptions: [] as DeviceSubscription[],
 		renderQueue: Promise.resolve(),
 	};
@@ -112,6 +113,18 @@ function clearFramebuffer(): void {
 
 function framebufferIndex(x: number, y: number): number {
 	return (y * runtime.options.displayWidth + x) * 4;
+}
+
+function drawCursorDot(): void {
+	if (runtime.cursorPosition === null) {
+		return;
+	}
+	ImGui.GetForegroundDrawList().AddCircleFilled(
+		new ImGui.ImVec2(runtime.cursorPosition.x, runtime.cursorPosition.y),
+		4,
+		ImGui.IM_COL32(255, 255, 255, 200),
+		32,
+	);
 }
 
 function alphaBlendPixel(
@@ -148,9 +161,8 @@ function alphaBlendPixel(
 	runtime.framebuffer[index + 2] = Math.round(
 		Math.max(0, Math.min(1, outB)) * 255,
 	);
-	runtime.framebuffer[index + 3] = Math.round(
-		Math.max(0, Math.min(1, outA)) * 255,
-	);
+	runtime.framebuffer[index + 3] =
+		srcA > 0 ? 255 : Math.round(Math.max(0, Math.min(1, outA)) * 255);
 }
 
 function sampleTexture(
@@ -366,7 +378,7 @@ async function ensurePanelEntity(): Promise<void> {
 		runtime.targetEntity,
 		runtime.targetMaterial,
 	);
-	await MaterialManager.SetAlphaMode(runtime.targetMaterial, AlphaMode.Opaque);
+	await MaterialManager.SetAlphaMode(runtime.targetMaterial, AlphaMode.Blend);
 	await MaterialManager.SetFloat(
 		runtime.targetMaterial,
 		MaterialProperty.Culling,
@@ -510,10 +522,12 @@ async function updateMouseFromHands(): Promise<void> {
 		),
 	};
 
-	if (intersections.left == null && intersections.right === null) {
+	if (intersections.left === null && intersections.right === null) {
 		runtime.preferredHand = null;
-	} else if (runtime.preferredHand === null) {
-		runtime.preferredHand = intersections.left ? "left" : "right";
+	} else if (intersections.left === null && intersections.right !== null) {
+		runtime.preferredHand = "right";
+	} else if (intersections.left !== null && intersections.right === null) {
+		runtime.preferredHand = "left";
 	} else {
 		const other = runtime.preferredHand === "left" ? "right" : "left";
 		if (intersections[other] && currentButtonValue(other, "trigger") > 0.5) {
@@ -523,6 +537,7 @@ async function updateMouseFromHands(): Promise<void> {
 
 	const hand = runtime.preferredHand;
 	const hit = hand === null ? null : intersections[hand];
+	runtime.cursorPosition = hit;
 	io.MousePos.x = hit?.x ?? -Number.MAX_VALUE;
 	io.MousePos.y = hit?.y ?? -Number.MAX_VALUE;
 	io.MouseDown[0] = hand !== null && currentButtonValue(hand, "trigger") > 0.5;
@@ -677,9 +692,6 @@ async function uploadFramebuffer(): Promise<void> {
 			runtime.framebuffer.subarray(srcRowStart, srcRowStart + rowBytes),
 			dstRowStart,
 		);
-		for (let x = 0; x < width; x++) {
-			runtime.uploadBuffer[dstRowStart + x * 4 + 3] = 255;
-		}
 	}
 	await TextureManager.LoadRGBAImage(
 		runtime.outputTexture,
@@ -776,10 +788,14 @@ export function NewFrame(time: number): void {
 	});
 }
 
-export function RenderDrawData(
-	drawData: ImGui.DrawData | null = ImGui.GetDrawData(),
-): void {
-	if (drawData === null || runtime.shutdown) {
+export function RenderDrawData(): void {
+	if (runtime.shutdown) {
+		return;
+	}
+	drawCursorDot();
+	ImGui.Render();
+	const drawData = ImGui.GetDrawData();
+	if (drawData === null) {
 		return;
 	}
 	renderCpu(drawData);

@@ -49,8 +49,7 @@ Project.FromBundle(projectBundle).Launch({
 
 		ShowDemoWindow((value = show_demo_window) => (show_demo_window = value));
 
-		ImGui.Render();
-		ImGui_Impl.RenderDrawData(ImGui.GetDrawData());
+		ImGui_Impl.RenderDrawData();
 
 		if (!show_demo_window) {
 			shutting_down = true;
