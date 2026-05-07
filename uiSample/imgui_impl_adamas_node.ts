@@ -323,10 +323,7 @@ function computeDeltaTime(time: number): number {
 	return 1 / 60;
 }
 
-function currentButtonValue(
-	hand: Hand,
-	kind: "trigger" | "grip",
-): number {
+function currentButtonValue(hand: Hand, kind: "trigger" | "grip"): number {
 	if (hand === "left") {
 		if (kind === "trigger") return runtime.input.leftTrigger;
 		return runtime.input.leftGrip;
@@ -340,9 +337,8 @@ async function subscribeDeviceValue<T extends number | vec2>(
 	setter: (value: T) => void,
 ): Promise<void> {
 	setter((await Device.GetValue(devicePath)) as T);
-	const subscription = await Device.SubscribeValueChange(
-		devicePath,
-		(value) => setter(value as T),
+	const subscription = await Device.SubscribeValueChange(devicePath, (value) =>
+		setter(value as T),
 	);
 	runtime.subscriptions.push(subscription);
 }
@@ -476,7 +472,8 @@ async function intersectHand(
 	const inverseRotation = quat.invert(quat.create(), panelRotation);
 	vec3.transformQuat(panelLocal, panelLocal, inverseRotation);
 
-	const x = (panelLocal[0] / panelScale[0] + 0.5) * runtime.options.displayWidth;
+	const x =
+		(panelLocal[0] / panelScale[0] + 0.5) * runtime.options.displayWidth;
 	const y =
 		(0.5 - panelLocal[1] / panelScale[1]) * runtime.options.displayHeight;
 	const inside =
@@ -505,14 +502,18 @@ async function updateMouseFromHands(): Promise<void> {
 	const panelScale = await TransformManager.GetLocalScale(runtime.targetEntity);
 	const intersections = {
 		left: await intersectHand("left", panelPosition, panelRotation, panelScale),
-		right: await intersectHand("right", panelPosition, panelRotation, panelScale),
+		right: await intersectHand(
+			"right",
+			panelPosition,
+			panelRotation,
+			panelScale,
+		),
 	};
-	if (runtime.preferredHand === null) {
-		runtime.preferredHand = intersections.left
-			? "left"
-			: intersections.right
-				? "right"
-				: null;
+
+	if (intersections.left == null && intersections.right === null) {
+		runtime.preferredHand = null;
+	} else if (runtime.preferredHand === null) {
+		runtime.preferredHand = intersections.left ? "left" : "right";
 	} else {
 		const other = runtime.preferredHand === "left" ? "right" : "left";
 		if (intersections[other] && currentButtonValue(other, "trigger") > 0.5) {
@@ -564,9 +565,8 @@ async function ensureInitialized(): Promise<void> {
 			DevicePath.RIGHT_GRIP,
 			(value) => (runtime.input.rightGrip = value),
 		);
-		await subscribeDeviceValue<vec2>(
-			DevicePath.LEFT_PRIMARY_2D_AXIS,
-			(value) => vec2.copy(runtime.input.leftPrimaryAxis, value),
+		await subscribeDeviceValue<vec2>(DevicePath.LEFT_PRIMARY_2D_AXIS, (value) =>
+			vec2.copy(runtime.input.leftPrimaryAxis, value),
 		);
 		await subscribeDeviceValue<vec2>(
 			DevicePath.RIGHT_PRIMARY_2D_AXIS,
