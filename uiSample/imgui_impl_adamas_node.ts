@@ -22,6 +22,7 @@ import {
 import { quat, vec2, vec3 } from "gl-matrix";
 
 type TextureId = number;
+type Hand = "left" | "right";
 
 interface CpuTexture {
 	width: number;
@@ -33,10 +34,6 @@ export interface AdamasInitOptions {
 	targetEntity: Entity;
 	displayWidth?: number;
 	displayHeight?: number;
-	preferredHand?: "left" | "right" | "either";
-	leftClickHand?: "left" | "right";
-	rightClickHand?: "left" | "right";
-	scrollHand?: "left" | "right";
 	scrollSpeed?: number;
 	scrollDeadzone?: number;
 	clearColor?: [number, number, number, number];
@@ -45,10 +42,6 @@ export interface AdamasInitOptions {
 const DEFAULT_OPTIONS: Required<Omit<AdamasInitOptions, "targetEntity">> = {
 	displayWidth: 1280,
 	displayHeight: 720,
-	preferredHand: "right",
-	leftClickHand: "right",
-	rightClickHand: "left",
-	scrollHand: "left",
 	scrollSpeed: 0.25,
 	scrollDeadzone: 0.2,
 	clearColor: [0, 0, 0, 1],
@@ -80,16 +73,12 @@ function createRuntime(options: AdamasInitOptions) {
 		input: {
 			leftTrigger: 0,
 			rightTrigger: 0,
-			leftPrimaryButton: 0,
-			rightPrimaryButton: 0,
-			leftSecondaryButton: 0,
-			rightSecondaryButton: 0,
+			leftGrip: 0,
+			rightGrip: 0,
 			leftPrimaryAxis: vec2.fromValues(0, 0),
 			rightPrimaryAxis: vec2.fromValues(0, 0),
 		},
-		lastPointerHand: (runtimeOptions.preferredHand === "left"
-			? "left"
-			: "right") as "left" | "right",
+		preferredHand: null as Hand | null,
 		subscriptions: [] as DeviceSubscription[],
 		renderQueue: Promise.resolve(),
 	};
@@ -334,30 +323,16 @@ function computeDeltaTime(time: number): number {
 	return 1 / 60;
 }
 
-function choosePointerHand(): "left" | "right" {
-	if (runtime.options.preferredHand === "either") {
-		if (runtime.input.rightTrigger > runtime.input.leftTrigger) {
-			runtime.lastPointerHand = "right";
-		} else if (runtime.input.leftTrigger > runtime.input.rightTrigger) {
-			runtime.lastPointerHand = "left";
-		}
-		return runtime.lastPointerHand;
-	}
-	return runtime.options.preferredHand;
-}
-
 function currentButtonValue(
-	hand: "left" | "right",
-	kind: "trigger" | "primary" | "secondary",
+	hand: Hand,
+	kind: "trigger" | "grip",
 ): number {
 	if (hand === "left") {
 		if (kind === "trigger") return runtime.input.leftTrigger;
-		if (kind === "primary") return runtime.input.leftPrimaryButton;
-		return runtime.input.leftSecondaryButton;
+		return runtime.input.leftGrip;
 	}
 	if (kind === "trigger") return runtime.input.rightTrigger;
-	if (kind === "primary") return runtime.input.rightPrimaryButton;
-	return runtime.input.rightSecondaryButton;
+	return runtime.input.rightGrip;
 }
 
 async function subscribeDeviceValue<T extends number | vec2>(
@@ -460,27 +435,21 @@ async function ensureFontTexture(): Promise<void> {
 	ImGui.GetIO().Fonts.TexID = id;
 }
 
-async function updateMouseFromHands(): Promise<void> {
-	const io = ImGui.GetIO();
-	const hand = choosePointerHand();
+async function intersectHand(
+	hand: Hand,
+	panelPosition: vec3,
+	panelRotation: quat,
+	panelScale: vec3,
+): Promise<{ x: number; y: number } | null> {
 	const handEntity =
 		hand === "left" ? runtime.leftHandEntity : runtime.rightHandEntity;
 
-	if (handEntity === null || runtime.targetEntity === null) {
-		io.MousePos.x = -Number.MAX_VALUE;
-		io.MousePos.y = -Number.MAX_VALUE;
-		return;
+	if (handEntity === null) {
+		return null;
 	}
 
 	const origin = await TransformManager.GetWorldPosition(handEntity);
 	const rotation = await TransformManager.GetWorldRotation(handEntity);
-	const panelPosition = await TransformManager.GetWorldPosition(
-		runtime.targetEntity,
-	);
-	const panelRotation = await TransformManager.GetWorldRotation(
-		runtime.targetEntity,
-	);
-	const panelScale = await TransformManager.GetLocalScale(runtime.targetEntity);
 	const direction = vec3.normalize(
 		vec3.create(),
 		vec3.transformQuat(vec3.create(), vec3.fromValues(0, 0, -1), rotation),
@@ -493,17 +462,13 @@ async function updateMouseFromHands(): Promise<void> {
 	);
 	const denominator = vec3.dot(direction, planeNormal);
 	if (Math.abs(denominator) < 1e-5) {
-		io.MousePos.x = -Number.MAX_VALUE;
-		io.MousePos.y = -Number.MAX_VALUE;
-		return;
+		return null;
 	}
 
 	const originToPlane = vec3.sub(vec3.create(), panelPosition, origin);
 	const distance = vec3.dot(originToPlane, planeNormal) / denominator;
 	if (distance <= 0) {
-		io.MousePos.x = -Number.MAX_VALUE;
-		io.MousePos.y = -Number.MAX_VALUE;
-		return;
+		return null;
 	}
 
 	const hit = vec3.scaleAndAdd(vec3.create(), origin, direction, distance);
@@ -520,13 +485,57 @@ async function updateMouseFromHands(): Promise<void> {
 		y >= 0 &&
 		y <= runtime.options.displayHeight;
 
-	if (inside) {
-		io.MousePos.x = x;
-		io.MousePos.y = y;
-	} else {
+	return inside ? { x, y } : null;
+}
+
+async function updateMouseFromHands(): Promise<void> {
+	const io = ImGui.GetIO();
+	if (runtime.targetEntity === null) {
 		io.MousePos.x = -Number.MAX_VALUE;
 		io.MousePos.y = -Number.MAX_VALUE;
+		return;
 	}
+
+	const panelPosition = await TransformManager.GetWorldPosition(
+		runtime.targetEntity,
+	);
+	const panelRotation = await TransformManager.GetWorldRotation(
+		runtime.targetEntity,
+	);
+	const panelScale = await TransformManager.GetLocalScale(runtime.targetEntity);
+	const intersections = {
+		left: await intersectHand("left", panelPosition, panelRotation, panelScale),
+		right: await intersectHand("right", panelPosition, panelRotation, panelScale),
+	};
+	if (runtime.preferredHand === null) {
+		runtime.preferredHand = intersections.left
+			? "left"
+			: intersections.right
+				? "right"
+				: null;
+	} else {
+		const other = runtime.preferredHand === "left" ? "right" : "left";
+		if (intersections[other] && currentButtonValue(other, "trigger") > 0.5) {
+			runtime.preferredHand = other;
+		}
+	}
+
+	const hand = runtime.preferredHand;
+	const hit = hand === null ? null : intersections[hand];
+	io.MousePos.x = hit?.x ?? -Number.MAX_VALUE;
+	io.MousePos.y = hit?.y ?? -Number.MAX_VALUE;
+	io.MouseDown[0] = hand !== null && currentButtonValue(hand, "trigger") > 0.5;
+	io.MouseDown[1] = hand !== null && currentButtonValue(hand, "grip") > 0.5;
+	io.MouseDown[2] = false;
+	const scrollAxis =
+		hand === "left"
+			? runtime.input.leftPrimaryAxis
+			: runtime.input.rightPrimaryAxis;
+	io.MouseWheel =
+		hand !== null && Math.abs(scrollAxis[1]) > runtime.options.scrollDeadzone
+			? scrollAxis[1] * runtime.options.scrollSpeed
+			: 0;
+	io.MouseWheelH = 0;
 }
 
 async function ensureInitialized(): Promise<void> {
@@ -548,20 +557,12 @@ async function ensureInitialized(): Promise<void> {
 			(value) => (runtime.input.rightTrigger = value),
 		);
 		await subscribeDeviceValue<number>(
-			DevicePath.LEFT_PRIMARY_BUTTON,
-			(value) => (runtime.input.leftPrimaryButton = value),
+			DevicePath.LEFT_GRIP,
+			(value) => (runtime.input.leftGrip = value),
 		);
 		await subscribeDeviceValue<number>(
-			DevicePath.RIGHT_PRIMARY_BUTTON,
-			(value) => (runtime.input.rightPrimaryButton = value),
-		);
-		await subscribeDeviceValue<number>(
-			DevicePath.LEFT_SECONDARY_BUTTON,
-			(value) => (runtime.input.leftSecondaryButton = value),
-		);
-		await subscribeDeviceValue<number>(
-			DevicePath.RIGHT_SECONDARY_BUTTON,
-			(value) => (runtime.input.rightSecondaryButton = value),
+			DevicePath.RIGHT_GRIP,
+			(value) => (runtime.input.rightGrip = value),
 		);
 		await subscribeDeviceValue<vec2>(
 			DevicePath.LEFT_PRIMARY_2D_AXIS,
@@ -757,28 +758,14 @@ export function NewFrame(time: number): void {
 	io.DisplayFramebufferScale.y = 1;
 	io.DeltaTime = computeDeltaTime(time);
 
-	io.MouseDown[0] =
-		currentButtonValue(runtime.options.leftClickHand, "trigger") > 0.5;
-	io.MouseDown[1] =
-		currentButtonValue(runtime.options.rightClickHand, "trigger") > 0.5;
-	io.MouseDown[2] = false;
-
-	const scrollAxis =
-		runtime.options.scrollHand === "left"
-			? runtime.input.leftPrimaryAxis
-			: runtime.input.rightPrimaryAxis;
-	io.MouseWheel =
-		Math.abs(scrollAxis[1]) > runtime.options.scrollDeadzone
-			? scrollAxis[1] * runtime.options.scrollSpeed
-			: 0;
-	io.MouseWheelH =
-		Math.abs(scrollAxis[0]) > runtime.options.scrollDeadzone
-			? scrollAxis[0] * runtime.options.scrollSpeed
-			: 0;
-
 	if (!runtime.initialized) {
 		io.MousePos.x = -Number.MAX_VALUE;
 		io.MousePos.y = -Number.MAX_VALUE;
+		io.MouseDown[0] = false;
+		io.MouseDown[1] = false;
+		io.MouseDown[2] = false;
+		io.MouseWheel = 0;
+		io.MouseWheelH = 0;
 		return;
 	}
 

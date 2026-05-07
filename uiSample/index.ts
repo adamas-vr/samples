@@ -19,11 +19,11 @@ Project.FromBundle(projectBundle).Launch({
 		ui_entity = await EntityManager.Create("ImGui Host");
 		await TransformManager.SetLocalScale(
 			ui_entity,
-			vec3.fromValues(1.28, 0.72, 1),
+			vec3.fromValues(0.64, 0.36, 1),
 		);
 		await TransformManager.SetLocalPosition(
 			ui_entity,
-			vec3.fromValues(0, 1.35, 0),
+			vec3.fromValues(0, 1.0, 0),
 		);
 
 		const io = ImGui.GetIO();
@@ -35,7 +35,6 @@ Project.FromBundle(projectBundle).Launch({
 			targetEntity: ui_entity,
 			displayWidth: 1280,
 			displayHeight: 720,
-			preferredHand: "right",
 		});
 
 		initialized = true;
