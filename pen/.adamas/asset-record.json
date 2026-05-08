@@ -1,0 +1,25 @@
+{
+    "__type": "Map",
+    "value": [
+        [
+            "45b8ab08-42aa-458d-a600-35fd0da80b8d",
+            "capsule.amesh"
+        ],
+        [
+            "212e2e74-a2f3-4389-af5e-d497660fb9c1",
+            "pen.amat"
+        ],
+        [
+            "fbc414ac-1fdd-4d43-aeac-6209877e5d54",
+            "cylinder.amesh"
+        ],
+        [
+            "e488991e-137d-4a45-a796-2d2058c8cfec",
+            "sphere.amesh"
+        ],
+        [
+            "4634f7cf-2194-499d-8c53-d4aa93f647c3",
+            "tip.amat"
+        ]
+    ]
+}
