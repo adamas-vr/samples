@@ -1,6 +1,6 @@
 import { EntityManager, Project, TransformManager } from "@adamasvr/sdk";
 import { projectBundle } from "adamasvr:editor";
-import { CreateImGuiWindow } from "./imgui_window";
+import { CreateImGuiWindow } from "imgui-adamas";
 
 Project.FromBundle(projectBundle).Launch({
 	OnSetup: async (_, sceneGraph) => {
