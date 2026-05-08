@@ -7,7 +7,7 @@
         "isPublic": false,
         "description": "No project description.",
         "createdAt": "2026-05-08T05:06:47.054Z",
-        "updateAt": "2026-05-08T05:15:00.658Z"
+        "updateAt": "2026-05-08T20:37:53.599Z"
     },
     "world": {
         "worldEntrance": false,
@@ -191,7 +191,7 @@
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
-                        "culling": true
+                        "culling": false
                     }
                 ],
                 [

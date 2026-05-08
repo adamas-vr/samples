@@ -1,4 +1,3 @@
-
 import { vec3 } from "gl-matrix";
 import {
 	Entity,
@@ -32,12 +31,17 @@ let strokeMaterial: Material;
 let activeInteractor: Entity | null = null;
 let activeStroke: StrokeState | null = null;
 let isStrokeMeshUpdating = false;
+let needsStrokeMeshRefresh = false;
+let strokeSessionId = 0;
 
 function cloneVec3(input: vec3): vec3 {
 	return vec3.fromValues(input[0], input[1], input[2]);
 }
 
-function shouldAppendPoint(lastPoint: vec3 | undefined, nextPoint: vec3): boolean {
+function shouldAppendPoint(
+	lastPoint: vec3 | undefined,
+	nextPoint: vec3,
+): boolean {
 	if (!lastPoint) {
 		return true;
 	}
@@ -89,15 +93,31 @@ function buildTubeMesh(points: vec3[], radius: number, sides: number) {
 		const center = points[ringIndex];
 		const tangent = vec3.normalize(vec3.create(), tangents[ringIndex]);
 		const referenceAxis = getStableReferenceAxis(tangent);
-		const normal = vec3.normalize(vec3.create(), vec3.cross(vec3.create(), referenceAxis, tangent));
-		const binormal = vec3.normalize(vec3.create(), vec3.cross(vec3.create(), tangent, normal));
+		const normal = vec3.normalize(
+			vec3.create(),
+			vec3.cross(vec3.create(), referenceAxis, tangent),
+		);
+		const binormal = vec3.normalize(
+			vec3.create(),
+			vec3.cross(vec3.create(), tangent, normal),
+		);
 		const v = totalLength > 0 ? cumulativeLengths[ringIndex] / totalLength : 0;
 
 		for (let side = 0; side < sides; side++) {
 			const angle = (side / sides) * Math.PI * 2;
 			const radialOffset = vec3.create();
-			vec3.scaleAndAdd(radialOffset, radialOffset, normal, Math.cos(angle) * radius);
-			vec3.scaleAndAdd(radialOffset, radialOffset, binormal, Math.sin(angle) * radius);
+			vec3.scaleAndAdd(
+				radialOffset,
+				radialOffset,
+				normal,
+				Math.cos(angle) * radius,
+			);
+			vec3.scaleAndAdd(
+				radialOffset,
+				radialOffset,
+				binormal,
+				Math.sin(angle) * radius,
+			);
 
 			const vertex = vec3.add(vec3.create(), center, radialOffset);
 			const radialNormal = vec3.normalize(vec3.create(), radialOffset);
@@ -132,20 +152,28 @@ function buildTubeMesh(points: vec3[], radius: number, sides: number) {
 	};
 }
 
-async function refreshActiveStrokeMesh() {
-	if (!activeStroke || isStrokeMeshUpdating) {
+async function refreshStrokeMesh(stroke: StrokeState) {
+	if (isStrokeMeshUpdating) {
+		needsStrokeMeshRefresh = true;
 		return;
 	}
 
 	isStrokeMeshUpdating = true;
 
 	try {
-		const { vertices, normals, uvs, indices } = buildTubeMesh(activeStroke.points, PEN_RADIUS, PEN_SIDES);
-		await MeshManager.SetVertices(activeStroke.mesh, vertices);
-		await MeshManager.SetNormals(activeStroke.mesh, normals);
-		await MeshManager.SetUVs(activeStroke.mesh, uvs);
-		await MeshManager.SetTriangles(activeStroke.mesh, indices);
-		await MeshManager.RecalcBounds(activeStroke.mesh);
+		do {
+			needsStrokeMeshRefresh = false;
+			const { vertices, normals, uvs, indices } = buildTubeMesh(
+				stroke.points,
+				PEN_RADIUS,
+				PEN_SIDES,
+			);
+			await MeshManager.SetVertices(stroke.mesh, vertices);
+			await MeshManager.SetNormals(stroke.mesh, normals);
+			await MeshManager.SetUVs(stroke.mesh, uvs);
+			await MeshManager.SetTriangles(stroke.mesh, indices);
+			await MeshManager.RecalcBounds(stroke.mesh);
+		} while (needsStrokeMeshRefresh);
 	} finally {
 		isStrokeMeshUpdating = false;
 	}
@@ -171,50 +199,68 @@ async function createStrokeEntity(): Promise<StrokeState> {
 	};
 }
 
-async function appendTipPoint(force = false) {
-	if (!activeStroke) {
+async function appendTipPoint(force = false, stroke = activeStroke) {
+	if (!stroke) {
 		return;
 	}
 
-	const tipWorldPosition = await TransformManager.GetWorldPosition(penTipEntity);
+	const tipWorldPosition =
+		await TransformManager.GetWorldPosition(penTipEntity);
 	const point = cloneVec3(tipWorldPosition);
 
-	if (!force && !shouldAppendPoint(activeStroke.lastPoint, point)) {
+	if (!force && activeStroke !== stroke) {
 		return;
 	}
 
-	if (activeStroke.points.length >= MAX_POINTS_PER_STROKE) {
+	if (!force && !shouldAppendPoint(stroke.lastPoint, point)) {
 		return;
 	}
 
-	activeStroke.points.push(point);
-	activeStroke.lastPoint = point;
-	await refreshActiveStrokeMesh();
+	if (stroke.points.length >= MAX_POINTS_PER_STROKE) {
+		return;
+	}
+
+	stroke.points.push(point);
+	stroke.lastPoint = point;
+	await refreshStrokeMesh(stroke);
 }
 
 async function beginStroke(interactorEntity: Entity) {
-	if (activeStroke) {
+	if (activeInteractor !== null || activeStroke) {
 		return;
 	}
 
+	const sessionId = ++strokeSessionId;
 	activeInteractor = interactorEntity;
-	activeStroke = await createStrokeEntity();
-	await appendTipPoint(true);
+	const stroke = await createStrokeEntity();
+
+	if (strokeSessionId !== sessionId || activeInteractor !== interactorEntity) {
+		return;
+	}
+
+	activeStroke = stroke;
+	await appendTipPoint(true, stroke);
 }
 
 async function endStroke(interactorEntity?: Entity) {
-	if (interactorEntity !== undefined && activeInteractor !== null && activeInteractor !== interactorEntity) {
+	if (
+		interactorEntity !== undefined &&
+		activeInteractor !== null &&
+		activeInteractor !== interactorEntity
+	) {
 		return;
 	}
 
-	if (!activeStroke) {
-		activeInteractor = null;
-		return;
-	}
-
-	await appendTipPoint(true);
+	const stroke = activeStroke;
 	activeStroke = null;
 	activeInteractor = null;
+	strokeSessionId++;
+
+	if (!stroke) {
+		return;
+	}
+
+	await appendTipPoint(true, stroke);
 }
 
 Project.FromBundle(projectBundle).Launch({
@@ -227,15 +273,24 @@ Project.FromBundle(projectBundle).Launch({
 		penTipEntity = sceneGraph["@Pen"]["@Pen Tip"].entityId;
 		strokeMaterial = await RenderableManager.GetMaterial(penTipEntity, 0);
 
-		await GrabInteractableManager.AddActivatedCallback(penEntity, (_, interactorEntity) => {
-			void beginStroke(interactorEntity);
-		});
-		await GrabInteractableManager.AddDeactivatedCallback(penEntity, (_, interactorEntity) => {
-			void endStroke(interactorEntity);
-		});
-		await GrabInteractableManager.AddSelectExitedCallback(penEntity, (_, interactorEntity) => {
-			void endStroke(interactorEntity);
-		});
+		await GrabInteractableManager.AddActivatedCallback(
+			penEntity,
+			(_, interactorEntity) => {
+				void beginStroke(interactorEntity);
+			},
+		);
+		await GrabInteractableManager.AddDeactivatedCallback(
+			penEntity,
+			(_, interactorEntity) => {
+				void endStroke(interactorEntity);
+			},
+		);
+		await GrabInteractableManager.AddSelectExitedCallback(
+			penEntity,
+			(_, interactorEntity) => {
+				void endStroke(interactorEntity);
+			},
+		);
 	},
 	OnTick: (project, timestep) => {
 		if (!activeStroke) {
