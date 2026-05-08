@@ -74,6 +74,6 @@
         ],
         "rotation": 0
     },
-    "alphaMode": "Opaque",
+    "alphaMode": "Blend",
     "alphaCutoff": 0
 }

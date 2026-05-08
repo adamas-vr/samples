@@ -32,19 +32,21 @@ interface CpuTexture {
 
 export interface AdamasInitOptions {
 	targetEntity: Entity;
-	displayWidth?: number;
-	displayHeight?: number;
+	displayWidth: number;
+	displayHeight: number;
 	scrollSpeed?: number;
 	scrollDeadzone?: number;
 	clearColor?: [number, number, number, number];
+	cursorColor?: [number, number, number, number];
 }
 
-const DEFAULT_OPTIONS: Required<Omit<AdamasInitOptions, "targetEntity">> = {
-	displayWidth: 1280,
-	displayHeight: 720,
+const DEFAULT_OPTIONS: Required<
+	Omit<AdamasInitOptions, "targetEntity" | "displayWidth" | "displayHeight">
+> = {
 	scrollSpeed: 0.25,
 	scrollDeadzone: 0.2,
 	clearColor: [0, 0, 0, 0],
+	cursorColor: [20, 71, 230, 200],
 };
 
 function createRuntime(options: AdamasInitOptions) {
@@ -85,7 +87,11 @@ function createRuntime(options: AdamasInitOptions) {
 	};
 }
 
-let runtime = createRuntime({ targetEntity: 0 as Entity });
+let runtime = createRuntime({
+	targetEntity: -1 as Entity,
+	displayWidth: 1,
+	displayHeight: 1,
+});
 
 export let gl: null = null;
 export let ctx: null = null;
@@ -119,10 +125,11 @@ function drawCursorDot(): void {
 	if (runtime.cursorPosition === null) {
 		return;
 	}
+	const [r, g, b, a] = runtime.options.cursorColor;
 	ImGui.GetForegroundDrawList().AddCircleFilled(
 		new ImGui.ImVec2(runtime.cursorPosition.x, runtime.cursorPosition.y),
 		4,
-		ImGui.IM_COL32(255, 255, 255, 200),
+		ImGui.IM_COL32(r, g, b, a),
 		32,
 	);
 }
@@ -364,26 +371,38 @@ async function ensurePanelEntity(): Promise<void> {
 
 	if (!(await RenderableManager.HasComponent(runtime.targetEntity))) {
 		await RenderableManager.Create(runtime.targetEntity);
+		await RenderableManager.SetReceiveShadows(runtime.targetEntity, false);
+		await RenderableManager.SetShadowMode(
+			runtime.targetEntity,
+			ShadowCastingMode.Off,
+		);
 	}
 
-	await RenderableManager.SetMesh(runtime.targetEntity, await NewQuadMesh());
-	await RenderableManager.SetReceiveShadows(runtime.targetEntity, false);
-	await RenderableManager.SetShadowMode(
-		runtime.targetEntity,
-		ShadowCastingMode.Off,
-	);
+	try {
+		await RenderableManager.GetMesh(runtime.targetEntity);
+	} catch {
+		await RenderableManager.SetMesh(runtime.targetEntity, await NewQuadMesh());
+	}
 
-	runtime.targetMaterial = await MaterialManager.Create();
-	await RenderableManager.SetMaterial(
-		runtime.targetEntity,
-		runtime.targetMaterial,
-	);
-	await MaterialManager.SetAlphaMode(runtime.targetMaterial, AlphaMode.Blend);
-	await MaterialManager.SetFloat(
-		runtime.targetMaterial,
-		MaterialProperty.Culling,
-		0,
-	);
+	try {
+		runtime.targetMaterial = await RenderableManager.GetMaterial(
+			runtime.targetEntity,
+		);
+	} catch {
+		runtime.targetMaterial = await MaterialManager.Create();
+
+		await RenderableManager.SetMaterial(
+			runtime.targetEntity,
+			runtime.targetMaterial,
+		);
+
+		await MaterialManager.SetAlphaMode(runtime.targetMaterial, AlphaMode.Blend);
+		await MaterialManager.SetFloat(
+			runtime.targetMaterial,
+			MaterialProperty.Culling,
+			0,
+		);
+	}
 }
 
 async function ensureOutputTexture(): Promise<void> {

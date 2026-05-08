@@ -7,7 +7,7 @@
         "isPublic": false,
         "description": "No project description.",
         "createdAt": "2026-05-05T19:09:12.404Z",
-        "updateAt": "2026-05-07T07:51:45.995Z"
+        "updateAt": "2026-05-08T00:15:30.081Z"
     },
     "world": {
         "worldEntrance": false,
@@ -26,11 +26,24 @@
     "scene": {
         "entities": {
             "__type": "Set",
-            "value": []
+            "value": [
+                "e7ed429c-00b7-42ce-be24-bc6ffb284bfe"
+            ]
         },
         "properties": {
             "__type": "Map",
-            "value": []
+            "value": [
+                [
+                    "e7ed429c-00b7-42ce-be24-bc6ffb284bfe",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "UI Panel",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ]
+            ]
         },
         "transforms": {
             "__type": "Map",
@@ -41,7 +54,9 @@
                         "componentType": "Transform",
                         "enabled": true,
                         "parent": "00000000-0000-0000-0000-000000000000",
-                        "children": [],
+                        "children": [
+                            "e7ed429c-00b7-42ce-be24-bc6ffb284bfe"
+                        ],
                         "localPosition": [
                             0,
                             0,
@@ -59,20 +74,87 @@
                         ],
                         "isTransformSync": false
                     }
+                ],
+                [
+                    "e7ed429c-00b7-42ce-be24-bc6ffb284bfe",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "00000000-0000-0000-0000-000000000000",
+                        "children": [],
+                        "localPosition": [
+                            0,
+                            1.3,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            0.6,
+                            0.4,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
                 ]
             ]
         },
         "renderables": {
             "__type": "Map",
-            "value": []
+            "value": [
+                [
+                    "e7ed429c-00b7-42ce-be24-bc6ffb284bfe",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "8e97addb-b7ed-4788-b97d-a05a16d8fcdf",
+                        "materialList": [
+                            "e583ff5e-528d-43cb-81c3-4a22ac8cd5be"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": true
+                    }
+                ]
+            ]
         },
         "grabbles": {
             "__type": "Map",
-            "value": []
+            "value": [
+                [
+                    "e7ed429c-00b7-42ce-be24-bc6ffb284bfe",
+                    {
+                        "componentType": "Grabble",
+                        "enabled": true,
+                        "movementType": 2,
+                        "dynamicAttach": true,
+                        "allowHoverActivate": false,
+                        "trackPosition": true,
+                        "trackRotation": true,
+                        "throwOnDetach": false
+                    }
+                ]
+            ]
         },
         "rigidbodies": {
             "__type": "Map",
-            "value": []
+            "value": [
+                [
+                    "e7ed429c-00b7-42ce-be24-bc6ffb284bfe",
+                    {
+                        "componentType": "Rigid Body",
+                        "enabled": true,
+                        "isKinematic": true,
+                        "angularDamping": 0.05,
+                        "linearDamping": 0.05,
+                        "mass": 1,
+                        "useGravity": false
+                    }
+                ]
+            ]
         },
         "lights": {
             "__type": "Map",
@@ -84,7 +166,31 @@
         },
         "colliders": {
             "__type": "Map",
-            "value": []
+            "value": [
+                [
+                    "e7ed429c-00b7-42ce-be24-bc6ffb284bfe",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    1,
+                                    0.1
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            ]
         }
     }
 }

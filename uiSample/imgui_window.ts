@@ -1,40 +1,70 @@
 import { readFile } from "node:fs/promises";
 import * as ImGui from "imgui-adamas";
 import * as ImGui_Impl from "./imgui_impl_adamas_node";
+import { robotoTTF } from "./roboto";
 
-const DEFAULT_FONT_SIZE_PX = 24;
-const DEFAULT_DISPLAY_WIDTH = 1280;
-const DEFAULT_DISPLAY_HEIGHT = 720;
+const DEFAULT_FONT_SIZE_PX = 32;
 
-export async function CreateImGuiWindow({
-	ui,
-	initOptions,
-}: {
-	ui: (imgui: typeof ImGui, timestep: number) => void;
-	initOptions: ImGui_Impl.AdamasInitOptions;
-}) {
+export type ImGuiStyleColor = "dark" | "light" | "classic";
+
+export interface ImGuiWindowInitOptions extends ImGui_Impl.AdamasInitOptions {
+	styleColor?: ImGuiStyleColor;
+	noBackground?: boolean;
+	fontPath?: string;
+	fontSizePx?: number;
+}
+
+async function loadFont(fontPath: string | undefined): Promise<Uint8Array> {
+	if (fontPath !== undefined) {
+		return Uint8Array.from(await readFile(fontPath));
+	}
+	return Uint8Array.from(Buffer.from(robotoTTF, "base64"));
+}
+
+function toArrayBuffer(bytes: Uint8Array): ArrayBuffer {
+	const buffer = new ArrayBuffer(bytes.byteLength);
+	new Uint8Array(buffer).set(bytes);
+	return buffer;
+}
+
+export async function CreateImGuiWindow(
+	initOptions: ImGuiWindowInitOptions,
+	ui: (imgui: typeof ImGui, timestep: number) => void,
+) {
 	await ImGui.default();
 	ImGui.CHECKVERSION();
 	ImGui.CreateContext();
 
+	const {
+		styleColor = "light",
+		noBackground = false,
+		fontPath,
+		fontSizePx = DEFAULT_FONT_SIZE_PX,
+		...adamasInitOptions
+	} = initOptions;
+	const runtimeOptions: ImGui_Impl.AdamasInitOptions = adamasInitOptions;
+
 	const io = ImGui.GetIO();
-	const robotoFont = await readFile("Roboto-VariableFont_wdth,wght.ttf");
+	const font = await loadFont(fontPath);
 	io.FontDefault = io.Fonts.AddFontFromMemoryTTF(
-		Uint8Array.from(robotoFont).buffer,
-		DEFAULT_FONT_SIZE_PX,
+		toArrayBuffer(font),
+		fontSizePx,
 		null,
 		io.Fonts.GetGlyphRangesDefault(),
 	);
-	ImGui.StyleColorsDark();
-
-	if (initOptions.displayHeight == undefined) {
-		initOptions.displayHeight = DEFAULT_DISPLAY_HEIGHT;
+	switch (styleColor) {
+		case "dark":
+			ImGui.StyleColorsDark();
+			break;
+		case "light":
+			ImGui.StyleColorsLight();
+			break;
+		case "classic":
+			ImGui.StyleColorsClassic();
+			break;
 	}
-	if (initOptions.displayWidth == undefined) {
-		initOptions.displayWidth = DEFAULT_DISPLAY_WIDTH;
-	}
 
-	ImGui_Impl.Init(initOptions);
+	ImGui_Impl.Init(runtimeOptions);
 
 	let lastFrameTime = Date.now();
 	return setInterval(() => {
@@ -51,21 +81,23 @@ export async function CreateImGuiWindow({
 			new ImGui.Vec2(0, 0),
 		);
 		ImGui.SetNextWindowSize(
-			new ImGui.Vec2(initOptions.displayWidth, initOptions.displayHeight),
+			new ImGui.Vec2(runtimeOptions.displayWidth, runtimeOptions.displayHeight),
 			ImGui.Cond.Always,
 		);
 
-		ImGui.Begin(
-			"UI",
-			null,
+		let windowFlags =
 			ImGui.WindowFlags.NoTitleBar |
-				ImGui.WindowFlags.NoResize |
-				ImGui.WindowFlags.NoMove |
-				ImGui.WindowFlags.NoCollapse |
-				ImGui.WindowFlags.NoNav |
-				ImGui.WindowFlags.NoSavedSettings |
-				ImGui.WindowFlags.NoBringToFrontOnFocus,
-		);
+			ImGui.WindowFlags.NoResize |
+			ImGui.WindowFlags.NoMove |
+			ImGui.WindowFlags.NoCollapse |
+			ImGui.WindowFlags.NoNav |
+			ImGui.WindowFlags.NoSavedSettings |
+			ImGui.WindowFlags.NoBringToFrontOnFocus;
+		if (noBackground) {
+			windowFlags |= ImGui.WindowFlags.NoBackground;
+		}
+
+		ImGui.Begin("UI", null, windowFlags);
 		ui(ImGui, timestep);
 		ImGui.End();
 
