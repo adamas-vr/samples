@@ -17,6 +17,7 @@ const PEN_RADIUS = 0.01;
 const PEN_SIDES = 8;
 const MIN_POINT_DISTANCE = 0.01;
 const MAX_POINTS_PER_STROKE = 4096;
+const STROKE_SAMPLE_INTERVAL_MS = 1000 / 60;
 
 type StrokeState = {
 	entity: Entity;
@@ -306,12 +307,13 @@ Project.FromBundle(projectBundle).Launch({
 				void endStroke(interactorEntity);
 			},
 		);
-	},
-	OnTick: (project, timestep) => {
-		if (!activeStroke) {
-			return;
-		}
 
-		void appendTipPoint(false);
+		setInterval(() => {
+			if (!activeStroke) {
+				return;
+			}
+
+			void appendTipPoint(false);
+		}, STROKE_SAMPLE_INTERVAL_MS);
 	},
 });
