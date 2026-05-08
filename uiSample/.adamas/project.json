@@ -7,7 +7,7 @@
         "isPublic": false,
         "description": "No project description.",
         "createdAt": "2026-05-05T19:09:12.404Z",
-        "updateAt": "2026-05-08T01:18:47.508Z"
+        "updateAt": "2026-05-08T04:00:26.643Z"
     },
     "world": {
         "worldEntrance": false,
@@ -105,8 +105,8 @@
                             0
                         ],
                         "localScale": [
-                            0.6,
-                            0.4,
+                            0.9646879656724286,
+                            0.6431253104482858,
                             1
                         ],
                         "isTransformSync": false
