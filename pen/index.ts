@@ -30,6 +30,8 @@ let penTipEntity: Entity;
 let strokeMaterial: Material;
 let activeInteractor: Entity | null = null;
 let activeStroke: StrokeState | null = null;
+let nextStroke: StrokeState | null = null;
+let nextStrokePromise: Promise<StrokeState> | null = null;
 let isStrokeMeshUpdating = false;
 let needsStrokeMeshRefresh = false;
 let strokeSessionId = 0;
@@ -199,6 +201,16 @@ async function createStrokeEntity(): Promise<StrokeState> {
 	};
 }
 
+async function prepareNextStroke() {
+	if (nextStroke || nextStrokePromise) {
+		return;
+	}
+
+	nextStrokePromise = createStrokeEntity();
+	nextStroke = await nextStrokePromise;
+	nextStrokePromise = null;
+}
+
 async function appendTipPoint(force = false, stroke = activeStroke) {
 	if (!stroke) {
 		return;
@@ -226,19 +238,21 @@ async function appendTipPoint(force = false, stroke = activeStroke) {
 }
 
 async function beginStroke(interactorEntity: Entity) {
-	if (activeInteractor !== null || activeStroke) {
+	if (activeInteractor !== null || activeStroke || !nextStroke) {
 		return;
 	}
 
 	const sessionId = ++strokeSessionId;
+	const stroke = nextStroke;
+	nextStroke = null;
 	activeInteractor = interactorEntity;
-	const stroke = await createStrokeEntity();
+	activeStroke = stroke;
+	void prepareNextStroke();
 
 	if (strokeSessionId !== sessionId || activeInteractor !== interactorEntity) {
 		return;
 	}
 
-	activeStroke = stroke;
 	await appendTipPoint(true, stroke);
 }
 
@@ -272,6 +286,7 @@ Project.FromBundle(projectBundle).Launch({
 		penEntity = sceneGraph["@Pen"].entityId;
 		penTipEntity = sceneGraph["@Pen"]["@Pen Tip"].entityId;
 		strokeMaterial = await RenderableManager.GetMaterial(penTipEntity, 0);
+		await prepareNextStroke();
 
 		await GrabInteractableManager.AddActivatedCallback(
 			penEntity,
