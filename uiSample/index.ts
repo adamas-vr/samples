@@ -26,14 +26,16 @@ Project.FromBundle(projectBundle).Launch({
 		await CreateImGuiWindow(
 			{
 				targetEntity: sceneGraph["@UI Panel"].entityId,
-				noBackground: true,
 				displayWidth: 600,
 				displayHeight: 400,
 			},
 			(imgui) => {
 				imgui.Text("Cube color");
 				imgui.Separator();
-				if (imgui.ColorEdit4("Base color", cubeColor) && cubeMaterial !== null) {
+				if (
+					imgui.ColorEdit4("Base color", cubeColor) &&
+					cubeMaterial !== null
+				) {
 					const nextColor = vec4.fromValues(
 						cubeColor.r,
 						cubeColor.g,
