@@ -7,6 +7,9 @@ export interface SceneGraph
 {
     "@UI Panel": {
         entityId: Entity
+    },
+    "@cube": {
+        entityId: Entity
     }
 }
 }

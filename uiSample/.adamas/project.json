@@ -7,7 +7,7 @@
         "isPublic": false,
         "description": "No project description.",
         "createdAt": "2026-05-05T19:09:12.404Z",
-        "updateAt": "2026-05-08T01:04:42.294Z"
+        "updateAt": "2026-05-08T01:18:47.508Z"
     },
     "world": {
         "worldEntrance": false,
@@ -27,7 +27,8 @@
         "entities": {
             "__type": "Set",
             "value": [
-                "e7ed429c-00b7-42ce-be24-bc6ffb284bfe"
+                "e7ed429c-00b7-42ce-be24-bc6ffb284bfe",
+                "451b7b07-0604-484b-8e96-908ec19fdb8a"
             ]
         },
         "properties": {
@@ -39,6 +40,16 @@
                         "componentType": "Property",
                         "enabled": true,
                         "name": "UI Panel",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "451b7b07-0604-484b-8e96-908ec19fdb8a",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "cube",
                         "layer": 0,
                         "activeEntity": true
                     }
@@ -55,7 +66,8 @@
                         "enabled": true,
                         "parent": "00000000-0000-0000-0000-000000000000",
                         "children": [
-                            "e7ed429c-00b7-42ce-be24-bc6ffb284bfe"
+                            "e7ed429c-00b7-42ce-be24-bc6ffb284bfe",
+                            "451b7b07-0604-484b-8e96-908ec19fdb8a"
                         ],
                         "localPosition": [
                             0,
@@ -99,6 +111,31 @@
                         ],
                         "isTransformSync": false
                     }
+                ],
+                [
+                    "451b7b07-0604-484b-8e96-908ec19fdb8a",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "00000000-0000-0000-0000-000000000000",
+                        "children": [],
+                        "localPosition": [
+                            -1.0545349682987273,
+                            0.35112461511360005,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
                 ]
             ]
         },
@@ -113,6 +150,20 @@
                         "mesh": "8e97addb-b7ed-4788-b97d-a05a16d8fcdf",
                         "materialList": [
                             "e583ff5e-528d-43cb-81c3-4a22ac8cd5be"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": true
+                    }
+                ],
+                [
+                    "451b7b07-0604-484b-8e96-908ec19fdb8a",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "b7b099b6-db3f-43a7-99ca-5c59f6783433",
+                        "materialList": [
+                            "14c7691a-6c3f-40d2-95c2-7392ec173337"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
