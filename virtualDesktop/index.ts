@@ -101,7 +101,8 @@ function getCaptureScreenSize(robotSize: ScreenSize): ScreenSize {
 
 	if (
 		physicalSize !== undefined &&
-		(physicalSize.width > robotSize.width || physicalSize.height > robotSize.height)
+		(physicalSize.width > robotSize.width ||
+			physicalSize.height > robotSize.height)
 	) {
 		return physicalSize;
 	}
@@ -115,8 +116,8 @@ const screenWidth = screenSize.width;
 const screenHeight = screenSize.height;
 const mouseScaleX = screenWidth / robotScreenSize.width;
 const mouseScaleY = screenHeight / robotScreenSize.height;
-const captureIntervalMs = 100;
-const triggerClickThreshold = 0.5;
+const captureIntervalMs = 1000 / 60;
+const triggerClickThreshold = 0.8;
 
 let screenTexture: number | undefined;
 let captureTimer: ReturnType<typeof setInterval> | undefined;
@@ -172,8 +173,7 @@ function isPointInPolygon(point: ScreenPoint, polygon: ScreenPoint[]): boolean {
 	for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
 		const current = polygon[i];
 		const previous = polygon[j];
-		const crossesY =
-			current.y > point.y !== previous.y > point.y;
+		const crossesY = current.y > point.y !== previous.y > point.y;
 
 		if (
 			crossesY &&
@@ -283,11 +283,14 @@ async function subscribeDeviceValue(
 		setter(value);
 	}
 
-	const subscription = await Device.SubscribeValueChange(devicePath, (value) => {
-		if (typeof value === "number") {
-			setter(value);
-		}
-	});
+	const subscription = await Device.SubscribeValueChange(
+		devicePath,
+		(value) => {
+			if (typeof value === "number") {
+				setter(value);
+			}
+		},
+	);
 	deviceSubscriptions.push(subscription);
 }
 
