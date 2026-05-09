@@ -63,6 +63,13 @@ type CaptureStageHistory = {
 	total: number[];
 };
 
+type PreparedCaptureUpload = {
+	data: Uint8Array;
+	width: number;
+	height: number;
+	payloadBytes: number;
+};
+
 function getWindowsPhysicalScreenSize(): ScreenSize | undefined {
 	if (process.platform !== "win32") {
 		return undefined;
@@ -140,7 +147,6 @@ const screenHeight = screenSize.height;
 const mouseScaleX = screenWidth / robotScreenSize.width;
 const mouseScaleY = screenHeight / robotScreenSize.height;
 const cursorIntervalMs = 1000 / 60;
-const jpegQuality = 50;
 const triggerClickThreshold = 0.8;
 const metricsWindowMs = 1000;
 const metricsHistoryLength = 180;
@@ -159,6 +165,8 @@ let primaryButtonDown = false;
 let vrCursorUpdateInFlight = false;
 let intendedCaptureFps = 60;
 let emissionStrength = 1.1;
+let captureRegionScale = 1;
+let jpegQuality = 50;
 const deviceSubscriptions: DeviceSubscription[] = [];
 const controllerInput: ControllerInput = {
 	leftTrigger: 0,
@@ -172,10 +180,18 @@ const captureStageHistory: CaptureStageHistory = {
 	load: [],
 	total: [],
 };
-const jpegByteSamples: ByteSample[] = [];
+const payloadByteSamples: ByteSample[] = [];
 
 function getCaptureIntervalMs(): number {
 	return 1000 / intendedCaptureFps;
+}
+
+function getRobotCaptureWidth(): number {
+	return Math.max(1, Math.round(screenWidth * captureRegionScale));
+}
+
+function getRobotCaptureHeight(): number {
+	return Math.max(1, Math.round(screenHeight * captureRegionScale));
 }
 
 function pruneOldSamples(nowMs: number): void {
@@ -187,10 +203,10 @@ function pruneOldSamples(nowMs: number): void {
 	}
 
 	while (
-		jpegByteSamples.length > 0 &&
-		nowMs - jpegByteSamples[0].timeMs > metricsWindowMs
+		payloadByteSamples.length > 0 &&
+		nowMs - payloadByteSamples[0].timeMs > metricsWindowMs
 	) {
-		jpegByteSamples.shift();
+		payloadByteSamples.shift();
 	}
 }
 
@@ -203,7 +219,7 @@ function appendMetric(history: number[], value: number): void {
 }
 
 function recordCaptureMetrics(
-	jpegBytes: number,
+	payloadBytes: number,
 	stageMetrics: CaptureStageMetrics,
 ): void {
 	const nowMs = Date.now();
@@ -213,9 +229,9 @@ function recordCaptureMetrics(
 	appendMetric(captureStageHistory.compress, stageMetrics.compressMs);
 	appendMetric(captureStageHistory.load, stageMetrics.loadMs);
 	appendMetric(captureStageHistory.total, stageMetrics.totalMs);
-	jpegByteSamples.push({
+	payloadByteSamples.push({
 		timeMs: nowMs,
-		bytes: jpegBytes,
+		bytes: payloadBytes,
 	});
 
 	pruneOldSamples(nowMs);
@@ -230,19 +246,17 @@ function getRealtimeCaptureFps(): number {
 function getRpcThroughputBytesPerSecond(): number {
 	const nowMs = Date.now();
 	pruneOldSamples(nowMs);
-	return jpegByteSamples.reduce((total, sample) => total + sample.bytes, 0);
+	return payloadByteSamples.reduce((total, sample) => total + sample.bytes, 0);
 }
 
-function getLatestJpegBytes(): number {
-	return jpegByteSamples.length === 0
+function getLatestPayloadBytes(): number {
+	return payloadByteSamples.length === 0
 		? 0
-		: jpegByteSamples[jpegByteSamples.length - 1].bytes;
+		: payloadByteSamples[payloadByteSamples.length - 1].bytes;
 }
 
 function getLatestMetric(history: number[]): number {
-	return history.length === 0
-		? 0
-		: history[history.length - 1];
+	return history.length === 0 ? 0 : history[history.length - 1];
 }
 
 function getCapturePlotMaxMs(): number {
@@ -270,7 +284,12 @@ function formatBytes(bytes: number): string {
 }
 
 function makeEmissionColor(): vec4 {
-	return vec4.fromValues(emissionStrength, emissionStrength, emissionStrength, 1);
+	return vec4.fromValues(
+		emissionStrength,
+		emissionStrength,
+		emissionStrength,
+		1,
+	);
 }
 
 function applyEmissionStrength(): void {
@@ -287,11 +306,11 @@ function applyEmissionStrength(): void {
 	});
 }
 
-async function compressCaptureToJpeg(
+async function prepareCaptureUpload(
 	bgrx: Buffer,
 	width: number,
 	height: number,
-): Promise<Uint8Array> {
+): Promise<PreparedCaptureUpload> {
 	const jpeg = await sharp(bgrx, {
 		raw: {
 			width,
@@ -299,17 +318,15 @@ async function compressCaptureToJpeg(
 			channels: 4,
 		},
 	})
-		.flip()
-		.removeAlpha()
-		.recomb([
-			[0, 0, 1],
-			[0, 1, 0],
-			[1, 0, 0],
-		])
 		.jpeg({ quality: jpegQuality })
 		.toBuffer();
 
-	return new Uint8Array(jpeg);
+	return {
+		data: new Uint8Array(jpeg),
+		width,
+		height,
+		payloadBytes: jpeg.byteLength,
+	};
 }
 
 function setCapturePixel(
@@ -387,7 +404,24 @@ function getCursorPosition(): ScreenPoint {
 	};
 }
 
-function drawCursor(bgrx: Uint8Array, width: number, height: number): void {
+function scaleCursorPolygon(
+	polygon: ScreenPoint[],
+	scaleX: number,
+	scaleY: number,
+): ScreenPoint[] {
+	return polygon.map((point) => ({
+		x: Math.round(point.x * scaleX),
+		y: Math.round(point.y * scaleY),
+	}));
+}
+
+function drawCursor(
+	bgrx: Uint8Array,
+	width: number,
+	height: number,
+	sourceWidth = width,
+	sourceHeight = height,
+): void {
 	const cursor = getCursorPosition();
 	const outline = [
 		{ x: cursor.x, y: cursor.y },
@@ -407,9 +441,23 @@ function drawCursor(bgrx: Uint8Array, width: number, height: number): void {
 		{ x: cursor.x + 8, y: cursor.y + 13 },
 		{ x: cursor.x + 15, y: cursor.y + 14 },
 	];
+	const scaleX = width / sourceWidth;
+	const scaleY = height / sourceHeight;
 
-	drawFilledPolygon(bgrx, width, height, outline, [0, 0, 0, 255]);
-	drawFilledPolygon(bgrx, width, height, fill, [255, 255, 255, 255]);
+	drawFilledPolygon(
+		bgrx,
+		width,
+		height,
+		scaleCursorPolygon(outline, scaleX, scaleY),
+		[0, 0, 0, 255],
+	);
+	drawFilledPolygon(
+		bgrx,
+		width,
+		height,
+		scaleCursorPolygon(fill, scaleX, scaleY),
+		[255, 255, 255, 255],
+	);
 }
 
 function clamp(value: number, min: number, max: number): number {
@@ -624,7 +672,7 @@ function startCursorLoop(): void {
 
 async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 	const screenEntity = sceneGraph["@Display"].entityId;
-	const displayScale = vec3.fromValues(1, -screenHeight / screenWidth, 1);
+	const displayScale = vec3.fromValues(1, screenHeight / screenWidth, 1);
 	displayState = {
 		entity: screenEntity,
 		scale: displayScale,
@@ -637,7 +685,7 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 	screenTexture = await TextureManager.Create2D(
 		screenWidth,
 		screenHeight,
-		TextureFormat.RGBA32,
+		TextureFormat.BGRA32,
 	);
 	await MaterialManager.SetTexture(
 		material,
@@ -674,13 +722,24 @@ function startCaptureLoop(): void {
 		void (async () => {
 			const totalStartMs = performance.now();
 			const captureStartMs = performance.now();
-			const capture = robot.screen.capture(0, 0, screenWidth, screenHeight);
+			const capture = robot.screen.capture(
+				0,
+				0,
+				getRobotCaptureWidth(),
+				getRobotCaptureHeight(),
+			);
 			const captureEndMs = performance.now();
 			const cursorStartMs = performance.now();
-			drawCursor(capture.image, capture.width, capture.height);
+			drawCursor(
+				capture.image,
+				capture.width,
+				capture.height,
+				screenWidth,
+				screenHeight,
+			);
 			const cursorEndMs = performance.now();
 			const compressStartMs = performance.now();
-			const jpeg = await compressCaptureToJpeg(
+			const upload = await prepareCaptureUpload(
 				capture.image,
 				capture.width,
 				capture.height,
@@ -688,9 +747,9 @@ function startCaptureLoop(): void {
 			const compressEndMs = performance.now();
 
 			const loadStartMs = performance.now();
-			await TextureManager.LoadImage(texture, jpeg);
+			await TextureManager.LoadImage(texture, upload.data);
 			const loadEndMs = performance.now();
-			recordCaptureMetrics(jpeg.byteLength, {
+			recordCaptureMetrics(upload.payloadBytes, {
 				captureMs: captureEndMs - captureStartMs,
 				cursorMs: cursorEndMs - cursorStartMs,
 				compressMs: compressEndMs - compressStartMs,
@@ -725,7 +784,7 @@ async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
 			const realtimeFps = getRealtimeCaptureFps();
 			const throughputBytesPerSecond = getRpcThroughputBytesPerSecond();
 			const plotMaxMs = getCapturePlotMaxMs();
-			const latestJpegBytes = getLatestJpegBytes();
+			const latestPayloadBytes = getLatestPayloadBytes();
 			const plotStage = (
 				label: string,
 				history: number[],
@@ -769,11 +828,46 @@ async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
 			);
 
 			ImGui.Separator();
-			ImGui.Text("RPC throughput");
-			ImGui.Text(`JPEG buffer: ${formatBytes(latestJpegBytes)}`);
+			ImGui.Text("JPEG upload");
+			const qualityValue: [number] = [jpegQuality];
+			ImGui.SetNextItemWidth(360);
+			if (
+				ImGui.SliderFloat(
+					"Quality",
+					qualityValue,
+					10,
+					95,
+					"%.0f",
+					ImGui.SliderFlags.AlwaysClamp,
+				)
+			) {
+				jpegQuality = Math.round(clamp(qualityValue[0], 10, 95));
+			}
+			const captureRegionValue: [number] = [captureRegionScale];
+			ImGui.SetNextItemWidth(360);
+			if (
+				ImGui.SliderFloat(
+					"Robot capture scale",
+					captureRegionValue,
+					0.25,
+					1,
+					"%.2f",
+					ImGui.SliderFlags.AlwaysClamp,
+				)
+			) {
+				captureRegionScale = clamp(captureRegionValue[0], 0.25, 1);
+			}
 			ImGui.Text(
-				`Payload rate: ${formatBytes(throughputBytesPerSecond)}/s`,
+				`Robot capture: ${getRobotCaptureWidth()}x${getRobotCaptureHeight()}`,
 			);
+			ImGui.Text(
+				`Upload size: ${getRobotCaptureWidth()}x${getRobotCaptureHeight()}`,
+			);
+
+			ImGui.Separator();
+			ImGui.Text("RPC throughput");
+			ImGui.Text(`Payload buffer: ${formatBytes(latestPayloadBytes)}`);
+			ImGui.Text(`Payload rate: ${formatBytes(throughputBytesPerSecond)}/s`);
 
 			ImGui.Separator();
 			ImGui.Text("Visual output");
@@ -799,7 +893,7 @@ async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
 			plotStage("capture", captureStageHistory.capture, 245);
 			ImGui.SameLine();
 			plotStage("cursor", captureStageHistory.cursor, 245);
-			plotStage("compress", captureStageHistory.compress, 245);
+			plotStage("encode", captureStageHistory.compress, 245);
 			ImGui.SameLine();
 			plotStage("loadImage", captureStageHistory.load, 245);
 			plotStage("total", captureStageHistory.total, 520);

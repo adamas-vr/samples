@@ -1,15 +1,15 @@
 {
-    "name": "virtualDesktop",
-    "version": "0.0.1",
-    "dependencies": {
-        "@adamasvr/sdk": "file:../../runtime-interface",
-        "gl-matrix": "^3.4.4",
-        "imgui-adamas": "file:../../imgui-adamas",
-        "robotjs": "^0.6.0",
-        "sharp": "^0.34.5"
-    },
-    "devDependencies": {
-        "@types/node": "^24.10.1",
-        "typescript": "^5.8.3"
-    }
+	"name": "virtualDesktop",
+	"version": "0.0.1",
+	"dependencies": {
+		"@adamasvr/sdk": "file:../../runtime-interface",
+		"gl-matrix": "^3.4.4",
+		"imgui-adamas": "file:../../imgui-adamas",
+		"robotjs": "file:../../robotjs",
+		"sharp": "^0.34.5"
+	},
+	"devDependencies": {
+		"@types/node": "^24.10.1",
+		"typescript": "^5.8.3"
+	}
 }
