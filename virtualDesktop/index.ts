@@ -16,6 +16,7 @@ import {
 import { projectBundle } from "adamasvr:editor";
 import { execFileSync } from "node:child_process";
 import { quat, vec3 } from "gl-matrix";
+import sharp = require("sharp");
 import robot from "robotjs";
 
 type Hand = "left" | "right";
@@ -117,10 +118,13 @@ const screenHeight = screenSize.height;
 const mouseScaleX = screenWidth / robotScreenSize.width;
 const mouseScaleY = screenHeight / robotScreenSize.height;
 const captureIntervalMs = 1000 / 60;
+const cursorIntervalMs = 1000 / 60;
+const jpegQuality = 75;
 const triggerClickThreshold = 0.8;
 
 let screenTexture: number | undefined;
 let captureTimer: ReturnType<typeof setInterval> | undefined;
+let cursorTimer: ReturnType<typeof setInterval> | undefined;
 let uploadInFlight = false;
 let displayState: DisplayState | undefined;
 let leftHandEntity: Entity | undefined;
@@ -135,21 +139,33 @@ const controllerInput: ControllerInput = {
 	rightTrigger: 0,
 };
 
-function convertBgrxToRgba(input: Buffer): Uint8Array {
-	const rgba = new Uint8Array(input.length);
+async function compressCaptureToJpeg(
+	bgrx: Buffer,
+	width: number,
+	height: number,
+): Promise<Uint8Array> {
+	const jpeg = await sharp(bgrx, {
+		raw: {
+			width,
+			height,
+			channels: 4,
+		},
+	})
+		.flip()
+		.removeAlpha()
+		.recomb([
+			[0, 0, 1],
+			[0, 1, 0],
+			[1, 0, 0],
+		])
+		.jpeg({ quality: jpegQuality })
+		.toBuffer();
 
-	for (let i = 0; i < input.length; i += 4) {
-		rgba[i] = input[i + 2];
-		rgba[i + 1] = input[i + 1];
-		rgba[i + 2] = input[i];
-		rgba[i + 3] = 255;
-	}
-
-	return rgba;
+	return new Uint8Array(jpeg);
 }
 
-function setPixel(
-	rgba: Uint8Array,
+function setCapturePixel(
+	bgrx: Uint8Array,
 	width: number,
 	height: number,
 	x: number,
@@ -160,11 +176,12 @@ function setPixel(
 		return;
 	}
 
-	const index = (y * width + x) * 4;
-	rgba[index] = color[0];
-	rgba[index + 1] = color[1];
-	rgba[index + 2] = color[2];
-	rgba[index + 3] = color[3];
+	const captureY = height - 1 - y;
+	const index = (captureY * width + x) * 4;
+	bgrx[index] = color[2];
+	bgrx[index + 1] = color[1];
+	bgrx[index + 2] = color[0];
+	bgrx[index + 3] = color[3];
 }
 
 function isPointInPolygon(point: ScreenPoint, polygon: ScreenPoint[]): boolean {
@@ -190,7 +207,7 @@ function isPointInPolygon(point: ScreenPoint, polygon: ScreenPoint[]): boolean {
 }
 
 function drawFilledPolygon(
-	rgba: Uint8Array,
+	bgrx: Uint8Array,
 	width: number,
 	height: number,
 	polygon: ScreenPoint[],
@@ -204,7 +221,7 @@ function drawFilledPolygon(
 	for (let y = minY; y <= maxY; y++) {
 		for (let x = minX; x <= maxX; x++) {
 			if (isPointInPolygon({ x: x + 0.5, y: y + 0.5 }, polygon)) {
-				setPixel(rgba, width, height, x, y, color);
+				setCapturePixel(bgrx, width, height, x, y, color);
 			}
 		}
 	}
@@ -223,7 +240,7 @@ function getCursorPosition(): ScreenPoint {
 	};
 }
 
-function drawCursor(rgba: Uint8Array, width: number, height: number): void {
+function drawCursor(bgrx: Uint8Array, width: number, height: number): void {
 	const cursor = getCursorPosition();
 	const outline = [
 		{ x: cursor.x, y: cursor.y },
@@ -244,8 +261,8 @@ function drawCursor(rgba: Uint8Array, width: number, height: number): void {
 		{ x: cursor.x + 15, y: cursor.y + 14 },
 	];
 
-	drawFilledPolygon(rgba, width, height, outline, [0, 0, 0, 255]);
-	drawFilledPolygon(rgba, width, height, fill, [255, 255, 255, 255]);
+	drawFilledPolygon(bgrx, width, height, outline, [0, 0, 0, 255]);
+	drawFilledPolygon(bgrx, width, height, fill, [255, 255, 255, 255]);
 }
 
 function clamp(value: number, min: number, max: number): number {
@@ -443,6 +460,21 @@ async function updateVrCursor(): Promise<void> {
 	}
 }
 
+function startCursorLoop(): void {
+	if (cursorTimer !== undefined) {
+		return;
+	}
+
+	cursorTimer = setInterval(() => {
+		void updateVrCursor().catch((error) => {
+			console.error("Failed to update VR cursor", error);
+			vrCursorPosition = undefined;
+			preferredHand = undefined;
+			setPrimaryButtonDown(false);
+		});
+	}, cursorIntervalMs);
+}
+
 async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 	const screenEntity = sceneGraph["@Display"].entityId;
 	const displayScale = vec3.fromValues(1, -screenHeight / screenWidth, 1);
@@ -479,25 +511,17 @@ function startCaptureLoop(): void {
 		const texture = screenTexture;
 		uploadInFlight = true;
 
-		void updateVrCursor()
-			.catch((error) => {
-				console.error("Failed to update VR cursor", error);
-				vrCursorPosition = undefined;
-				preferredHand = undefined;
-				setPrimaryButtonDown(false);
-			})
-			.then(() => {
-				const capture = robot.screen.capture(0, 0, screenWidth, screenHeight);
-				const rgba = convertBgrxToRgba(capture.image);
-				drawCursor(rgba, capture.width, capture.height);
+		void (async () => {
+			const capture = robot.screen.capture(0, 0, screenWidth, screenHeight);
+			drawCursor(capture.image, capture.width, capture.height);
+			const jpeg = await compressCaptureToJpeg(
+				capture.image,
+				capture.width,
+				capture.height,
+			);
 
-				return TextureManager.LoadRGBAImage(
-					texture,
-					rgba,
-					capture.width,
-					capture.height,
-				);
-			})
+			await TextureManager.LoadImage(texture, jpeg);
+		})()
 			.catch((error) => {
 				console.error("Failed to upload desktop capture", error);
 			})
@@ -511,6 +535,7 @@ Project.FromBundle(projectBundle).Launch({
 	OnSetup: async (_, sceneGraph) => {
 		await createScreenQuad(sceneGraph);
 		await initializeControllerInput();
+		startCursorLoop();
 		startCaptureLoop();
 		console.log(
 			`Streaming ${screenWidth}x${screenHeight} desktop capture to the screen quad`,
