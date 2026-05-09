@@ -152,6 +152,8 @@ const metricsWindowMs = 1000;
 const metricsHistoryLength = 180;
 
 let screenTexture: number | undefined;
+let screenTextureWidth = 0;
+let screenTextureHeight = 0;
 let screenMaterial: number | undefined;
 let captureTimer: ReturnType<typeof setTimeout> | undefined;
 let cursorTimer: ReturnType<typeof setInterval> | undefined;
@@ -167,6 +169,7 @@ let intendedCaptureFps = 60;
 let emissionStrength = 1.1;
 let captureRegionScale = 1;
 let jpegQuality = 50;
+let streamRgba = false;
 const deviceSubscriptions: DeviceSubscription[] = [];
 const controllerInput: ControllerInput = {
 	leftTrigger: 0,
@@ -342,9 +345,9 @@ function setCapturePixel(
 	}
 
 	const index = (y * width + x) * 4;
-	bgrx[index] = color[2];
+	bgrx[index] = color[0];
 	bgrx[index + 1] = color[1];
-	bgrx[index + 2] = color[0];
+	bgrx[index + 2] = color[2];
 	bgrx[index + 3] = color[3];
 }
 
@@ -687,6 +690,8 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 		screenHeight,
 		TextureFormat.BGRA32,
 	);
+	screenTextureWidth = screenWidth;
+	screenTextureHeight = screenHeight;
 	await MaterialManager.SetTexture(
 		material,
 		MaterialProperty.BaseColorMap,
@@ -704,6 +709,49 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 	);
 }
 
+async function ensureRgbaTextureSize(width: number, height: number): Promise<number> {
+	if (
+		screenTexture !== undefined &&
+		screenTextureWidth === width &&
+		screenTextureHeight === height
+	) {
+		return screenTexture;
+	}
+
+	if (screenMaterial === undefined) {
+		throw new Error("Screen material is not initialized");
+	}
+
+	const previousTexture = screenTexture;
+	const texture = await TextureManager.Create2D(
+		width,
+		height,
+		TextureFormat.RGBA32,
+	);
+	screenTexture = texture;
+	screenTextureWidth = width;
+	screenTextureHeight = height;
+
+	await MaterialManager.SetTexture(
+		screenMaterial,
+		MaterialProperty.BaseColorMap,
+		texture,
+	);
+	await MaterialManager.SetTexture(
+		screenMaterial,
+		MaterialProperty.EmissionMap,
+		texture,
+	);
+
+	if (previousTexture !== undefined) {
+		void TextureManager.Destroy(previousTexture).catch((error) => {
+			console.error("Failed to destroy previous screen texture", error);
+		});
+	}
+
+	return texture;
+}
+
 function startCaptureLoop(): void {
 	if (screenTexture === undefined || captureTimer !== undefined) {
 		return;
@@ -716,7 +764,7 @@ function startCaptureLoop(): void {
 			return;
 		}
 
-		const texture = screenTexture;
+		let texture = screenTexture;
 		uploadInFlight = true;
 
 		void (async () => {
@@ -739,15 +787,32 @@ function startCaptureLoop(): void {
 			);
 			const cursorEndMs = performance.now();
 			const compressStartMs = performance.now();
-			const upload = await prepareCaptureUpload(
-				capture.image,
-				capture.width,
-				capture.height,
-			);
+			const upload = streamRgba
+				? {
+						data: new Uint8Array(capture.image),
+						width: capture.width,
+						height: capture.height,
+						payloadBytes: capture.image.byteLength,
+					}
+				: await prepareCaptureUpload(
+						capture.image,
+						capture.width,
+						capture.height,
+					);
 			const compressEndMs = performance.now();
 
 			const loadStartMs = performance.now();
-			await TextureManager.LoadImage(texture, upload.data);
+			if (streamRgba) {
+				texture = await ensureRgbaTextureSize(upload.width, upload.height);
+				await TextureManager.LoadRGBAImage(
+					texture,
+					upload.data,
+					upload.width,
+					upload.height,
+				);
+			} else {
+				await TextureManager.LoadImage(texture, upload.data);
+			}
 			const loadEndMs = performance.now();
 			recordCaptureMetrics(upload.payloadBytes, {
 				captureMs: captureEndMs - captureStartMs,
@@ -829,6 +894,10 @@ async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
 
 			ImGui.Separator();
 			ImGui.Text("JPEG upload");
+			const streamRgbaValue: [boolean] = [streamRgba];
+			if (ImGui.Checkbox("Stream raw RGBA", streamRgbaValue)) {
+				streamRgba = streamRgbaValue[0];
+			}
 			const qualityValue: [number] = [jpegQuality];
 			ImGui.SetNextItemWidth(360);
 			if (
