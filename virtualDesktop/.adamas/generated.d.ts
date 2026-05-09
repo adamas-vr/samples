@@ -7,6 +7,9 @@ export interface SceneGraph
 {
     "@Display": {
         entityId: Entity
+    },
+    "@controller": {
+        entityId: Entity
     }
 }
 }

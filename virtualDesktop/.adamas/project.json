@@ -7,7 +7,7 @@
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-04-07T05:28:30.106Z",
-        "updateAt": "2026-05-09T17:27:10.179Z"
+        "updateAt": "2026-05-09T19:05:17.421Z"
     },
     "world": {
         "worldEntrance": false,
@@ -27,7 +27,8 @@
         "entities": {
             "__type": "Set",
             "value": [
-                "5dae26ba-973d-4dff-9186-b8b46b8c55e8"
+                "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
+                "5cae9be6-29fc-4b70-bbfe-1faab33d3b43"
             ]
         },
         "properties": {
@@ -39,6 +40,16 @@
                         "componentType": "Property",
                         "enabled": true,
                         "name": "Display",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "5cae9be6-29fc-4b70-bbfe-1faab33d3b43",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "controller",
                         "layer": 0,
                         "activeEntity": true
                     }
@@ -55,7 +66,8 @@
                         "enabled": true,
                         "parent": "00000000-0000-0000-0000-000000000000",
                         "children": [
-                            "5dae26ba-973d-4dff-9186-b8b46b8c55e8"
+                            "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
+                            "5cae9be6-29fc-4b70-bbfe-1faab33d3b43"
                         ],
                         "localPosition": [
                             0,
@@ -99,6 +111,31 @@
                         ],
                         "isTransformSync": false
                     }
+                ],
+                [
+                    "5cae9be6-29fc-4b70-bbfe-1faab33d3b43",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "00000000-0000-0000-0000-000000000000",
+                        "children": [],
+                        "localPosition": [
+                            -2,
+                            1,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
                 ]
             ]
         },
@@ -113,6 +150,20 @@
                         "mesh": "cfd788eb-f684-4d6a-9351-e1849249d19c",
                         "materialList": [
                             "0db31d7e-3121-4db3-99ec-c086ca560504"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": true
+                    }
+                ],
+                [
+                    "5cae9be6-29fc-4b70-bbfe-1faab33d3b43",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "cfd788eb-f684-4d6a-9351-e1849249d19c",
+                        "materialList": [
+                            "a841b67a-29b3-41f1-bf3a-ef74c5e82e62"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,

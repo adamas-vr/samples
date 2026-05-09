@@ -7,7 +7,11 @@ declare module "adamasvr:assets/quad.amesh" {
 	const value: import("@adamasvr/sdk").MeshAsset;
 	export default value;
 }
-declare module "adamasvr:assets/material.amat" {
+declare module "adamasvr:assets/screen.amat" {
+	const value: import("@adamasvr/sdk").MaterialAsset;
+	export default value;
+}
+declare module "adamasvr:assets/imgui.amat" {
 	const value: import("@adamasvr/sdk").MaterialAsset;
 	export default value;
 }

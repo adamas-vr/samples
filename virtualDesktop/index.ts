@@ -18,6 +18,7 @@ import { execFileSync } from "node:child_process";
 import { quat, vec3, vec4 } from "gl-matrix";
 import sharp = require("sharp");
 import robot from "robotjs";
+import { CreateImGuiWindow } from "imgui-adamas";
 
 type Hand = "left" | "right";
 
@@ -39,6 +40,27 @@ type DisplayState = {
 type ControllerInput = {
 	leftTrigger: number;
 	rightTrigger: number;
+};
+
+type ByteSample = {
+	timeMs: number;
+	bytes: number;
+};
+
+type CaptureStageMetrics = {
+	captureMs: number;
+	cursorMs: number;
+	compressMs: number;
+	loadMs: number;
+	totalMs: number;
+};
+
+type CaptureStageHistory = {
+	capture: number[];
+	cursor: number[];
+	compress: number[];
+	load: number[];
+	total: number[];
 };
 
 function getWindowsPhysicalScreenSize(): ScreenSize | undefined {
@@ -117,14 +139,15 @@ const screenWidth = screenSize.width;
 const screenHeight = screenSize.height;
 const mouseScaleX = screenWidth / robotScreenSize.width;
 const mouseScaleY = screenHeight / robotScreenSize.height;
-const captureIntervalMs = 1000 / 60;
 const cursorIntervalMs = 1000 / 60;
 const jpegQuality = 50;
-const emissionBoost = vec4.fromValues(1.1, 1.1, 1.1, 1);
 const triggerClickThreshold = 0.8;
+const metricsWindowMs = 1000;
+const metricsHistoryLength = 180;
 
 let screenTexture: number | undefined;
-let captureTimer: ReturnType<typeof setInterval> | undefined;
+let screenMaterial: number | undefined;
+let captureTimer: ReturnType<typeof setTimeout> | undefined;
 let cursorTimer: ReturnType<typeof setInterval> | undefined;
 let uploadInFlight = false;
 let displayState: DisplayState | undefined;
@@ -134,11 +157,135 @@ let preferredHand: Hand | undefined;
 let vrCursorPosition: ScreenPoint | undefined;
 let primaryButtonDown = false;
 let vrCursorUpdateInFlight = false;
+let intendedCaptureFps = 60;
+let emissionStrength = 1.1;
 const deviceSubscriptions: DeviceSubscription[] = [];
 const controllerInput: ControllerInput = {
 	leftTrigger: 0,
 	rightTrigger: 0,
 };
+const completedCaptureTimesMs: number[] = [];
+const captureStageHistory: CaptureStageHistory = {
+	capture: [],
+	cursor: [],
+	compress: [],
+	load: [],
+	total: [],
+};
+const jpegByteSamples: ByteSample[] = [];
+
+function getCaptureIntervalMs(): number {
+	return 1000 / intendedCaptureFps;
+}
+
+function pruneOldSamples(nowMs: number): void {
+	while (
+		completedCaptureTimesMs.length > 0 &&
+		nowMs - completedCaptureTimesMs[0] > metricsWindowMs
+	) {
+		completedCaptureTimesMs.shift();
+	}
+
+	while (
+		jpegByteSamples.length > 0 &&
+		nowMs - jpegByteSamples[0].timeMs > metricsWindowMs
+	) {
+		jpegByteSamples.shift();
+	}
+}
+
+function appendMetric(history: number[], value: number): void {
+	history.push(value);
+
+	if (history.length > metricsHistoryLength) {
+		history.splice(0, history.length - metricsHistoryLength);
+	}
+}
+
+function recordCaptureMetrics(
+	jpegBytes: number,
+	stageMetrics: CaptureStageMetrics,
+): void {
+	const nowMs = Date.now();
+	completedCaptureTimesMs.push(nowMs);
+	appendMetric(captureStageHistory.capture, stageMetrics.captureMs);
+	appendMetric(captureStageHistory.cursor, stageMetrics.cursorMs);
+	appendMetric(captureStageHistory.compress, stageMetrics.compressMs);
+	appendMetric(captureStageHistory.load, stageMetrics.loadMs);
+	appendMetric(captureStageHistory.total, stageMetrics.totalMs);
+	jpegByteSamples.push({
+		timeMs: nowMs,
+		bytes: jpegBytes,
+	});
+
+	pruneOldSamples(nowMs);
+}
+
+function getRealtimeCaptureFps(): number {
+	const nowMs = Date.now();
+	pruneOldSamples(nowMs);
+	return (completedCaptureTimesMs.length * 1000) / metricsWindowMs;
+}
+
+function getRpcThroughputBytesPerSecond(): number {
+	const nowMs = Date.now();
+	pruneOldSamples(nowMs);
+	return jpegByteSamples.reduce((total, sample) => total + sample.bytes, 0);
+}
+
+function getLatestJpegBytes(): number {
+	return jpegByteSamples.length === 0
+		? 0
+		: jpegByteSamples[jpegByteSamples.length - 1].bytes;
+}
+
+function getLatestMetric(history: number[]): number {
+	return history.length === 0
+		? 0
+		: history[history.length - 1];
+}
+
+function getCapturePlotMaxMs(): number {
+	const values = [
+		...captureStageHistory.capture,
+		...captureStageHistory.cursor,
+		...captureStageHistory.compress,
+		...captureStageHistory.load,
+		...captureStageHistory.total,
+	];
+
+	return Math.max(1, ...values) * 1.2;
+}
+
+function formatBytes(bytes: number): string {
+	if (bytes >= 1024 * 1024) {
+		return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+	}
+
+	if (bytes >= 1024) {
+		return `${(bytes / 1024).toFixed(1)} KB`;
+	}
+
+	return `${bytes.toFixed(0)} B`;
+}
+
+function makeEmissionColor(): vec4 {
+	return vec4.fromValues(emissionStrength, emissionStrength, emissionStrength, 1);
+}
+
+function applyEmissionStrength(): void {
+	if (screenMaterial === undefined) {
+		return;
+	}
+
+	void MaterialManager.SetColor(
+		screenMaterial,
+		MaterialProperty.Emission,
+		makeEmissionColor(),
+	).catch((error) => {
+		console.error("Failed to update emission strength", error);
+	});
+}
 
 async function compressCaptureToJpeg(
 	bgrx: Buffer,
@@ -486,6 +633,7 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 	await TransformManager.SetLocalScale(screenEntity, displayScale);
 
 	const material = await RenderableManager.GetMaterial(screenEntity);
+	screenMaterial = material;
 	screenTexture = await TextureManager.Create2D(
 		screenWidth,
 		screenHeight,
@@ -504,7 +652,7 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 	await MaterialManager.SetColor(
 		material,
 		MaterialProperty.Emission,
-		emissionBoost,
+		makeEmissionColor(),
 	);
 }
 
@@ -513,7 +661,9 @@ function startCaptureLoop(): void {
 		return;
 	}
 
-	captureTimer = setInterval(() => {
+	const tick = () => {
+		captureTimer = setTimeout(tick, getCaptureIntervalMs());
+
 		if (screenTexture === undefined || uploadInFlight) {
 			return;
 		}
@@ -522,15 +672,31 @@ function startCaptureLoop(): void {
 		uploadInFlight = true;
 
 		void (async () => {
+			const totalStartMs = performance.now();
+			const captureStartMs = performance.now();
 			const capture = robot.screen.capture(0, 0, screenWidth, screenHeight);
+			const captureEndMs = performance.now();
+			const cursorStartMs = performance.now();
 			drawCursor(capture.image, capture.width, capture.height);
+			const cursorEndMs = performance.now();
+			const compressStartMs = performance.now();
 			const jpeg = await compressCaptureToJpeg(
 				capture.image,
 				capture.width,
 				capture.height,
 			);
+			const compressEndMs = performance.now();
 
+			const loadStartMs = performance.now();
 			await TextureManager.LoadImage(texture, jpeg);
+			const loadEndMs = performance.now();
+			recordCaptureMetrics(jpeg.byteLength, {
+				captureMs: captureEndMs - captureStartMs,
+				cursorMs: cursorEndMs - cursorStartMs,
+				compressMs: compressEndMs - compressStartMs,
+				loadMs: loadEndMs - loadStartMs,
+				totalMs: loadEndMs - totalStartMs,
+			});
 		})()
 			.catch((error) => {
 				console.error("Failed to upload desktop capture", error);
@@ -538,12 +704,113 @@ function startCaptureLoop(): void {
 			.finally(() => {
 				uploadInFlight = false;
 			});
-	}, captureIntervalMs);
+	};
+
+	tick();
+}
+
+async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
+	const controllerEntity = sceneGraph["@controller"].entityId;
+
+	await CreateImGuiWindow(
+		{
+			targetEntity: controllerEntity,
+			displayWidth: 640,
+			displayHeight: 480,
+			styleColor: "dark",
+			clearColor: [0.02, 0.02, 0.025, 1],
+			fontSizePx: 14,
+		},
+		(ImGui) => {
+			const realtimeFps = getRealtimeCaptureFps();
+			const throughputBytesPerSecond = getRpcThroughputBytesPerSecond();
+			const plotMaxMs = getCapturePlotMaxMs();
+			const latestJpegBytes = getLatestJpegBytes();
+			const plotStage = (
+				label: string,
+				history: number[],
+				graphWidth: number,
+			) => {
+				const latestMs = getLatestMetric(history);
+				ImGui.PlotLines(
+					label,
+					history,
+					history.length,
+					0,
+					`${latestMs.toFixed(1)} ms`,
+					0,
+					plotMaxMs,
+					new ImGui.Vec2(graphWidth, 48),
+				);
+			};
+
+			ImGui.Text("Virtual Desktop Capture");
+			ImGui.Separator();
+
+			ImGui.Text("Capture pacing");
+			const fpsValue: [number] = [intendedCaptureFps];
+			ImGui.SetNextItemWidth(360);
+			if (
+				ImGui.SliderFloat(
+					"Intended FPS",
+					fpsValue,
+					1,
+					90,
+					"%.0f",
+					ImGui.SliderFlags.AlwaysClamp,
+				)
+			) {
+				intendedCaptureFps = clamp(fpsValue[0], 1, 90);
+			}
+			ImGui.Text(`Target interval: ${getCaptureIntervalMs().toFixed(2)} ms`);
+			ImGui.Text(
+				`Realtime FPS: ${realtimeFps.toFixed(1)} ` +
+					`(actual completed capture/upload rate)`,
+			);
+
+			ImGui.Separator();
+			ImGui.Text("RPC throughput");
+			ImGui.Text(`JPEG buffer: ${formatBytes(latestJpegBytes)}`);
+			ImGui.Text(
+				`Payload rate: ${formatBytes(throughputBytesPerSecond)}/s`,
+			);
+
+			ImGui.Separator();
+			ImGui.Text("Visual output");
+			const emissionValue: [number] = [emissionStrength];
+			ImGui.SetNextItemWidth(360);
+			if (
+				ImGui.SliderFloat(
+					"Emission strength",
+					emissionValue,
+					0,
+					3,
+					"%.2f",
+					ImGui.SliderFlags.AlwaysClamp,
+				)
+			) {
+				emissionStrength = clamp(emissionValue[0], 0, 3);
+				applyEmissionStrength();
+			}
+
+			ImGui.Separator();
+			ImGui.Text("Capture stage time");
+			ImGui.Text(`Scale: 0-${plotMaxMs.toFixed(1)} ms`);
+			plotStage("capture", captureStageHistory.capture, 245);
+			ImGui.SameLine();
+			plotStage("cursor", captureStageHistory.cursor, 245);
+			plotStage("compress", captureStageHistory.compress, 245);
+			ImGui.SameLine();
+			plotStage("loadImage", captureStageHistory.load, 245);
+			plotStage("total", captureStageHistory.total, 520);
+		},
+	);
 }
 
 Project.FromBundle(projectBundle).Launch({
 	OnSetup: async (_, sceneGraph) => {
 		await createScreenQuad(sceneGraph);
+		await createDebugWindow(sceneGraph);
 		await initializeControllerInput();
 		startCursorLoop();
 		startCaptureLoop();
