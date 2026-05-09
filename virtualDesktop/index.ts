@@ -15,7 +15,7 @@ import {
 } from "@adamasvr/sdk";
 import { projectBundle } from "adamasvr:editor";
 import { execFileSync } from "node:child_process";
-import { quat, vec3 } from "gl-matrix";
+import { quat, vec3, vec4 } from "gl-matrix";
 import sharp = require("sharp");
 import robot from "robotjs";
 
@@ -119,7 +119,8 @@ const mouseScaleX = screenWidth / robotScreenSize.width;
 const mouseScaleY = screenHeight / robotScreenSize.height;
 const captureIntervalMs = 1000 / 60;
 const cursorIntervalMs = 1000 / 60;
-const jpegQuality = 75;
+const jpegQuality = 50;
+const emissionBoost = vec4.fromValues(1.1, 1.1, 1.1, 1);
 const triggerClickThreshold = 0.8;
 
 let screenTexture: number | undefined;
@@ -176,8 +177,7 @@ function setCapturePixel(
 		return;
 	}
 
-	const captureY = height - 1 - y;
-	const index = (captureY * width + x) * 4;
+	const index = (y * width + x) * 4;
 	bgrx[index] = color[2];
 	bgrx[index + 1] = color[1];
 	bgrx[index + 2] = color[0];
@@ -495,6 +495,16 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 		material,
 		MaterialProperty.BaseColorMap,
 		screenTexture,
+	);
+	await MaterialManager.SetTexture(
+		material,
+		MaterialProperty.EmissionMap,
+		screenTexture,
+	);
+	await MaterialManager.SetColor(
+		material,
+		MaterialProperty.Emission,
+		emissionBoost,
 	);
 }
 
