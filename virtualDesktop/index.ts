@@ -169,7 +169,7 @@ let intendedCaptureFps = 60;
 let emissionStrength = 1.1;
 let captureRegionScale = 1;
 let jpegQuality = 50;
-let streamRgba = false;
+let streamRgba = true;
 const deviceSubscriptions: DeviceSubscription[] = [];
 const controllerInput: ControllerInput = {
 	leftTrigger: 0,
@@ -310,11 +310,11 @@ function applyEmissionStrength(): void {
 }
 
 async function prepareCaptureUpload(
-	bgrx: Buffer,
+	rgba: Buffer,
 	width: number,
 	height: number,
 ): Promise<PreparedCaptureUpload> {
-	const jpeg = await sharp(bgrx, {
+	const jpeg = await sharp(rgba, {
 		raw: {
 			width,
 			height,
@@ -333,7 +333,7 @@ async function prepareCaptureUpload(
 }
 
 function setCapturePixel(
-	bgrx: Uint8Array,
+	rgba: Uint8Array,
 	width: number,
 	height: number,
 	x: number,
@@ -345,10 +345,10 @@ function setCapturePixel(
 	}
 
 	const index = (y * width + x) * 4;
-	bgrx[index] = color[0];
-	bgrx[index + 1] = color[1];
-	bgrx[index + 2] = color[2];
-	bgrx[index + 3] = color[3];
+	rgba[index] = color[0];
+	rgba[index + 1] = color[1];
+	rgba[index + 2] = color[2];
+	rgba[index + 3] = color[3];
 }
 
 function isPointInPolygon(point: ScreenPoint, polygon: ScreenPoint[]): boolean {
@@ -374,7 +374,7 @@ function isPointInPolygon(point: ScreenPoint, polygon: ScreenPoint[]): boolean {
 }
 
 function drawFilledPolygon(
-	bgrx: Uint8Array,
+	rgba: Uint8Array,
 	width: number,
 	height: number,
 	polygon: ScreenPoint[],
@@ -388,7 +388,7 @@ function drawFilledPolygon(
 	for (let y = minY; y <= maxY; y++) {
 		for (let x = minX; x <= maxX; x++) {
 			if (isPointInPolygon({ x: x + 0.5, y: y + 0.5 }, polygon)) {
-				setCapturePixel(bgrx, width, height, x, y, color);
+				setCapturePixel(rgba, width, height, x, y, color);
 			}
 		}
 	}
@@ -419,7 +419,7 @@ function scaleCursorPolygon(
 }
 
 function drawCursor(
-	bgrx: Uint8Array,
+	rgba: Uint8Array,
 	width: number,
 	height: number,
 	sourceWidth = width,
@@ -448,14 +448,14 @@ function drawCursor(
 	const scaleY = height / sourceHeight;
 
 	drawFilledPolygon(
-		bgrx,
+		rgba,
 		width,
 		height,
 		scaleCursorPolygon(outline, scaleX, scaleY),
 		[0, 0, 0, 255],
 	);
 	drawFilledPolygon(
-		bgrx,
+		rgba,
 		width,
 		height,
 		scaleCursorPolygon(fill, scaleX, scaleY),
@@ -581,7 +581,7 @@ async function intersectHand(hand: Hand): Promise<ScreenPoint | undefined> {
 	vec3.transformQuat(displayLocal, displayLocal, inverseRotation);
 
 	const x = (displayLocal[0] / displayState.scale[0] + 0.5) * screenWidth;
-	const y = (displayLocal[1] / displayState.scale[1] + 0.5) * screenHeight;
+	const y = (0.5 - displayLocal[1] / displayState.scale[1]) * screenHeight;
 
 	if (x < 0 || x > screenWidth || y < 0 || y > screenHeight) {
 		return undefined;
@@ -688,7 +688,7 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 	screenTexture = await TextureManager.Create2D(
 		screenWidth,
 		screenHeight,
-		TextureFormat.BGRA32,
+		TextureFormat.RGBA32,
 	);
 	screenTextureWidth = screenWidth;
 	screenTextureHeight = screenHeight;
@@ -709,7 +709,10 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 	);
 }
 
-async function ensureRgbaTextureSize(width: number, height: number): Promise<number> {
+async function ensureRgbaTextureSize(
+	width: number,
+	height: number,
+): Promise<number> {
 	if (
 		screenTexture !== undefined &&
 		screenTextureWidth === width &&
