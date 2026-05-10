@@ -187,8 +187,7 @@ async function createPanelEntity(): Promise<Entity> {
 	const headEntity = await localUser.GetHeadEntity();
 	const entity = await EntityManager.Create("RPC Benchmark Panel");
 
-	await TransformManager.SetParent(entity, headEntity);
-	await TransformManager.SetLocalPosition(entity, vec3.fromValues(0, 0, -1.2));
+	await TransformManager.SetLocalPosition(entity, vec3.fromValues(0, 1, -1.2));
 	await TransformManager.SetLocalScale(
 		entity,
 		vec3.fromValues(
@@ -353,10 +352,7 @@ async function runSingleCallBenchmark(): Promise<void> {
 			);
 		} finally {
 			await TextureManager.Destroy(texture).catch((error) => {
-				console.error(
-					"Failed to destroy single-call benchmark texture",
-					error,
-				);
+				console.error("Failed to destroy single-call benchmark texture", error);
 			});
 		}
 	}
