@@ -1,0 +1,90 @@
+{
+    "metadata": {
+        "name": "rpcBenchmark",
+        "projectId": "WWGPtPTaYfNzoiMbFvPEn0mf_Z3jBNjEjqqLjGBTON8",
+        "author": "Test Account 0",
+        "version": "0.0.1",
+        "isPublic": false,
+        "description": "No project description.",
+        "createdAt": "2026-05-10T04:42:44.051Z",
+        "updateAt": "2026-05-10T06:27:42.915Z"
+    },
+    "world": {
+        "worldEntrance": false,
+        "environmentIntensity": 0.5,
+        "spawnRotation": [
+            0,
+            0,
+            0
+        ],
+        "spawnPosition": [
+            0,
+            0,
+            0
+        ]
+    },
+    "scene": {
+        "entities": {
+            "__type": "Set",
+            "value": []
+        },
+        "properties": {
+            "__type": "Map",
+            "value": []
+        },
+        "transforms": {
+            "__type": "Map",
+            "value": [
+                [
+                    "00000000-0000-0000-0000-000000000000",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "00000000-0000-0000-0000-000000000000",
+                        "children": [],
+                        "localPosition": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "isTransformSync": false
+                    }
+                ]
+            ]
+        },
+        "renderables": {
+            "__type": "Map",
+            "value": []
+        },
+        "grabbles": {
+            "__type": "Map",
+            "value": []
+        },
+        "rigidbodies": {
+            "__type": "Map",
+            "value": []
+        },
+        "lights": {
+            "__type": "Map",
+            "value": []
+        },
+        "cameras": {
+            "__type": "Map",
+            "value": []
+        },
+        "colliders": {
+            "__type": "Map",
+            "value": []
+        }
+    }
+}
