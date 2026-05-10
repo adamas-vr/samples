@@ -150,6 +150,7 @@ const cursorIntervalMs = 1000 / 60;
 const triggerClickThreshold = 0.8;
 const metricsWindowMs = 1000;
 const metricsHistoryLength = 180;
+const showImGuiDebugWindow = false;
 
 let screenTexture: number | undefined;
 let screenTextureWidth = 0;
@@ -976,7 +977,9 @@ async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
 Project.FromBundle(projectBundle).Launch({
 	OnSetup: async (_, sceneGraph) => {
 		await createScreenQuad(sceneGraph);
-		await createDebugWindow(sceneGraph);
+		if (showImGuiDebugWindow) {
+			await createDebugWindow(sceneGraph);
+		}
 		await initializeControllerInput();
 		startCursorLoop();
 		startCaptureLoop();
