@@ -7,7 +7,7 @@
         "isPublic": true,
         "description": "Pen in VR",
         "createdAt": "2026-05-08T05:06:47.054Z",
-        "updateAt": "2026-05-08T22:31:09.311Z",
+        "updateAt": "2026-05-13T01:28:37.294Z",
         "previewImagePath": "projects/mRyzCTylNndl230ivYiXtmzqwhX2/1778279467256-Screenshot%202026-05-08%20153023.png"
     },
     "world": {
@@ -119,9 +119,9 @@
                             0
                         ],
                         "localScale": [
-                            0.1,
-                            0.1,
-                            0.1
+                            0.05,
+                            0.05,
+                            0.05
                         ],
                         "isTransformSync": false
                     }

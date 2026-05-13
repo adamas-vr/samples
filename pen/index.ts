@@ -13,9 +13,9 @@ import {
 } from "@adamasvr/sdk";
 import { projectBundle } from "adamasvr:editor";
 
-const PEN_RADIUS = 0.01;
+const PEN_RADIUS = 0.005;
 const PEN_SIDES = 8;
-const MIN_POINT_DISTANCE = 0.01;
+const MIN_POINT_DISTANCE = 0.005;
 const MAX_POINTS_PER_STROKE = 4096;
 const STROKE_SAMPLE_INTERVAL_MS = 1000 / 60;
 
@@ -171,10 +171,12 @@ async function refreshStrokeMesh(stroke: StrokeState) {
 				PEN_RADIUS,
 				PEN_SIDES,
 			);
-			await MeshManager.SetVertices(stroke.mesh, vertices);
-			await MeshManager.SetNormals(stroke.mesh, normals);
-			await MeshManager.SetUVs(stroke.mesh, uvs);
-			await MeshManager.SetTriangles(stroke.mesh, indices);
+			await Promise.all([
+				MeshManager.SetVertices(stroke.mesh, vertices),
+				MeshManager.SetNormals(stroke.mesh, normals),
+				MeshManager.SetUVs(stroke.mesh, uvs),
+				MeshManager.SetTriangles(stroke.mesh, indices),
+			]);
 			await MeshManager.RecalcBounds(stroke.mesh);
 		} while (needsStrokeMeshRefresh);
 	} finally {
