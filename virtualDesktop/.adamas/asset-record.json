@@ -14,12 +14,12 @@
             "imgui.amat"
         ],
         [
-            "f9828cd1-5ae0-4b00-a2e6-349edb740845",
-            "debug.amat"
-        ],
-        [
             "2599af2f-177e-42ab-a2a7-800fd6a18088",
             "cube.amesh"
+        ],
+        [
+            "f9828cd1-5ae0-4b00-a2e6-349edb740845",
+            "debug.amat"
         ]
     ]
 }
