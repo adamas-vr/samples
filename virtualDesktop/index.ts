@@ -7,6 +7,7 @@ import {
 	TextureFormat,
 	TextureManager,
 	TransformManager,
+	GrabInteractableManager,
 	Device,
 	DevicePath,
 	type DeviceSubscription,
@@ -18,7 +19,7 @@ import { execFileSync } from "node:child_process";
 import { quat, vec3, vec4 } from "gl-matrix";
 import sharp = require("sharp");
 import robot from "robotjs";
-import { CreateImGuiWindow } from "imgui-adamas";
+import { CreateImGuiWindow, adamas_backend } from "imgui-adamas";
 
 type Hand = "left" | "right";
 
@@ -150,7 +151,7 @@ const cursorIntervalMs = 1000 / 60;
 const triggerClickThreshold = 0.8;
 const metricsWindowMs = 1000;
 const metricsHistoryLength = 180;
-const showImGuiDebugWindow = false;
+const showImGuiDebugWindow = true;
 
 let screenTexture: number | undefined;
 let screenTextureWidth = 0;
@@ -158,6 +159,9 @@ let screenTextureHeight = 0;
 let screenMaterial: number | undefined;
 let captureTimer: ReturnType<typeof setTimeout> | undefined;
 let cursorTimer: ReturnType<typeof setInterval> | undefined;
+let debugWindowTimer: ReturnType<typeof setInterval> | undefined;
+let debugWindowEntity: Entity | undefined;
+let debugWindowStarting = false;
 let uploadInFlight = false;
 let displayState: DisplayState | undefined;
 let leftHandEntity: Entity | undefined;
@@ -239,6 +243,18 @@ function recordCaptureMetrics(
 	});
 
 	pruneOldSamples(nowMs);
+
+	console.log(
+		[
+			"Captured desktop frame",
+			`payload=${formatBytes(payloadBytes)}`,
+			`capture=${stageMetrics.captureMs.toFixed(1)}ms`,
+			`cursor=${stageMetrics.cursorMs.toFixed(1)}ms`,
+			`compress=${stageMetrics.compressMs.toFixed(1)}ms`,
+			`load=${stageMetrics.loadMs.toFixed(1)}ms`,
+			`total=${stageMetrics.totalMs.toFixed(1)}ms`,
+		].join(" "),
+	);
 }
 
 function getRealtimeCaptureFps(): number {
@@ -840,143 +856,194 @@ function startCaptureLoop(): void {
 async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
 	const controllerEntity = sceneGraph["@controller"].entityId;
 
-	await CreateImGuiWindow(
-		{
-			targetEntity: controllerEntity,
-			displayWidth: 640,
-			displayHeight: 480,
-			styleColor: "dark",
-			clearColor: [0.02, 0.02, 0.025, 1],
-			fontSizePx: 14,
-		},
-		(ImGui) => {
-			const realtimeFps = getRealtimeCaptureFps();
-			const throughputBytesPerSecond = getRpcThroughputBytesPerSecond();
-			const plotMaxMs = getCapturePlotMaxMs();
-			const latestPayloadBytes = getLatestPayloadBytes();
-			const plotStage = (
-				label: string,
-				history: number[],
-				graphWidth: number,
-			) => {
-				const latestMs = getLatestMetric(history);
-				ImGui.PlotLines(
-					label,
-					history,
-					history.length,
-					0,
-					`${latestMs.toFixed(1)} ms`,
-					0,
-					plotMaxMs,
-					new ImGui.Vec2(graphWidth, 48),
+	if (debugWindowTimer !== undefined || debugWindowStarting) {
+		return;
+	}
+
+	debugWindowStarting = true;
+	debugWindowEntity = controllerEntity;
+
+	try {
+		await RenderableManager.SetEnabled(controllerEntity, true);
+		debugWindowTimer = await CreateImGuiWindow(
+			{
+				targetEntity: controllerEntity,
+				displayWidth: 640,
+				displayHeight: 480,
+				styleColor: "dark",
+				clearColor: [0.02, 0.02, 0.025, 1],
+				fontSizePx: 14,
+			},
+			(ImGui) => {
+				const realtimeFps = getRealtimeCaptureFps();
+				const throughputBytesPerSecond = getRpcThroughputBytesPerSecond();
+				const plotMaxMs = getCapturePlotMaxMs();
+				const latestPayloadBytes = getLatestPayloadBytes();
+				const plotStage = (
+					label: string,
+					history: number[],
+					graphWidth: number,
+				) => {
+					const latestMs = getLatestMetric(history);
+					ImGui.PlotLines(
+						label,
+						history,
+						history.length,
+						0,
+						`${latestMs.toFixed(1)} ms`,
+						0,
+						plotMaxMs,
+						new ImGui.Vec2(graphWidth, 48),
+					);
+				};
+
+				ImGui.Text("Virtual Desktop Capture");
+				ImGui.Separator();
+
+				ImGui.Text("Capture pacing");
+				const fpsValue: [number] = [intendedCaptureFps];
+				ImGui.SetNextItemWidth(360);
+				if (
+					ImGui.SliderFloat(
+						"Intended FPS",
+						fpsValue,
+						1,
+						90,
+						"%.0f",
+						ImGui.SliderFlags.AlwaysClamp,
+					)
+				) {
+					intendedCaptureFps = clamp(fpsValue[0], 1, 90);
+				}
+				ImGui.Text(`Target interval: ${getCaptureIntervalMs().toFixed(2)} ms`);
+				ImGui.Text(
+					`Realtime FPS: ${realtimeFps.toFixed(1)} ` +
+						`(actual completed capture/upload rate)`,
 				);
-			};
 
-			ImGui.Text("Virtual Desktop Capture");
-			ImGui.Separator();
+				ImGui.Separator();
+				ImGui.Text("JPEG upload");
+				const streamRgbaValue: [boolean] = [streamRgba];
+				if (ImGui.Checkbox("Stream raw RGBA", streamRgbaValue)) {
+					streamRgba = streamRgbaValue[0];
+				}
+				const qualityValue: [number] = [jpegQuality];
+				ImGui.SetNextItemWidth(360);
+				if (
+					ImGui.SliderFloat(
+						"Quality",
+						qualityValue,
+						10,
+						95,
+						"%.0f",
+						ImGui.SliderFlags.AlwaysClamp,
+					)
+				) {
+					jpegQuality = Math.round(clamp(qualityValue[0], 10, 95));
+				}
+				const captureRegionValue: [number] = [captureRegionScale];
+				ImGui.SetNextItemWidth(360);
+				if (
+					ImGui.SliderFloat(
+						"Robot capture scale",
+						captureRegionValue,
+						0.25,
+						1,
+						"%.2f",
+						ImGui.SliderFlags.AlwaysClamp,
+					)
+				) {
+					captureRegionScale = clamp(captureRegionValue[0], 0.25, 1);
+				}
+				ImGui.Text(
+					`Robot capture: ${getRobotCaptureWidth()}x${getRobotCaptureHeight()}`,
+				);
+				ImGui.Text(
+					`Upload size: ${getRobotCaptureWidth()}x${getRobotCaptureHeight()}`,
+				);
 
-			ImGui.Text("Capture pacing");
-			const fpsValue: [number] = [intendedCaptureFps];
-			ImGui.SetNextItemWidth(360);
-			if (
-				ImGui.SliderFloat(
-					"Intended FPS",
-					fpsValue,
-					1,
-					90,
-					"%.0f",
-					ImGui.SliderFlags.AlwaysClamp,
-				)
-			) {
-				intendedCaptureFps = clamp(fpsValue[0], 1, 90);
-			}
-			ImGui.Text(`Target interval: ${getCaptureIntervalMs().toFixed(2)} ms`);
-			ImGui.Text(
-				`Realtime FPS: ${realtimeFps.toFixed(1)} ` +
-					`(actual completed capture/upload rate)`,
-			);
+				ImGui.Separator();
+				ImGui.Text("RPC throughput");
+				ImGui.Text(`Payload buffer: ${formatBytes(latestPayloadBytes)}`);
+				ImGui.Text(`Payload rate: ${formatBytes(throughputBytesPerSecond)}/s`);
 
-			ImGui.Separator();
-			ImGui.Text("JPEG upload");
-			const streamRgbaValue: [boolean] = [streamRgba];
-			if (ImGui.Checkbox("Stream raw RGBA", streamRgbaValue)) {
-				streamRgba = streamRgbaValue[0];
-			}
-			const qualityValue: [number] = [jpegQuality];
-			ImGui.SetNextItemWidth(360);
-			if (
-				ImGui.SliderFloat(
-					"Quality",
-					qualityValue,
-					10,
-					95,
-					"%.0f",
-					ImGui.SliderFlags.AlwaysClamp,
-				)
-			) {
-				jpegQuality = Math.round(clamp(qualityValue[0], 10, 95));
-			}
-			const captureRegionValue: [number] = [captureRegionScale];
-			ImGui.SetNextItemWidth(360);
-			if (
-				ImGui.SliderFloat(
-					"Robot capture scale",
-					captureRegionValue,
-					0.25,
-					1,
-					"%.2f",
-					ImGui.SliderFlags.AlwaysClamp,
-				)
-			) {
-				captureRegionScale = clamp(captureRegionValue[0], 0.25, 1);
-			}
-			ImGui.Text(
-				`Robot capture: ${getRobotCaptureWidth()}x${getRobotCaptureHeight()}`,
-			);
-			ImGui.Text(
-				`Upload size: ${getRobotCaptureWidth()}x${getRobotCaptureHeight()}`,
-			);
+				ImGui.Separator();
+				ImGui.Text("Visual output");
+				const emissionValue: [number] = [emissionStrength];
+				ImGui.SetNextItemWidth(360);
+				if (
+					ImGui.SliderFloat(
+						"Emission strength",
+						emissionValue,
+						0,
+						3,
+						"%.2f",
+						ImGui.SliderFlags.AlwaysClamp,
+					)
+				) {
+					emissionStrength = clamp(emissionValue[0], 0, 3);
+					applyEmissionStrength();
+				}
 
-			ImGui.Separator();
-			ImGui.Text("RPC throughput");
-			ImGui.Text(`Payload buffer: ${formatBytes(latestPayloadBytes)}`);
-			ImGui.Text(`Payload rate: ${formatBytes(throughputBytesPerSecond)}/s`);
+				ImGui.Separator();
+				ImGui.Text("Capture stage time");
+				ImGui.Text(`Scale: 0-${plotMaxMs.toFixed(1)} ms`);
+				plotStage("capture", captureStageHistory.capture, 245);
+				ImGui.SameLine();
+				plotStage("cursor", captureStageHistory.cursor, 245);
+				plotStage("encode", captureStageHistory.compress, 245);
+				ImGui.SameLine();
+				plotStage("loadImage", captureStageHistory.load, 245);
+				plotStage("total", captureStageHistory.total, 520);
+			},
+		);
+	} finally {
+		debugWindowStarting = false;
+	}
+}
 
-			ImGui.Separator();
-			ImGui.Text("Visual output");
-			const emissionValue: [number] = [emissionStrength];
-			ImGui.SetNextItemWidth(360);
-			if (
-				ImGui.SliderFloat(
-					"Emission strength",
-					emissionValue,
-					0,
-					3,
-					"%.2f",
-					ImGui.SliderFlags.AlwaysClamp,
-				)
-			) {
-				emissionStrength = clamp(emissionValue[0], 0, 3);
-				applyEmissionStrength();
-			}
+async function closeDebugWindow(): Promise<void> {
+	if (debugWindowTimer !== undefined) {
+		clearInterval(debugWindowTimer);
+		debugWindowTimer = undefined;
+	}
 
-			ImGui.Separator();
-			ImGui.Text("Capture stage time");
-			ImGui.Text(`Scale: 0-${plotMaxMs.toFixed(1)} ms`);
-			plotStage("capture", captureStageHistory.capture, 245);
-			ImGui.SameLine();
-			plotStage("cursor", captureStageHistory.cursor, 245);
-			plotStage("encode", captureStageHistory.compress, 245);
-			ImGui.SameLine();
-			plotStage("loadImage", captureStageHistory.load, 245);
-			plotStage("total", captureStageHistory.total, 520);
-		},
-	);
+	adamas_backend.Shutdown();
+
+	if (debugWindowEntity !== undefined) {
+		await RenderableManager.SetEnabled(debugWindowEntity, false);
+	}
+}
+
+async function toggleDebugWindow(sceneGraph: SceneGraph): Promise<void> {
+	if (debugWindowTimer !== undefined || debugWindowStarting) {
+		await closeDebugWindow();
+		return;
+	}
+
+	await createDebugWindow(sceneGraph);
+}
+
+async function initializeDebugButton(sceneGraph: SceneGraph): Promise<void> {
+	const debugButtonEntity = sceneGraph["@Display"]["@debug button"].entityId;
+	debugWindowEntity = sceneGraph["@controller"].entityId;
+
+	await GrabInteractableManager.SetAllowHoverActivate(debugButtonEntity, true);
+	await GrabInteractableManager.AddActivatedCallback(debugButtonEntity, () => {
+		void toggleDebugWindow(sceneGraph).catch((error) => {
+			console.error("Failed to toggle debug ImGui window", error);
+		});
+	});
+
+	if (!showImGuiDebugWindow) {
+		await RenderableManager.SetEnabled(debugWindowEntity, false);
+	}
 }
 
 Project.FromBundle(projectBundle).Launch({
 	OnSetup: async (_, sceneGraph) => {
 		await createScreenQuad(sceneGraph);
+		await initializeDebugButton(sceneGraph);
 		if (showImGuiDebugWindow) {
 			await createDebugWindow(sceneGraph);
 		}

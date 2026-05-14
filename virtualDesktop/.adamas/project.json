@@ -7,7 +7,7 @@
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-04-07T05:28:30.106Z",
-        "updateAt": "2026-05-10T06:46:06.414Z"
+        "updateAt": "2026-05-14T03:49:23.652Z"
     },
     "world": {
         "worldEntrance": false,
@@ -28,7 +28,8 @@
             "__type": "Set",
             "value": [
                 "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
-                "5cae9be6-29fc-4b70-bbfe-1faab33d3b43"
+                "5cae9be6-29fc-4b70-bbfe-1faab33d3b43",
+                "ea9b3c80-494f-47bd-84d2-cfb0a79479d3"
             ]
         },
         "properties": {
@@ -50,6 +51,16 @@
                         "componentType": "Property",
                         "enabled": true,
                         "name": "controller",
+                        "layer": 0,
+                        "activeEntity": true
+                    }
+                ],
+                [
+                    "ea9b3c80-494f-47bd-84d2-cfb0a79479d3",
+                    {
+                        "componentType": "Property",
+                        "enabled": true,
+                        "name": "debug button",
                         "layer": 0,
                         "activeEntity": true
                     }
@@ -93,7 +104,9 @@
                         "componentType": "Transform",
                         "enabled": true,
                         "parent": "00000000-0000-0000-0000-000000000000",
-                        "children": [],
+                        "children": [
+                            "ea9b3c80-494f-47bd-84d2-cfb0a79479d3"
+                        ],
                         "localPosition": [
                             0,
                             1,
@@ -136,6 +149,31 @@
                         ],
                         "isTransformSync": false
                     }
+                ],
+                [
+                    "ea9b3c80-494f-47bd-84d2-cfb0a79479d3",
+                    {
+                        "componentType": "Transform",
+                        "enabled": true,
+                        "parent": "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
+                        "children": [],
+                        "localPosition": [
+                            0,
+                            -0.9459383897412181,
+                            0
+                        ],
+                        "localRotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "localScale": [
+                            0.32548391381154623,
+                            0.32548391381154623,
+                            0.32548391381154623
+                        ],
+                        "isTransformSync": false
+                    }
                 ]
             ]
         },
@@ -169,6 +207,20 @@
                         "castShadows": 1,
                         "culling": true
                     }
+                ],
+                [
+                    "ea9b3c80-494f-47bd-84d2-cfb0a79479d3",
+                    {
+                        "componentType": "Renderable",
+                        "enabled": true,
+                        "mesh": "2599af2f-177e-42ab-a2a7-800fd6a18088",
+                        "materialList": [
+                            "f9828cd1-5ae0-4b00-a2e6-349edb740845"
+                        ],
+                        "receiveShadows": true,
+                        "castShadows": 1,
+                        "culling": true
+                    }
                 ]
             ]
         },
@@ -187,6 +239,19 @@
                         "trackRotation": true,
                         "throwOnDetach": false
                     }
+                ],
+                [
+                    "ea9b3c80-494f-47bd-84d2-cfb0a79479d3",
+                    {
+                        "componentType": "Grabble",
+                        "enabled": true,
+                        "movementType": 2,
+                        "dynamicAttach": true,
+                        "allowHoverActivate": true,
+                        "trackPosition": false,
+                        "trackRotation": false,
+                        "throwOnDetach": false
+                    }
                 ]
             ]
         },
@@ -195,6 +260,18 @@
             "value": [
                 [
                     "5dae26ba-973d-4dff-9186-b8b46b8c55e8",
+                    {
+                        "componentType": "Rigid Body",
+                        "enabled": true,
+                        "isKinematic": true,
+                        "angularDamping": 0.05,
+                        "linearDamping": 0.05,
+                        "mass": 1,
+                        "useGravity": false
+                    }
+                ],
+                [
+                    "ea9b3c80-494f-47bd-84d2-cfb0a79479d3",
                     {
                         "componentType": "Rigid Body",
                         "enabled": true,
@@ -236,6 +313,29 @@
                                     1,
                                     1,
                                     0.1
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "ea9b3c80-494f-47bd-84d2-cfb0a79479d3",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    1,
+                                    1
                                 ]
                             }
                         ]

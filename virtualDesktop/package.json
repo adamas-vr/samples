@@ -6,7 +6,8 @@
 		"gl-matrix": "^3.4.4",
 		"imgui-adamas": "file:../../imgui-adamas",
 		"robotjs": "file:../../robotjs",
-		"sharp": "^0.34.5"
+		"sharp": "^0.34.5",
+		"ts-node": "^10.9.2"
 	},
 	"devDependencies": {
 		"@types/node": "^24.10.1",
