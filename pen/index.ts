@@ -280,42 +280,40 @@ async function endStroke(interactorEntity?: Entity) {
 	await appendTipPoint(true, stroke);
 }
 
-Project.FromBundle(projectBundle).Launch({
-	OnSetup: async (project, sceneGraph) => {
-		if (!sceneGraph?.["@Pen"]?.["@Pen Tip"]) {
-			throw new Error("Pen scene graph nodes were not found.");
+Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
+	if (!sceneGraph?.["@Pen"]?.["@Pen Tip"]) {
+		throw new Error("Pen scene graph nodes were not found.");
+	}
+
+	penEntity = sceneGraph["@Pen"].entityId;
+	penTipEntity = sceneGraph["@Pen"]["@Pen Tip"].entityId;
+	strokeMaterial = await RenderableManager.GetMaterial(penTipEntity, 0);
+	await prepareNextStroke();
+
+	await GrabInteractableManager.AddActivatedCallback(
+		penEntity,
+		(_, interactorEntity) => {
+			void beginStroke(interactorEntity);
+		},
+	);
+	await GrabInteractableManager.AddDeactivatedCallback(
+		penEntity,
+		(_, interactorEntity) => {
+			void endStroke(interactorEntity);
+		},
+	);
+	await GrabInteractableManager.AddSelectExitedCallback(
+		penEntity,
+		(_, interactorEntity) => {
+			void endStroke(interactorEntity);
+		},
+	);
+
+	project.ScheduleUpdate(() => {
+		if (!activeStroke) {
+			return;
 		}
 
-		penEntity = sceneGraph["@Pen"].entityId;
-		penTipEntity = sceneGraph["@Pen"]["@Pen Tip"].entityId;
-		strokeMaterial = await RenderableManager.GetMaterial(penTipEntity, 0);
-		await prepareNextStroke();
-
-		await GrabInteractableManager.AddActivatedCallback(
-			penEntity,
-			(_, interactorEntity) => {
-				void beginStroke(interactorEntity);
-			},
-		);
-		await GrabInteractableManager.AddDeactivatedCallback(
-			penEntity,
-			(_, interactorEntity) => {
-				void endStroke(interactorEntity);
-			},
-		);
-		await GrabInteractableManager.AddSelectExitedCallback(
-			penEntity,
-			(_, interactorEntity) => {
-				void endStroke(interactorEntity);
-			},
-		);
-
-		setInterval(() => {
-			if (!activeStroke) {
-				return;
-			}
-
-			void appendTipPoint(false);
-		}, STROKE_SAMPLE_INTERVAL_MS);
-	},
+		void appendTipPoint(false);
+	});
 });
