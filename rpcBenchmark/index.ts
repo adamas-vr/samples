@@ -727,43 +727,40 @@ function renderLogs(ImGui: typeof import("imgui-adamas/imgui")): void {
 	ImGui.EndChild();
 }
 
-Project.FromBundle(projectBundle).Launch({
-	OnSetup: async () => {
-		benchmarkState.panelEntity = await createPanelEntity();
-		benchmarkState.benchmarkEntity = await createBenchmarkEntity();
-		pushLog(
-			`Created benchmark panel entity ${benchmarkState.panelEntity} ` +
-				`and benchmark target entity ${benchmarkState.benchmarkEntity}`,
-		);
+Project.FromBundle(projectBundle).Launch(async () => {
+	benchmarkState.panelEntity = await createPanelEntity();
+	benchmarkState.benchmarkEntity = await createBenchmarkEntity();
+	pushLog(
+		`Created benchmark panel entity ${benchmarkState.panelEntity} ` +
+			`and benchmark target entity ${benchmarkState.benchmarkEntity}`,
+	);
 
-		if (!benchmarkState.hasAutoRunCompleted) {
-			benchmarkState.hasAutoRunCompleted = true;
-			pushLog("Starting initial automatic benchmark run");
-			await runBenchmarks("all");
-		}
+	if (!benchmarkState.hasAutoRunCompleted) {
+		benchmarkState.hasAutoRunCompleted = true;
+		pushLog("Starting initial automatic benchmark run");
+		await runBenchmarks("all");
+	}
 
-		await CreateImGuiWindow(
-			{
-				targetEntity: benchmarkState.panelEntity,
-				displayWidth: UI_WIDTH,
-				displayHeight: UI_HEIGHT,
-				styleColor: "dark",
-				clearColor: [0.05, 0.06, 0.08, 0.96],
-				fontSizePx: 16,
-			},
-			(ImGui) => {
-				// maybeStartInitialBenchmarkRun();
-				renderControls(ImGui);
-				ImGui.Separator();
-				renderLatencyPlot(ImGui, 420);
-				ImGui.Separator();
-				renderThroughputPlot(ImGui, 420);
-				ImGui.Separator();
-				renderSingleCallPlot(ImGui, 420);
-				ImGui.Separator();
-				renderLogs(ImGui);
-			},
-		);
-	},
-	OnTick: () => {},
+	await CreateImGuiWindow(
+		{
+			targetEntity: benchmarkState.panelEntity,
+			displayWidth: UI_WIDTH,
+			displayHeight: UI_HEIGHT,
+			styleColor: "dark",
+			clearColor: [0.05, 0.06, 0.08, 0.96],
+			fontSizePx: 16,
+		},
+		(ImGui) => {
+			// maybeStartInitialBenchmarkRun();
+			renderControls(ImGui);
+			ImGui.Separator();
+			renderLatencyPlot(ImGui, 420);
+			ImGui.Separator();
+			renderThroughputPlot(ImGui, 420);
+			ImGui.Separator();
+			renderSingleCallPlot(ImGui, 420);
+			ImGui.Separator();
+			renderLogs(ImGui);
+		},
+	);
 });

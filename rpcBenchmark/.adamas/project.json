@@ -3,11 +3,12 @@
         "name": "rpcBenchmark",
         "projectId": "WWGPtPTaYfNzoiMbFvPEn0mf_Z3jBNjEjqqLjGBTON8",
         "author": "Test Account 0",
-        "version": "0.0.1",
-        "isPublic": false,
+        "version": "0.1.0",
+        "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-05-10T04:42:44.051Z",
-        "updateAt": "2026-05-10T20:03:07.919Z"
+        "updateAt": "2026-05-14T21:09:37.880Z",
+        "previewImagePath": "projects/mRyzCTylNndl230ivYiXtmzqwhX2/1778560670978-9afadb0b-e865-480d-b71b-662bfa6b78ed.png"
     },
     "world": {
         "worldEntrance": false,

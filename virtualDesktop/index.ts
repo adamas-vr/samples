@@ -147,7 +147,6 @@ const screenWidth = screenSize.width;
 const screenHeight = screenSize.height;
 const mouseScaleX = screenWidth / robotScreenSize.width;
 const mouseScaleY = screenHeight / robotScreenSize.height;
-const cursorIntervalMs = 1000 / 60;
 const triggerClickThreshold = 0.8;
 const metricsWindowMs = 1000;
 const metricsHistoryLength = 180;
@@ -157,22 +156,19 @@ let screenTexture: number | undefined;
 let screenTextureWidth = 0;
 let screenTextureHeight = 0;
 let screenMaterial: number | undefined;
-let captureTimer: ReturnType<typeof setTimeout> | undefined;
-let cursorTimer: ReturnType<typeof setInterval> | undefined;
 let debugWindowTimer: ReturnType<typeof setInterval> | undefined;
 let debugWindowEntity: Entity | undefined;
 let debugWindowStarting = false;
-let uploadInFlight = false;
+let captureLoopScheduled = false;
+let cursorLoopScheduled = false;
 let displayState: DisplayState | undefined;
 let leftHandEntity: Entity | undefined;
 let rightHandEntity: Entity | undefined;
 let preferredHand: Hand | undefined;
 let vrCursorPosition: ScreenPoint | undefined;
 let primaryButtonDown = false;
-let vrCursorUpdateInFlight = false;
-let intendedCaptureFps = 60;
 let emissionStrength = 1.1;
-let captureRegionScale = 1;
+let captureRegionScale = 0.6;
 let jpegQuality = 50;
 let streamRgba = true;
 const deviceSubscriptions: DeviceSubscription[] = [];
@@ -189,10 +185,6 @@ const captureStageHistory: CaptureStageHistory = {
 	total: [],
 };
 const payloadByteSamples: ByteSample[] = [];
-
-function getCaptureIntervalMs(): number {
-	return 1000 / intendedCaptureFps;
-}
 
 function getRobotCaptureWidth(): number {
 	return Math.max(1, Math.round(screenWidth * captureRegionScale));
@@ -638,56 +630,47 @@ function updatePreferredHand(
 }
 
 async function updateVrCursor(): Promise<void> {
-	if (vrCursorUpdateInFlight) {
+	const [leftIntersection, rightIntersection] = await Promise.all([
+		intersectHand("left"),
+		intersectHand("right"),
+	]);
+	const intersections = {
+		left: leftIntersection,
+		right: rightIntersection,
+	};
+
+	updatePreferredHand(intersections);
+
+	const hit =
+		preferredHand === undefined ? undefined : intersections[preferredHand];
+
+	vrCursorPosition = hit;
+
+	if (preferredHand === undefined || hit === undefined) {
+		setPrimaryButtonDown(false);
 		return;
 	}
 
-	vrCursorUpdateInFlight = true;
-
-	try {
-		const [leftIntersection, rightIntersection] = await Promise.all([
-			intersectHand("left"),
-			intersectHand("right"),
-		]);
-		const intersections = {
-			left: leftIntersection,
-			right: rightIntersection,
-		};
-
-		updatePreferredHand(intersections);
-
-		const hit =
-			preferredHand === undefined ? undefined : intersections[preferredHand];
-
-		vrCursorPosition = hit;
-
-		if (preferredHand === undefined || hit === undefined) {
-			setPrimaryButtonDown(false);
-			return;
-		}
-
-		moveMouseToScreenPoint(hit);
-		setPrimaryButtonDown(
-			getTriggerValue(preferredHand) > triggerClickThreshold,
-		);
-	} finally {
-		vrCursorUpdateInFlight = false;
-	}
+	moveMouseToScreenPoint(hit);
+	setPrimaryButtonDown(getTriggerValue(preferredHand) > triggerClickThreshold);
 }
 
-function startCursorLoop(): void {
-	if (cursorTimer !== undefined) {
+function startCursorLoop(project: Project): void {
+	if (cursorLoopScheduled) {
 		return;
 	}
 
-	cursorTimer = setInterval(() => {
-		void updateVrCursor().catch((error) => {
+	cursorLoopScheduled = true;
+	project.ScheduleUpdate(async () => {
+		try {
+			await updateVrCursor();
+		} catch (error) {
 			console.error("Failed to update VR cursor", error);
 			vrCursorPosition = undefined;
 			preferredHand = undefined;
 			setPrimaryButtonDown(false);
-		});
-	}, cursorIntervalMs);
+		}
+	});
 }
 
 async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
@@ -772,85 +755,76 @@ async function ensureRgbaTextureSize(
 	return texture;
 }
 
-function startCaptureLoop(): void {
-	if (screenTexture === undefined || captureTimer !== undefined) {
+async function captureDesktopFrame(): Promise<void> {
+	if (screenTexture === undefined) {
 		return;
 	}
 
-	const tick = () => {
-		captureTimer = setTimeout(tick, getCaptureIntervalMs());
-
-		if (screenTexture === undefined || uploadInFlight) {
-			return;
-		}
-
-		let texture = screenTexture;
-		uploadInFlight = true;
-
-		void (async () => {
-			const totalStartMs = performance.now();
-			const captureStartMs = performance.now();
-			const capture = robot.screen.capture(
-				0,
-				0,
-				getRobotCaptureWidth(),
-				getRobotCaptureHeight(),
-			);
-			const captureEndMs = performance.now();
-			const cursorStartMs = performance.now();
-			drawCursor(
-				capture.image,
-				capture.width,
-				capture.height,
-				screenWidth,
-				screenHeight,
-			);
-			const cursorEndMs = performance.now();
-			const compressStartMs = performance.now();
-			const upload = streamRgba
-				? {
-						data: new Uint8Array(capture.image),
-						width: capture.width,
-						height: capture.height,
-						payloadBytes: capture.image.byteLength,
-					}
-				: await prepareCaptureUpload(
-						capture.image,
-						capture.width,
-						capture.height,
-					);
-			const compressEndMs = performance.now();
-
-			const loadStartMs = performance.now();
-			if (streamRgba) {
-				texture = await ensureRgbaTextureSize(upload.width, upload.height);
-				await TextureManager.LoadRGBAImage(
-					texture,
-					upload.data,
-					upload.width,
-					upload.height,
-				);
-			} else {
-				await TextureManager.LoadImage(texture, upload.data);
+	let texture = screenTexture;
+	const totalStartMs = performance.now();
+	const captureStartMs = performance.now();
+	const capture = robot.screen.capture(
+		0,
+		0,
+		getRobotCaptureWidth(),
+		getRobotCaptureHeight(),
+	);
+	const captureEndMs = performance.now();
+	const cursorStartMs = performance.now();
+	drawCursor(
+		capture.image,
+		capture.width,
+		capture.height,
+		screenWidth,
+		screenHeight,
+	);
+	const cursorEndMs = performance.now();
+	const compressStartMs = performance.now();
+	const upload = streamRgba
+		? {
+				data: new Uint8Array(capture.image),
+				width: capture.width,
+				height: capture.height,
+				payloadBytes: capture.image.byteLength,
 			}
-			const loadEndMs = performance.now();
-			recordCaptureMetrics(upload.payloadBytes, {
-				captureMs: captureEndMs - captureStartMs,
-				cursorMs: cursorEndMs - cursorStartMs,
-				compressMs: compressEndMs - compressStartMs,
-				loadMs: loadEndMs - loadStartMs,
-				totalMs: loadEndMs - totalStartMs,
-			});
-		})()
-			.catch((error) => {
-				console.error("Failed to upload desktop capture", error);
-			})
-			.finally(() => {
-				uploadInFlight = false;
-			});
-	};
+		: await prepareCaptureUpload(capture.image, capture.width, capture.height);
+	const compressEndMs = performance.now();
 
-	tick();
+	const loadStartMs = performance.now();
+	if (streamRgba) {
+		texture = await ensureRgbaTextureSize(upload.width, upload.height);
+		await TextureManager.LoadRGBAImage(
+			texture,
+			upload.data,
+			upload.width,
+			upload.height,
+		);
+	} else {
+		await TextureManager.LoadImage(texture, upload.data);
+	}
+	const loadEndMs = performance.now();
+	recordCaptureMetrics(upload.payloadBytes, {
+		captureMs: captureEndMs - captureStartMs,
+		cursorMs: cursorEndMs - cursorStartMs,
+		compressMs: compressEndMs - compressStartMs,
+		loadMs: loadEndMs - loadStartMs,
+		totalMs: loadEndMs - totalStartMs,
+	});
+}
+
+function startCaptureLoop(project: Project): void {
+	if (screenTexture === undefined || captureLoopScheduled) {
+		return;
+	}
+
+	captureLoopScheduled = true;
+	project.ScheduleUpdate(async () => {
+		try {
+			await captureDesktopFrame();
+		} catch (error) {
+			console.error("Failed to upload desktop capture", error);
+		}
+	});
 }
 
 async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
@@ -900,22 +874,7 @@ async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
 				ImGui.Text("Virtual Desktop Capture");
 				ImGui.Separator();
 
-				ImGui.Text("Capture pacing");
-				const fpsValue: [number] = [intendedCaptureFps];
-				ImGui.SetNextItemWidth(360);
-				if (
-					ImGui.SliderFloat(
-						"Intended FPS",
-						fpsValue,
-						1,
-						90,
-						"%.0f",
-						ImGui.SliderFlags.AlwaysClamp,
-					)
-				) {
-					intendedCaptureFps = clamp(fpsValue[0], 1, 90);
-				}
-				ImGui.Text(`Target interval: ${getCaptureIntervalMs().toFixed(2)} ms`);
+				ImGui.Text("Runtime updates");
 				ImGui.Text(
 					`Realtime FPS: ${realtimeFps.toFixed(1)} ` +
 						`(actual completed capture/upload rate)`,
@@ -1040,19 +999,16 @@ async function initializeDebugButton(sceneGraph: SceneGraph): Promise<void> {
 	}
 }
 
-Project.FromBundle(projectBundle).Launch({
-	OnSetup: async (_, sceneGraph) => {
-		await createScreenQuad(sceneGraph);
-		await initializeDebugButton(sceneGraph);
-		if (showImGuiDebugWindow) {
-			await createDebugWindow(sceneGraph);
-		}
-		await initializeControllerInput();
-		startCursorLoop();
-		startCaptureLoop();
-		console.log(
-			`Streaming ${screenWidth}x${screenHeight} desktop capture to the screen quad`,
-		);
-	},
-	OnTick: () => {},
+Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
+	await createScreenQuad(sceneGraph);
+	await initializeDebugButton(sceneGraph);
+	if (showImGuiDebugWindow) {
+		await createDebugWindow(sceneGraph);
+	}
+	await initializeControllerInput();
+	startCursorLoop(project);
+	startCaptureLoop(project);
+	console.log(
+		`Streaming ${screenWidth}x${screenHeight} desktop capture to the screen quad`,
+	);
 });

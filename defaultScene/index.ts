@@ -1,7 +1,4 @@
 import { Project } from "@adamasvr/sdk";
 import { projectBundle } from "adamasvr:editor";
 
-Project.FromBundle(projectBundle).Launch({
-	OnSetup: async (project, sceneGraph) => {},
-	OnTick: (project, timestep) => {},
-});
+Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {});
