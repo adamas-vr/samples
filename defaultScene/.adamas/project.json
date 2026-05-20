@@ -1,14 +1,13 @@
 {
     "metadata": {
-        "name": "defaultScene",
-        "projectId": "-PEQuaCHjGq2ZWaFM6kvui5nnkYLWtnJceonaeBFda0",
-        "author": "Test T0 Account",
-        "version": "0.2.0",
-        "isPublic": true,
+        "name": "Home Space Private",
+        "author": "Adamas Official",
+        "version": "0.1.3",
+        "isPublic": false,
         "description": "The home space.",
         "createdAt": "2026-03-24T16:51:17.472Z",
-        "updateAt": "2026-05-14T20:39:54.308Z",
-        "previewImagePath": "projects/mRyzCTylNndl230ivYiXtmzqwhX2/1774931429016-Screenshot%202026-03-30%20at%209.30.15%C3%A2%C2%80%C2%AFPM.png"
+        "updateAt": "2026-05-20T09:39:47.491Z",
+        "previewImagePath": "projects/8NFqsUGBOfTOAnjZOib3m8YxQCv2/1779268458935-30233d48-e360-41a0-ad07-5e398f8eef8c.png"
     },
     "world": {
         "worldEntrance": true,
@@ -4404,7 +4403,7 @@
                         "enabled": true,
                         "mesh": "054345c3-bb55-45db-a7b1-f74435845754",
                         "materialList": [
-                            "e7daed8d-a414-48fc-a86e-2117a571dab5"
+                            "0f72741e-64ff-4f95-b7be-116fc68ed56e"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -5670,9 +5669,577 @@
                                     0
                                 ],
                                 "size": [
-                                    7,
+                                    8,
                                     1,
                                     11
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "f6f61133-3f8e-4918-ba8b-25799a01d020",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    0.05,
+                                    0.3
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -0.2,
+                                    -0.25
+                                ],
+                                "size": [
+                                    1,
+                                    0.05,
+                                    0.3
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "fd7d995f-dfad-4c47-88f2-698cac3575f5",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    0.05,
+                                    1
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "b52b0d41-7a20-44ff-acf9-0238a6bd0b2f",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    0.1,
+                                    0.3
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -0.2,
+                                    -0.22
+                                ],
+                                "size": [
+                                    1,
+                                    0.1,
+                                    0.3
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -0.4,
+                                    -0.44
+                                ],
+                                "size": [
+                                    1,
+                                    0.1,
+                                    0.3
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -0.6,
+                                    -0.7
+                                ],
+                                "size": [
+                                    1,
+                                    0.1,
+                                    0.3
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -0.8,
+                                    -0.9
+                                ],
+                                "size": [
+                                    1,
+                                    0.1,
+                                    0.3
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -1,
+                                    -1.15
+                                ],
+                                "size": [
+                                    1,
+                                    0.1,
+                                    0.3
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -1.22,
+                                    -1.35
+                                ],
+                                "size": [
+                                    1,
+                                    0.1,
+                                    0.3
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -1.44,
+                                    -1.6
+                                ],
+                                "size": [
+                                    1,
+                                    0.1,
+                                    0.3
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -1.63,
+                                    -1.85
+                                ],
+                                "size": [
+                                    1,
+                                    0.1,
+                                    0.3
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "48b43fc8-956f-4056-b686-e4695cfbb56d",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    -1.7,
+                                    0,
+                                    -2
+                                ],
+                                "size": [
+                                    5,
+                                    0.3,
+                                    5.936358505859971
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "27af904c-7650-493f-89e2-7418537567a0",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    0.2,
+                                    0.8,
+                                    0.8
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "16f6a9ea-06c7-4107-999e-a51e132841e2",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0.45,
+                                    -0.000039980471134185796,
+                                    -0.8
+                                ],
+                                "size": [
+                                    0.2,
+                                    1,
+                                    2.2
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    -1.1,
+                                    0,
+                                    0.4
+                                ],
+                                "size": [
+                                    3,
+                                    1,
+                                    0.2
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "e3e44774-457b-41ea-85fc-afa24160ed10",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    0.2,
+                                    0.8,
+                                    3.4
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "bbcef5e6-6e4b-4095-b982-9f33643b8408",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    0.2,
+                                    5.5,
+                                    11
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "4deb51c9-1a04-4768-9a03-8401c5e1f03d",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -0.65,
+                                    0.6
+                                ],
+                                "size": [
+                                    0.2,
+                                    5.5,
+                                    5
+                                ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    3.2,
+                                    -1
+                                ],
+                                "size": [
+                                    0.2,
+                                    2.2,
+                                    2
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "3f58132c-ff05-4730-99a2-73ad4c609071",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    0.2,
+                                    5.5,
+                                    11
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "b77c1966-fe48-4ae6-88d1-dc3c942beda4",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    -0.4,
+                                    0.6
+                                ],
+                                "size": [
+                                    0.2,
+                                    6,
+                                    5
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "29f6d50e-59f0-4edb-aef7-ccda278d1f08",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    2,
+                                    11
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "1495450f-7d41-4598-9c02-f15c89f93f30",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    3,
+                                    2.5,
+                                    0.2
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "6ee902ec-87d7-4d1e-9570-e0a2328ea0b4",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    1,
+                                    0.2
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "08712aee-3674-4843-86b6-700c74f163ee",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    1,
+                                    0.2
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "67a7f786-da4b-426d-90fe-f638631e3954",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    0.8,
+                                    1,
+                                    0.2
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "9a453e11-e01d-46ce-871b-ab274b2b9efa",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    0.5,
+                                    0.2
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                [
+                    "a8762bd1-6a0c-4c1e-8be1-7bd1ad4af5d5",
+                    {
+                        "componentType": "Collider",
+                        "enabled": true,
+                        "colliders": [
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "size": [
+                                    1,
+                                    1,
+                                    0.2
                                 ]
                             }
                         ]
