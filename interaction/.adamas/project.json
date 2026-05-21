@@ -6,7 +6,7 @@
         "isPublic": false,
         "description": "Interaction sample for grabble and collision detection.",
         "createdAt": "2026-05-21T18:14:36.857Z",
-        "updateAt": "2026-05-21T20:46:14.683Z"
+        "updateAt": "2026-05-21T20:55:18.313Z"
     },
     "world": {
         "worldEntrance": false,
@@ -30,7 +30,6 @@
                 "520181e3-970f-4c08-93c8-1151badc7a97",
                 "e1b14cee-90f5-410c-bfb8-5884b728f431",
                 "ceecded2-5ca6-4be6-8495-79d10ce2496c",
-                "b90c8f55-837d-4065-a9ee-8d890600f03a",
                 "7986bd96-a7fc-422e-b5f3-9d7f394b9646",
                 "1988292b-c72e-499c-bb4c-9c8b7430b830"
             ]
@@ -79,16 +78,6 @@
                     }
                 ],
                 [
-                    "b90c8f55-837d-4065-a9ee-8d890600f03a",
-                    {
-                        "componentType": "Property",
-                        "enabled": true,
-                        "name": "Display",
-                        "layer": 0,
-                        "activeEntity": true
-                    }
-                ],
-                [
                     "7986bd96-a7fc-422e-b5f3-9d7f394b9646",
                     {
                         "componentType": "Property",
@@ -121,7 +110,6 @@
                         "parent": "00000000-0000-0000-0000-000000000000",
                         "children": [
                             "f636b305-f7d5-4a6f-98bd-27c1c77e000f",
-                            "b90c8f55-837d-4065-a9ee-8d890600f03a",
                             "7986bd96-a7fc-422e-b5f3-9d7f394b9646",
                             "1988292b-c72e-499c-bb4c-9c8b7430b830"
                         ],
@@ -248,31 +236,6 @@
                     }
                 ],
                 [
-                    "b90c8f55-837d-4065-a9ee-8d890600f03a",
-                    {
-                        "componentType": "Transform",
-                        "enabled": true,
-                        "parent": "00000000-0000-0000-0000-000000000000",
-                        "children": [],
-                        "localPosition": [
-                            -1.1157139860744796,
-                            0.9616463970580293,
-                            0.15503891483797222
-                        ],
-                        "localRotation": [
-                            0,
-                            0,
-                            0
-                        ],
-                        "localScale": [
-                            1,
-                            1,
-                            1
-                        ],
-                        "isTransformSync": true
-                    }
-                ],
-                [
                     "7986bd96-a7fc-422e-b5f3-9d7f394b9646",
                     {
                         "componentType": "Transform",
@@ -335,20 +298,6 @@
                         "mesh": "8868b62b-ba11-40ce-af36-617e0e2a55af",
                         "materialList": [
                             "25e3232d-0b89-43d4-b019-d8f5a6d67924"
-                        ],
-                        "receiveShadows": true,
-                        "castShadows": 1,
-                        "culling": true
-                    }
-                ],
-                [
-                    "b90c8f55-837d-4065-a9ee-8d890600f03a",
-                    {
-                        "componentType": "Renderable",
-                        "enabled": true,
-                        "mesh": "71c3a5fd-d5ad-4044-93b5-ab63d7fcb1b4",
-                        "materialList": [
-                            "8fbf918e-9caa-402d-9a47-373e06d9ed2f"
                         ],
                         "receiveShadows": true,
                         "castShadows": 1,
@@ -442,19 +391,6 @@
                         "trackRotation": true,
                         "throwOnDetach": false
                     }
-                ],
-                [
-                    "b90c8f55-837d-4065-a9ee-8d890600f03a",
-                    {
-                        "componentType": "Grabble",
-                        "enabled": true,
-                        "movementType": 2,
-                        "dynamicAttach": true,
-                        "allowHoverActivate": false,
-                        "trackPosition": true,
-                        "trackRotation": true,
-                        "throwOnDetach": false
-                    }
                 ]
             ]
         },
@@ -467,18 +403,6 @@
                         "componentType": "Rigid Body",
                         "enabled": true,
                         "isKinematic": false,
-                        "angularDamping": 0.05,
-                        "linearDamping": 0.05,
-                        "mass": 1,
-                        "useGravity": false
-                    }
-                ],
-                [
-                    "b90c8f55-837d-4065-a9ee-8d890600f03a",
-                    {
-                        "componentType": "Rigid Body",
-                        "enabled": true,
-                        "isKinematic": true,
                         "angularDamping": 0.05,
                         "linearDamping": 0.05,
                         "mass": 1,
@@ -562,29 +486,6 @@
                                     1,
                                     1,
                                     1
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                [
-                    "b90c8f55-837d-4065-a9ee-8d890600f03a",
-                    {
-                        "componentType": "Collider",
-                        "enabled": true,
-                        "colliders": [
-                            {
-                                "colliderType": "Box",
-                                "isTrigger": false,
-                                "center": [
-                                    0,
-                                    0,
-                                    0
-                                ],
-                                "size": [
-                                    1,
-                                    1,
-                                    0.2
                                 ]
                             }
                         ]

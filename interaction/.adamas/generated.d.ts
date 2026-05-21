@@ -17,9 +17,6 @@ export interface SceneGraph
             entityId: Entity
         }
     },
-    "@Display": {
-        entityId: Entity
-    },
     "@Collision": {
         entityId: Entity
     },
