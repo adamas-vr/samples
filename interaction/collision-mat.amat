@@ -1,0 +1,79 @@
+{
+    "name": "material",
+    "uuid": "87c0e906-b61a-4cf7-afbe-cc78eeb4f31c",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": [
+        1,
+        0.5607843137254902,
+        0.2196078431372549,
+        0.5
+    ],
+    "baseColorTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "normalScale": 1,
+    "normalTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "emission": [
+        0,
+        0,
+        0
+    ],
+    "emissionIntensity": 1,
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 0,
+    "roughness": 0.5,
+    "metallicRoughnessTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "occlusionStrength": 1,
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Blend",
+    "alphaCutoff": 0
+}

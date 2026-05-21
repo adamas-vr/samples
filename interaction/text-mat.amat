@@ -1,0 +1,79 @@
+{
+    "name": "material",
+    "uuid": "0930fecd-e1aa-400d-8e90-aed545ea453f",
+    "dirty": false,
+    "assetType": "Material",
+    "baseColor": [
+        1,
+        0.30196078431372547,
+        0.30196078431372547,
+        1
+    ],
+    "baseColorTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "normalScale": 1,
+    "normalTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "emission": [
+        0,
+        0,
+        0
+    ],
+    "emissionIntensity": 1,
+    "emissionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "metalness": 0,
+    "roughness": 0.5,
+    "metallicRoughnessTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "occlusionStrength": 1,
+    "occlusionTransform": {
+        "offset": [
+            0,
+            0
+        ],
+        "scale": [
+            1,
+            1
+        ],
+        "rotation": 0
+    },
+    "alphaMode": "Opaque",
+    "alphaCutoff": 0
+}
