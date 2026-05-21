@@ -24,11 +24,11 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
             (onActivate) => EntityManager.SetActive(networkAct, onActivate)
         );
 
-        const sendRPC = Networking.NewFunction((arg0: boolean, arg1: string) => {
-            console.log(`arg0: ${arg0}, arg1: ${arg1}`);
-        });
+        // const sendRPC = Networking.NewFunction((arg0: boolean, arg1: string) => {
+        //     console.log(`arg0: ${arg0}, arg1: ${arg1}`);
+        // });
 
-        sendRPC(false, "34")
+        // sendRPC(false, "34")
 
         GrabInteractableManager.AddHoverEnteredCallback(grabble, () => {
             hoverState.value = true;
