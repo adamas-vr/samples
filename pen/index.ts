@@ -6,6 +6,8 @@ import {
 	Material,
 	Mesh,
 	MeshManager,
+	Networking,
+	NetworkState,
 	Project,
 	RenderableManager,
 	ShadowCastingMode,
@@ -17,28 +19,82 @@ const PEN_RADIUS = 0.005;
 const PEN_SIDES = 8;
 const MIN_POINT_DISTANCE = 0.005;
 const MAX_POINTS_PER_STROKE = 4096;
-const STROKE_SAMPLE_INTERVAL_MS = 1000 / 60;
+const STROKE_CHANNEL = "spatial-pen-strokes";
+const NETWORK_FLUSH_INTERVAL_MS = 1000 / 20;
+const NETWORK_POINTS_PER_BATCH = 12;
+const SNAPSHOT_POINTS_PER_BATCH = 48;
 
 type StrokeState = {
+	strokeId: string;
 	entity: Entity;
 	mesh: Mesh;
 	points: vec3[];
 	lastPoint?: vec3;
+	isMeshUpdating: boolean;
+	needsMeshRefresh: boolean;
 };
+
+type ActiveStrokeSyncState = {
+	strokeId: string;
+	ownerClientId: number;
+};
+
+type AppendStrokeMessage = {
+	type: "append";
+	strokeId: string;
+	points: number[];
+};
+
+type EndStrokeMessage = {
+	type: "end";
+	strokeId: string;
+};
+
+type SnapshotStrokeMessage = {
+	type: "snapshot";
+	strokeId: string;
+	points: number[];
+	offset: number;
+	replace: boolean;
+	complete: boolean;
+};
+
+type StrokeNetworkMessage =
+	| AppendStrokeMessage
+	| EndStrokeMessage
+	| SnapshotStrokeMessage;
 
 let penEntity: Entity;
 let penTipEntity: Entity;
 let strokeMaterial: Material;
+let localClientId = -1;
+let isLocalMode = true;
 let activeInteractor: Entity | null = null;
 let activeStroke: StrokeState | null = null;
 let nextStroke: StrokeState | null = null;
 let nextStrokePromise: Promise<StrokeState> | null = null;
-let isStrokeMeshUpdating = false;
-let needsStrokeMeshRefresh = false;
 let strokeSessionId = 0;
+let localStrokeSequence = 0;
+let lastNetworkFlushTime = 0;
+let activeStrokeState: NetworkState<ActiveStrokeSyncState | null>;
+let requestStrokeReplay: ((requesterClientId: number) => void) | null = null;
+const strokesById = new Map<string, StrokeState>();
+const strokeCreationPromises = new Map<string, Promise<StrokeState>>();
+const completedStrokeIds: string[] = [];
+const pendingNetworkPointsByStrokeId = new Map<string, number[]>();
 
 function cloneVec3(input: vec3): vec3 {
 	return vec3.fromValues(input[0], input[1], input[2]);
+}
+
+function flattenPoints(points: vec3[]): number[] {
+	const flattened: number[] = [];
+
+	for (const point of points) {
+		flattened.push(point[0], point[1], point[2]);
+	}
+
+	return flattened;
 }
 
 function shouldAppendPoint(
@@ -61,6 +117,17 @@ function getStableReferenceAxis(tangent: vec3): vec3 {
 	return vec3.fromValues(1, 0, 0);
 }
 
+function makeStrokeId() {
+	localStrokeSequence += 1;
+	return `${localClientId}:${localStrokeSequence}`;
+}
+
+function rememberCompletedStroke(strokeId: string) {
+	if (!completedStrokeIds.includes(strokeId)) {
+		completedStrokeIds.push(strokeId);
+	}
+}
+
 function buildTubeMesh(points: vec3[], radius: number, sides: number) {
 	if (points.length < 2) {
 		return {
@@ -80,8 +147,8 @@ function buildTubeMesh(points: vec3[], radius: number, sides: number) {
 	let totalLength = 0;
 	const cumulativeLengths = [0];
 
-	for (let i = 0; i < points.length - 1; i++) {
-		const segment = vec3.subtract(vec3.create(), points[i + 1], points[i]);
+	for (let index = 0; index < points.length - 1; index++) {
+		const segment = vec3.subtract(vec3.create(), points[index + 1], points[index]);
 		const length = vec3.length(segment);
 		if (length > 0) {
 			vec3.scale(segment, segment, 1 / length);
@@ -156,16 +223,16 @@ function buildTubeMesh(points: vec3[], radius: number, sides: number) {
 }
 
 async function refreshStrokeMesh(stroke: StrokeState) {
-	if (isStrokeMeshUpdating) {
-		needsStrokeMeshRefresh = true;
+	if (stroke.isMeshUpdating) {
+		stroke.needsMeshRefresh = true;
 		return;
 	}
 
-	isStrokeMeshUpdating = true;
+	stroke.isMeshUpdating = true;
 
 	try {
 		do {
-			needsStrokeMeshRefresh = false;
+			stroke.needsMeshRefresh = false;
 			const { vertices, normals, uvs, indices } = buildTubeMesh(
 				stroke.points,
 				PEN_RADIUS,
@@ -178,14 +245,14 @@ async function refreshStrokeMesh(stroke: StrokeState) {
 				MeshManager.SetTriangles(stroke.mesh, indices),
 			]);
 			await MeshManager.RecalcBounds(stroke.mesh);
-		} while (needsStrokeMeshRefresh);
+		} while (stroke.needsMeshRefresh);
 	} finally {
-		isStrokeMeshUpdating = false;
+		stroke.isMeshUpdating = false;
 	}
 }
 
-async function createStrokeEntity(): Promise<StrokeState> {
-	const entity = await EntityManager.Create(`Stroke ${Date.now()}`);
+async function createStrokeEntity(strokeId: string): Promise<StrokeState> {
+	const entity = await EntityManager.Create(`Stroke ${strokeId}`);
 	await TransformManager.SetWorldPosition(entity, vec3.fromValues(0, 0, 0));
 	await TransformManager.SetWorldRotation(entity, [0, 0, 0, 1]);
 	await TransformManager.SetLocalScale(entity, vec3.fromValues(1, 1, 1));
@@ -198,10 +265,34 @@ async function createStrokeEntity(): Promise<StrokeState> {
 	await RenderableManager.SetReceiveShadows(entity, true);
 
 	return {
+		strokeId,
 		entity,
 		mesh,
 		points: [],
+		isMeshUpdating: false,
+		needsMeshRefresh: false,
 	};
+}
+
+async function getOrCreateStroke(strokeId: string) {
+	const existingStroke = strokesById.get(strokeId);
+	if (existingStroke) {
+		return existingStroke;
+	}
+
+	const existingPromise = strokeCreationPromises.get(strokeId);
+	if (existingPromise) {
+		return existingPromise;
+	}
+
+	const creationPromise = createStrokeEntity(strokeId).then((stroke) => {
+		strokesById.set(strokeId, stroke);
+		strokeCreationPromises.delete(strokeId);
+		return stroke;
+	});
+
+	strokeCreationPromises.set(strokeId, creationPromise);
+	return creationPromise;
 }
 
 async function prepareNextStroke() {
@@ -209,35 +300,223 @@ async function prepareNextStroke() {
 		return;
 	}
 
-	nextStrokePromise = createStrokeEntity();
+	nextStrokePromise = createStrokeEntity(makeStrokeId());
 	nextStroke = await nextStrokePromise;
+	strokesById.set(nextStroke.strokeId, nextStroke);
 	nextStrokePromise = null;
 }
 
-async function appendTipPoint(force = false, stroke = activeStroke) {
-	if (!stroke) {
-		return;
-	}
-
-	const tipWorldPosition =
-		await TransformManager.GetWorldPosition(penTipEntity);
-	const point = cloneVec3(tipWorldPosition);
-
-	if (!force && activeStroke !== stroke) {
-		return;
+async function appendPointToStroke(
+	stroke: StrokeState,
+	point: vec3,
+	force = false,
+	refreshMesh = true,
+) {
+	if (stroke.points.length >= MAX_POINTS_PER_STROKE) {
+		return false;
 	}
 
 	if (!force && !shouldAppendPoint(stroke.lastPoint, point)) {
-		return;
-	}
-
-	if (stroke.points.length >= MAX_POINTS_PER_STROKE) {
-		return;
+		return false;
 	}
 
 	stroke.points.push(point);
 	stroke.lastPoint = point;
+
+	if (refreshMesh) {
+		await refreshStrokeMesh(stroke);
+	}
+
+	return true;
+}
+
+async function appendNetworkPoints(strokeId: string, flatPoints: number[]) {
+	const stroke = await getOrCreateStroke(strokeId);
+	let didAppend = false;
+
+	for (let index = 0; index < flatPoints.length; index += 3) {
+		const point = vec3.fromValues(
+			flatPoints[index],
+			flatPoints[index + 1],
+			flatPoints[index + 2],
+		);
+		const appended = await appendPointToStroke(stroke, point, false, false);
+		didAppend = didAppend || appended;
+	}
+
+	if (didAppend) {
+		await refreshStrokeMesh(stroke);
+	}
+}
+
+async function replaceStrokePoints(
+	strokeId: string,
+	flatPoints: number[],
+	offset: number,
+	complete: boolean,
+) {
+	const stroke = await getOrCreateStroke(strokeId);
+
+	if (offset === 0) {
+		stroke.points = [];
+		stroke.lastPoint = undefined;
+	}
+
+	for (let index = 0; index < flatPoints.length; index += 3) {
+		const point = vec3.fromValues(
+			flatPoints[index],
+			flatPoints[index + 1],
+			flatPoints[index + 2],
+		);
+		stroke.points.push(point);
+		stroke.lastPoint = point;
+	}
+
 	await refreshStrokeMesh(stroke);
+
+	if (complete) {
+		rememberCompletedStroke(strokeId);
+	}
+}
+
+function queueNetworkPoint(strokeId: string, point: vec3) {
+	if (isLocalMode) {
+		return;
+	}
+
+	const pendingPoints = pendingNetworkPointsByStrokeId.get(strokeId) ?? [];
+	pendingPoints.push(point[0], point[1], point[2]);
+	pendingNetworkPointsByStrokeId.set(strokeId, pendingPoints);
+}
+
+function sendStrokeChannelMessage(message: StrokeNetworkMessage) {
+	if (isLocalMode) {
+		return;
+	}
+
+	Networking.BroadcastMessage(STROKE_CHANNEL, JSON.stringify(message));
+}
+
+function flushNetworkPoints(stroke: StrokeState | null, force = false) {
+	if (!stroke || isLocalMode) {
+		return;
+	}
+
+	const pendingPoints = pendingNetworkPointsByStrokeId.get(stroke.strokeId);
+	if (!pendingPoints || pendingPoints.length === 0) {
+		return;
+	}
+
+	const now = Date.now();
+	const hasFullBatch = pendingPoints.length >= NETWORK_POINTS_PER_BATCH * 3;
+	if (!force && !hasFullBatch && now - lastNetworkFlushTime < NETWORK_FLUSH_INTERVAL_MS) {
+		return;
+	}
+
+	do {
+		const points = pendingPoints.splice(0, NETWORK_POINTS_PER_BATCH * 3);
+		sendStrokeChannelMessage({
+			type: "append",
+			strokeId: stroke.strokeId,
+			points,
+		});
+		lastNetworkFlushTime = Date.now();
+	} while (force && pendingPoints.length > 0);
+
+	if (pendingPoints.length === 0) {
+		pendingNetworkPointsByStrokeId.delete(stroke.strokeId);
+	}
+}
+
+async function appendTipPoint(force = false, stroke = activeStroke) {
+	if (!stroke) {
+		return false;
+	}
+
+	if (!force && activeStroke !== stroke) {
+		return false;
+	}
+
+	const tipWorldPosition = await TransformManager.GetWorldPosition(penTipEntity);
+	const point = cloneVec3(tipWorldPosition);
+	const didAppend = await appendPointToStroke(stroke, point, force, true);
+
+	if (didAppend) {
+		queueNetworkPoint(stroke.strokeId, point);
+	}
+
+	return didAppend;
+}
+
+async function handleStrokeChannelMessage(
+	senderClientId: number,
+	payload: string,
+) {
+	if (senderClientId === localClientId) {
+		return;
+	}
+
+	const message = JSON.parse(payload) as StrokeNetworkMessage;
+
+	if (message.type === "append") {
+		await appendNetworkPoints(message.strokeId, message.points);
+		return;
+	}
+
+	if (message.type === "snapshot") {
+		await replaceStrokePoints(
+			message.strokeId,
+			message.points,
+			message.offset,
+			message.complete,
+		);
+		return;
+	}
+
+	if (message.type === "end") {
+		rememberCompletedStroke(message.strokeId);
+	}
+}
+
+function sendStrokeSnapshotToClient(
+	targetClientId: number,
+	stroke: StrokeState,
+	complete: boolean,
+) {
+	if (isLocalMode) {
+		return;
+	}
+
+	const flatPoints = flattenPoints(stroke.points);
+	for (
+		let offset = 0;
+		offset < flatPoints.length;
+		offset += SNAPSHOT_POINTS_PER_BATCH * 3
+	) {
+		const message: SnapshotStrokeMessage = {
+			type: "snapshot",
+			strokeId: stroke.strokeId,
+			points: flatPoints.slice(offset, offset + SNAPSHOT_POINTS_PER_BATCH * 3),
+			offset,
+			replace: offset === 0,
+			complete,
+		};
+		Networking.SendMessageTo(
+			targetClientId,
+			STROKE_CHANNEL,
+			JSON.stringify(message),
+		);
+	}
+}
+
+async function handleActiveStrokeStateChange(
+	state: ActiveStrokeSyncState | null,
+) {
+	if (!state || state.ownerClientId === localClientId) {
+		return;
+	}
+
+	await getOrCreateStroke(state.strokeId);
 }
 
 async function beginStroke(interactorEntity: Entity) {
@@ -257,6 +536,11 @@ async function beginStroke(interactorEntity: Entity) {
 	}
 
 	await appendTipPoint(true, stroke);
+	activeStrokeState.value = {
+		strokeId: stroke.strokeId,
+		ownerClientId: localClientId,
+	};
+	flushNetworkPoints(stroke, true);
 }
 
 async function endStroke(interactorEntity?: Entity) {
@@ -269,15 +553,24 @@ async function endStroke(interactorEntity?: Entity) {
 	}
 
 	const stroke = activeStroke;
-	activeStroke = null;
-	activeInteractor = null;
 	strokeSessionId++;
 
 	if (!stroke) {
+		activeInteractor = null;
+		activeStrokeState.value = null;
 		return;
 	}
 
 	await appendTipPoint(true, stroke);
+	flushNetworkPoints(stroke, true);
+	sendStrokeChannelMessage({
+		type: "end",
+		strokeId: stroke.strokeId,
+	});
+	rememberCompletedStroke(stroke.strokeId);
+	activeStroke = null;
+	activeInteractor = null;
+	activeStrokeState.value = null;
 }
 
 Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
@@ -288,6 +581,43 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 	penEntity = sceneGraph["@Pen"].entityId;
 	penTipEntity = sceneGraph["@Pen"]["@Pen Tip"].entityId;
 	strokeMaterial = await RenderableManager.GetMaterial(penTipEntity, 0);
+	localClientId = await Networking.GetClientId();
+	isLocalMode = await Networking.IsLocalMode();
+
+	Networking.NewChannel(STROKE_CHANNEL, (senderClientId, payload) => {
+		void handleStrokeChannelMessage(senderClientId, payload);
+	});
+
+	activeStrokeState = Networking.NewVariable<ActiveStrokeSyncState | null>(
+		null,
+		(state) => {
+			void handleActiveStrokeStateChange(state);
+		},
+	);
+	requestStrokeReplay = Networking.NewFunction(
+		async (requesterClientId: number) => {
+			if (requesterClientId === localClientId) {
+				return;
+			}
+
+			const masterClientId = await Networking.GetMasterClientId();
+			if (masterClientId !== localClientId) {
+				return;
+			}
+
+			for (const strokeId of completedStrokeIds) {
+				const stroke = strokesById.get(strokeId);
+				if (stroke) {
+					sendStrokeSnapshotToClient(requesterClientId, stroke, true);
+				}
+			}
+
+			if (activeStroke) {
+				sendStrokeSnapshotToClient(requesterClientId, activeStroke, false);
+			}
+		},
+	);
+
 	await prepareNextStroke();
 
 	await GrabInteractableManager.AddActivatedCallback(
@@ -309,11 +639,16 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 		},
 	);
 
+	if (!isLocalMode) {
+		requestStrokeReplay?.(localClientId);
+	}
+
 	project.ScheduleUpdate(() => {
 		if (!activeStroke) {
 			return;
 		}
 
-		void appendTipPoint(false);
+		void appendTipPoint(false, activeStroke);
+		flushNetworkPoints(activeStroke, false);
 	});
 });
