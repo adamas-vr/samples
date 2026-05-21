@@ -2,7 +2,7 @@
 	"name": "pen",
 	"version": "0.0.1",
 	"dependencies": {
-		"@adamasvr/sdk": "file:../../runtime-interface",
+		"@adamasvr/sdk": "^0.3.7",
 		"gl-matrix": "^3.4.4"
 	},
 	"devDependencies": {
