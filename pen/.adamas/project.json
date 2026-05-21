@@ -1,13 +1,12 @@
 {
     "metadata": {
-        "name": "pen",
-        "author": "Test Account 0",
-        "version": "0.0.3",
-        "isPublic": true,
-        "description": "Pen in VR",
+        "name": "Spatial Pen",
+        "author": "Adamas Official",
+        "version": "0.1.0",
+        "isPublic": false,
+        "description": "Spatial Pen Sample",
         "createdAt": "2026-05-08T05:06:47.054Z",
-        "updateAt": "2026-05-21T05:01:43.160Z",
-        "previewImagePath": "projects/mRyzCTylNndl230ivYiXtmzqwhX2/1778279467256-Screenshot%202026-05-08%20153023.png"
+        "updateAt": "2026-05-21T05:21:49.260Z"
     },
     "world": {
         "worldEntrance": false,
@@ -122,7 +121,7 @@
                             0.05,
                             0.05
                         ],
-                        "isTransformSync": false
+                        "isTransformSync": true
                     }
                 ],
                 [
