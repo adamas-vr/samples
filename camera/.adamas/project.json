@@ -1,12 +1,12 @@
 {
     "metadata": {
-        "name": "Camera",
+        "name": "Virtual Camera",
         "author": "Adamas Official",
-        "version": "0.1.0",
-        "isPublic": false,
+        "version": "0.1.2",
+        "isPublic": true,
         "description": "Virtual camera on Adamas",
         "createdAt": "2026-04-01T19:54:36.869Z",
-        "updateAt": "2026-05-20T20:18:35.797Z"
+        "updateAt": "2026-05-22T21:53:19.547Z"
     },
     "world": {
         "worldEntrance": false,
@@ -27,7 +27,6 @@
             "__type": "Set",
             "value": [
                 "2620e8af-5dbc-4d09-84ff-ef957c44673e",
-                "761471a8-fd5c-4d85-b6b5-abc30eb42bcf",
                 "82eab310-fc33-409e-8dde-f0b7471365af",
                 "7916eb7c-182c-46cd-885a-7e789a9c2078",
                 "444859ce-34c3-4cf7-b32a-8e73031e3a91",
@@ -85,8 +84,7 @@
                 "0dcd2f40-26d5-4c53-8d16-f2b171ed5589",
                 "bff7d93f-8035-4073-bbe7-1b3611652e5c",
                 "8e644afe-2da9-4104-847c-1623ed944960",
-                "e28dee40-80fa-4a48-9f59-23c88efd452a",
-                "62ba8861-a104-4215-adc7-bf3bedb83052"
+                "e28dee40-80fa-4a48-9f59-23c88efd452a"
             ]
         },
         "properties": {
@@ -98,16 +96,6 @@
                         "componentType": "Property",
                         "enabled": true,
                         "name": "Preview",
-                        "layer": 0,
-                        "activeEntity": true
-                    }
-                ],
-                [
-                    "761471a8-fd5c-4d85-b6b5-abc30eb42bcf",
-                    {
-                        "componentType": "Property",
-                        "enabled": true,
-                        "name": "Display",
                         "layer": 0,
                         "activeEntity": true
                     }
@@ -691,16 +679,6 @@
                         "layer": 0,
                         "activeEntity": true
                     }
-                ],
-                [
-                    "62ba8861-a104-4215-adc7-bf3bedb83052",
-                    {
-                        "componentType": "Property",
-                        "enabled": true,
-                        "name": "Capture",
-                        "layer": 0,
-                        "activeEntity": true
-                    }
                 ]
             ]
         },
@@ -714,7 +692,6 @@
                         "enabled": true,
                         "parent": "00000000-0000-0000-0000-000000000000",
                         "children": [
-                            "761471a8-fd5c-4d85-b6b5-abc30eb42bcf",
                             "8e644afe-2da9-4104-847c-1623ed944960"
                         ],
                         "localPosition": [
@@ -740,12 +717,12 @@
                     {
                         "componentType": "Transform",
                         "enabled": true,
-                        "parent": "761471a8-fd5c-4d85-b6b5-abc30eb42bcf",
+                        "parent": "8e644afe-2da9-4104-847c-1623ed944960",
                         "children": [],
                         "localPosition": [
-                            0,
-                            0,
-                            0
+                            -0.05707648674922283,
+                            0.10410621034861756,
+                            0.07371715076732845
                         ],
                         "localRotation": [
                             0,
@@ -753,37 +730,9 @@
                             0
                         ],
                         "localScale": [
-                            0.9,
-                            1.2,
-                            1
-                        ],
-                        "isTransformSync": false
-                    }
-                ],
-                [
-                    "761471a8-fd5c-4d85-b6b5-abc30eb42bcf",
-                    {
-                        "componentType": "Transform",
-                        "enabled": true,
-                        "parent": "00000000-0000-0000-0000-000000000000",
-                        "children": [
-                            "2620e8af-5dbc-4d09-84ff-ef957c44673e",
-                            "62ba8861-a104-4215-adc7-bf3bedb83052"
-                        ],
-                        "localPosition": [
-                            0.19048579000356497,
-                            1.0215951098836877,
-                            0
-                        ],
-                        "localRotation": [
-                            0,
-                            0,
-                            0
-                        ],
-                        "localScale": [
-                            0.8342749144230607,
-                            0.8342749144230607,
-                            0.8342749144230607
+                            0.009632269144058306,
+                            0.012843025525411077,
+                            0.010702521271175896
                         ],
                         "isTransformSync": false
                     }
@@ -2274,7 +2223,8 @@
                         "parent": "00000000-0000-0000-0000-000000000000",
                         "children": [
                             "82eab310-fc33-409e-8dde-f0b7471365af",
-                            "e28dee40-80fa-4a48-9f59-23c88efd452a"
+                            "e28dee40-80fa-4a48-9f59-23c88efd452a",
+                            "2620e8af-5dbc-4d09-84ff-ef957c44673e"
                         ],
                         "localPosition": [
                             0.88991160784915,
@@ -2314,31 +2264,6 @@
                         "localScale": [
                             1,
                             1,
-                            1
-                        ],
-                        "isTransformSync": false
-                    }
-                ],
-                [
-                    "62ba8861-a104-4215-adc7-bf3bedb83052",
-                    {
-                        "componentType": "Transform",
-                        "enabled": true,
-                        "parent": "761471a8-fd5c-4d85-b6b5-abc30eb42bcf",
-                        "children": [],
-                        "localPosition": [
-                            -1.1328496938389572,
-                            0,
-                            -0.00019634092359347788
-                        ],
-                        "localRotation": [
-                            0,
-                            0,
-                            0
-                        ],
-                        "localScale": [
-                            0.9,
-                            1.2,
                             1
                         ],
                         "isTransformSync": false
@@ -2824,39 +2749,12 @@
                         "castShadows": 1,
                         "culling": false
                     }
-                ],
-                [
-                    "62ba8861-a104-4215-adc7-bf3bedb83052",
-                    {
-                        "componentType": "Renderable",
-                        "enabled": true,
-                        "mesh": "61b88e63-97b1-4703-826a-d0d7d625d433",
-                        "materialList": [
-                            "e880532f-7eed-4220-9afc-e9d259641845"
-                        ],
-                        "receiveShadows": true,
-                        "castShadows": 1,
-                        "culling": true
-                    }
                 ]
             ]
         },
         "grabbles": {
             "__type": "Map",
             "value": [
-                [
-                    "761471a8-fd5c-4d85-b6b5-abc30eb42bcf",
-                    {
-                        "componentType": "Grabble",
-                        "enabled": true,
-                        "movementType": 2,
-                        "dynamicAttach": true,
-                        "allowHoverActivate": false,
-                        "trackPosition": true,
-                        "trackRotation": true,
-                        "throwOnDetach": false
-                    }
-                ],
                 [
                     "8e644afe-2da9-4104-847c-1623ed944960",
                     {
@@ -2875,18 +2773,6 @@
         "rigidbodies": {
             "__type": "Map",
             "value": [
-                [
-                    "761471a8-fd5c-4d85-b6b5-abc30eb42bcf",
-                    {
-                        "componentType": "Rigid Body",
-                        "enabled": true,
-                        "isKinematic": true,
-                        "angularDamping": 0.05,
-                        "linearDamping": 0.05,
-                        "mass": 1,
-                        "useGravity": false
-                    }
-                ],
                 [
                     "8e644afe-2da9-4104-847c-1623ed944960",
                     {
@@ -2926,29 +2812,6 @@
         "colliders": {
             "__type": "Map",
             "value": [
-                [
-                    "761471a8-fd5c-4d85-b6b5-abc30eb42bcf",
-                    {
-                        "componentType": "Collider",
-                        "enabled": true,
-                        "colliders": [
-                            {
-                                "colliderType": "Box",
-                                "isTrigger": false,
-                                "center": [
-                                    0,
-                                    0,
-                                    0
-                                ],
-                                "size": [
-                                    0.9,
-                                    1.2,
-                                    0.2754229583740233
-                                ]
-                            }
-                        ]
-                    }
-                ],
                 [
                     "8e644afe-2da9-4104-847c-1623ed944960",
                     {

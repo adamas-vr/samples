@@ -1,22 +1,26 @@
 import {
 	CameraManager,
+	ColliderManager,
+	EntityManager,
 	GrabInteractableManager,
 	MaterialManager,
 	MaterialProperty,
 	Project,
+	NewQuadMesh,
 	RenderableManager,
-	RenderTextureFormat,
-	TextureDimension,
+	RigidbodyManager,
 	TextureFormat,
 	TextureManager,
+	TransformManager,
+	MovementType,
 } from "@adamasvr/sdk";
+import { quat, vec3 } from "gl-matrix";
 import { projectBundle } from "adamasvr:editor";
 
 Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 	if (sceneGraph === undefined) return;
-	const display = sceneGraph["@Display"]["@Preview"].entityId;
+	const display = sceneGraph["@Camera"]["@Preview"].entityId;
 	const camera = sceneGraph["@Camera"]["@Film"].entityId;
-	const capture = sceneGraph["@Display"]["@Capture"].entityId;
 	const button = sceneGraph["@Camera"].entityId;
 
 	const renderTexture = await TextureManager.CreateRenderTexture(900, 1200);
@@ -30,11 +34,79 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 	);
 
 	const tex = await TextureManager.Create2D(1, 1, TextureFormat.RGBA32);
-	const captureMat = await RenderableManager.GetMaterial(capture, 0);
-	MaterialManager.SetTexture(captureMat, MaterialProperty.BaseColorMap, tex);
+	const photoQuad = await NewQuadMesh();
+
+	type PreparedPhoto = {
+		entity: number;
+		texture: number;
+	};
+
+	const preparePhoto = async (): Promise<PreparedPhoto> => {
+		const photo = await EntityManager.Create("Photo");
+		EntityManager.SetActive(photo, false);
+
+		const photoMat = await MaterialManager.Create();
+		TransformManager.SetLocalScale(photo, vec3.fromValues(0.3, 0.4, 1));
+
+		await RenderableManager.Create(photo);
+		RenderableManager.SetMesh(photo, photoQuad);
+		RenderableManager.SetMaterial(photo, photoMat);
+		RenderableManager.SetReceiveShadows(photo, false);
+		const photoTexture = await TextureManager.Create2D(
+			1,
+			1,
+			TextureFormat.RGBA32,
+		);
+		MaterialManager.SetTexture(
+			photoMat,
+			MaterialProperty.BaseColorMap,
+			photoTexture,
+		);
+		MaterialManager.SetFloat(photoMat, MaterialProperty.Culling, 0);
+
+		const collider = await ColliderManager.CreateBox(photo);
+		ColliderManager.SetBoxColliderCenter(collider, vec3.fromValues(0, 0, 0));
+		ColliderManager.SetBoxColliderSize(collider, vec3.fromValues(1, 1, 0.02));
+
+		await RigidbodyManager.Create(photo);
+		RigidbodyManager.SetIsKinematic(photo, true);
+		RigidbodyManager.SetUseGravity(photo, false);
+
+		await GrabInteractableManager.Create(photo);
+		GrabInteractableManager.SetMovementType(photo, MovementType.Instantaneous);
+		GrabInteractableManager.SetDynamicAttach(photo, true);
+		GrabInteractableManager.SetAllowHoverActivate(photo, false);
+		GrabInteractableManager.SetTrackPosition(photo, true);
+		GrabInteractableManager.SetTrackRotation(photo, true);
+		GrabInteractableManager.SetThrowOnDetach(photo, false);
+		GrabInteractableManager.SetEnabled(photo, false);
+
+		return {
+			entity: photo,
+			texture: photoTexture,
+		};
+	};
+
+	const placePhoto = async (photo: PreparedPhoto) => {
+		const cameraPosition = await TransformManager.GetWorldPosition(camera);
+		const cameraRotation = await TransformManager.GetWorldRotation(camera);
+
+		TransformManager.SetWorldPosition(photo.entity, vec3.clone(cameraPosition));
+		TransformManager.SetWorldRotation(photo.entity, quat.clone(cameraRotation));
+		EntityManager.SetActive(photo.entity, true);
+		GrabInteractableManager.SetEnabled(photo.entity, true);
+	};
+
+	let nextPhotoPromise = preparePhoto();
 
 	GrabInteractableManager.AddActivatedCallback(button, async () => {
 		const result = await TextureManager.ReadbackJPGImage(renderTexture);
-		TextureManager.LoadImage(tex, result.data);
+		const imageData = result.data;
+		const photo = await nextPhotoPromise;
+
+		nextPhotoPromise = preparePhoto();
+		TextureManager.LoadImage(tex, imageData);
+		TextureManager.LoadImage(photo.texture, imageData);
+		await placePhoto(photo);
 	});
 });

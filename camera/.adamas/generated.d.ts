@@ -5,17 +5,11 @@ import "./asset-type"
 declare module "@adamasvr/sdk"{
 export interface SceneGraph
 {
-    "@Display": {
+    "@Camera": {
         entityId: Entity,
         "@Preview": {
             entityId: Entity
         },
-        "@Capture": {
-            entityId: Entity
-        }
-    },
-    "@Camera": {
-        entityId: Entity,
         "@polaroid_camera": {
             entityId: Entity,
             "@Sketchfab_model": {
