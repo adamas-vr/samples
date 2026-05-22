@@ -5,6 +5,7 @@ import {
 	GrabInteractableManager,
 	MaterialManager,
 	MaterialProperty,
+	Networking,
 	Project,
 	NewQuadMesh,
 	RenderableManager,
@@ -35,6 +36,7 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 
 	const tex = await TextureManager.Create2D(1, 1, TextureFormat.RGBA32);
 	const photoQuad = await NewQuadMesh();
+	const isLocalMode = await Networking.IsLocalMode();
 
 	type PreparedPhoto = {
 		entity: number;
@@ -47,6 +49,9 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 
 		const photoMat = await MaterialManager.Create();
 		TransformManager.SetLocalScale(photo, vec3.fromValues(0.3, 0.4, 1));
+		if (!isLocalMode) {
+			await Networking.MakeNetworkTransform(photo);
+		}
 
 		await RenderableManager.Create(photo);
 		RenderableManager.SetMesh(photo, photoQuad);
@@ -80,6 +85,9 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 		GrabInteractableManager.SetTrackRotation(photo, true);
 		GrabInteractableManager.SetThrowOnDetach(photo, false);
 		GrabInteractableManager.SetEnabled(photo, false);
+		if (!isLocalMode) {
+			await GrabInteractableManager.MakeNetworkGrabble(photo);
+		}
 
 		return {
 			entity: photo,
@@ -98,8 +106,7 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 	};
 
 	let nextPhotoPromise = preparePhoto();
-
-	GrabInteractableManager.AddActivatedCallback(button, async () => {
+	const capturePhoto = Networking.NewFunction(async () => {
 		const result = await TextureManager.ReadbackJPGImage(renderTexture);
 		const imageData = result.data;
 		const photo = await nextPhotoPromise;
@@ -108,5 +115,9 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 		TextureManager.LoadImage(tex, imageData);
 		TextureManager.LoadImage(photo.texture, imageData);
 		await placePhoto(photo);
+	});
+
+	GrabInteractableManager.AddActivatedCallback(button, async () => {
+		capturePhoto();
 	});
 });
