@@ -2,12 +2,11 @@
     "metadata": {
         "name": "Home Space Private",
         "author": "Adamas Official",
-        "version": "0.1.4",
+        "version": "0.1.5",
         "isPublic": false,
         "description": "The home space.",
         "createdAt": "2026-03-24T16:51:17.472Z",
-        "updateAt": "2026-05-20T19:53:29.168Z",
-        "previewImagePath": "projects/8NFqsUGBOfTOAnjZOib3m8YxQCv2/1779268458935-30233d48-e360-41a0-ad07-5e398f8eef8c.png"
+        "updateAt": "2026-05-22T23:19:51.754Z"
     },
     "world": {
         "worldEntrance": true,
@@ -6080,6 +6079,20 @@
                                     6,
                                     5
                                 ]
+                            },
+                            {
+                                "colliderType": "Box",
+                                "isTrigger": false,
+                                "center": [
+                                    0,
+                                    3.35,
+                                    -0.9157716217041016
+                                ],
+                                "size": [
+                                    0.2,
+                                    1.5,
+                                    2
+                                ]
                             }
                         ]
                     }
@@ -6094,8 +6107,8 @@
                                 "colliderType": "Box",
                                 "isTrigger": false,
                                 "center": [
-                                    0,
-                                    0,
+                                    -0.47340240478515627,
+                                    0.7,
                                     0
                                 ],
                                 "size": [
@@ -6146,7 +6159,7 @@
                                 ],
                                 "size": [
                                     1,
-                                    1,
+                                    1.5077815399169925,
                                     0.2
                                 ]
                             }
@@ -6164,12 +6177,12 @@
                                 "isTrigger": false,
                                 "center": [
                                     0,
-                                    0,
+                                    -0.17659918212890627,
                                     0
                                 ],
                                 "size": [
                                     1,
-                                    1,
+                                    1.4510645904541017,
                                     0.2
                                 ]
                             }
@@ -6187,12 +6200,12 @@
                                 "isTrigger": false,
                                 "center": [
                                     0,
-                                    0,
+                                    -0.1472999420166016,
                                     0
                                 ],
                                 "size": [
                                     0.8,
-                                    1,
+                                    1.5901157836914064,
                                     0.2
                                 ]
                             }
@@ -6210,12 +6223,12 @@
                                 "isTrigger": false,
                                 "center": [
                                     0,
-                                    0,
+                                    0.18457769775390628,
                                     0
                                 ],
                                 "size": [
                                     1,
-                                    0.5,
+                                    1.1570657806396487,
                                     0.2
                                 ]
                             }
@@ -6233,12 +6246,12 @@
                                 "isTrigger": false,
                                 "center": [
                                     0,
-                                    0,
+                                    0.145127197265625,
                                     0
                                 ],
                                 "size": [
                                     1,
-                                    1,
+                                    1.4105657653808592,
                                     0.2
                                 ]
                             }
