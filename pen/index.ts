@@ -7,7 +7,6 @@ import {
 	Mesh,
 	MeshManager,
 	Networking,
-	NetworkState,
 	Project,
 	RenderableManager,
 	ShadowCastingMode,
