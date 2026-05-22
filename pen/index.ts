@@ -20,8 +20,7 @@ const PEN_SIDES = 8;
 const MIN_POINT_DISTANCE = 0.005;
 const MAX_POINTS_PER_STROKE = 4096;
 const STROKE_CHANNEL = "spatial-pen-strokes";
-const NETWORK_FLUSH_INTERVAL_MS = 1000 / 20;
-const NETWORK_POINTS_PER_BATCH = 12;
+const NETWORK_SEND_TIMESTEP = 1000 / 10;
 const SNAPSHOT_POINTS_PER_BATCH = 48;
 
 type StrokeState = {
@@ -75,9 +74,8 @@ let nextStroke: StrokeState | null = null;
 let nextStrokePromise: Promise<StrokeState> | null = null;
 let strokeSessionId = 0;
 let localStrokeSequence = 0;
-let lastNetworkFlushTime = 0;
-let activeStrokeState: NetworkState<ActiveStrokeSyncState | null>;
-let requestStrokeReplay: ((requesterClientId: number) => void) | null = null;
+let networkSendAccumulator = 0;
+
 const strokesById = new Map<string, StrokeState>();
 const strokeCreationPromises = new Map<string, Promise<StrokeState>>();
 const completedStrokeIds: string[] = [];
@@ -148,7 +146,11 @@ function buildTubeMesh(points: vec3[], radius: number, sides: number) {
 	const cumulativeLengths = [0];
 
 	for (let index = 0; index < points.length - 1; index++) {
-		const segment = vec3.subtract(vec3.create(), points[index + 1], points[index]);
+		const segment = vec3.subtract(
+			vec3.create(),
+			points[index + 1],
+			points[index],
+		);
 		const length = vec3.length(segment);
 		if (length > 0) {
 			vec3.scale(segment, segment, 1 / length);
@@ -389,15 +391,15 @@ function queueNetworkPoint(strokeId: string, point: vec3) {
 	pendingNetworkPointsByStrokeId.set(strokeId, pendingPoints);
 }
 
-function sendStrokeChannelMessage(message: StrokeNetworkMessage) {
+async function sendStrokeChannelMessage(message: StrokeNetworkMessage) {
 	if (isLocalMode) {
 		return;
 	}
 
-	Networking.BroadcastMessage(STROKE_CHANNEL, JSON.stringify(message));
+	await Networking.BroadcastMessage(STROKE_CHANNEL, JSON.stringify(message));
 }
 
-function flushNetworkPoints(stroke: StrokeState | null, force = false) {
+async function flushNetworkPoints(stroke?: StrokeState) {
 	if (!stroke || isLocalMode) {
 		return;
 	}
@@ -407,25 +409,13 @@ function flushNetworkPoints(stroke: StrokeState | null, force = false) {
 		return;
 	}
 
-	const now = Date.now();
-	const hasFullBatch = pendingPoints.length >= NETWORK_POINTS_PER_BATCH * 3;
-	if (!force && !hasFullBatch && now - lastNetworkFlushTime < NETWORK_FLUSH_INTERVAL_MS) {
-		return;
-	}
-
-	do {
-		const points = pendingPoints.splice(0, NETWORK_POINTS_PER_BATCH * 3);
-		sendStrokeChannelMessage({
-			type: "append",
-			strokeId: stroke.strokeId,
-			points,
-		});
-		lastNetworkFlushTime = Date.now();
-	} while (force && pendingPoints.length > 0);
-
-	if (pendingPoints.length === 0) {
-		pendingNetworkPointsByStrokeId.delete(stroke.strokeId);
-	}
+	const points = pendingPoints.splice(0, pendingPoints.length);
+	await sendStrokeChannelMessage({
+		type: "append",
+		strokeId: stroke.strokeId,
+		points,
+	});
+	pendingNetworkPointsByStrokeId.delete(stroke.strokeId);
 }
 
 async function appendTipPoint(force = false, stroke = activeStroke) {
@@ -437,7 +427,8 @@ async function appendTipPoint(force = false, stroke = activeStroke) {
 		return false;
 	}
 
-	const tipWorldPosition = await TransformManager.GetWorldPosition(penTipEntity);
+	const tipWorldPosition =
+		await TransformManager.GetWorldPosition(penTipEntity);
 	const point = cloneVec3(tipWorldPosition);
 	const didAppend = await appendPointToStroke(stroke, point, force, true);
 
@@ -519,82 +510,22 @@ async function handleActiveStrokeStateChange(
 	await getOrCreateStroke(state.strokeId);
 }
 
-async function beginStroke(interactorEntity: Entity) {
-	if (activeInteractor !== null || activeStroke || !nextStroke) {
-		return;
-	}
-
-	const sessionId = ++strokeSessionId;
-	const stroke = nextStroke;
-	nextStroke = null;
-	activeInteractor = interactorEntity;
-	activeStroke = stroke;
-	void prepareNextStroke();
-
-	if (strokeSessionId !== sessionId || activeInteractor !== interactorEntity) {
-		return;
-	}
-
-	await appendTipPoint(true, stroke);
-	activeStrokeState.value = {
-		strokeId: stroke.strokeId,
-		ownerClientId: localClientId,
-	};
-	flushNetworkPoints(stroke, true);
-}
-
-async function endStroke(interactorEntity?: Entity) {
-	if (
-		interactorEntity !== undefined &&
-		activeInteractor !== null &&
-		activeInteractor !== interactorEntity
-	) {
-		return;
-	}
-
-	const stroke = activeStroke;
-	strokeSessionId++;
-
-	if (!stroke) {
-		activeInteractor = null;
-		activeStrokeState.value = null;
-		return;
-	}
-
-	await appendTipPoint(true, stroke);
-	flushNetworkPoints(stroke, true);
-	sendStrokeChannelMessage({
-		type: "end",
-		strokeId: stroke.strokeId,
-	});
-	rememberCompletedStroke(stroke.strokeId);
-	activeStroke = null;
-	activeInteractor = null;
-	activeStrokeState.value = null;
-}
-
 Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
-	if (!sceneGraph?.["@Pen"]?.["@Pen Tip"]) {
-		throw new Error("Pen scene graph nodes were not found.");
-	}
-
 	penEntity = sceneGraph["@Pen"].entityId;
 	penTipEntity = sceneGraph["@Pen"]["@Pen Tip"].entityId;
 	strokeMaterial = await RenderableManager.GetMaterial(penTipEntity, 0);
 	localClientId = await Networking.GetClientId();
 	isLocalMode = await Networking.IsLocalMode();
 
-	Networking.NewChannel(STROKE_CHANNEL, (senderClientId, payload) => {
-		void handleStrokeChannelMessage(senderClientId, payload);
-	});
+	Networking.NewChannel(STROKE_CHANNEL, handleStrokeChannelMessage);
 
-	activeStrokeState = Networking.NewVariable<ActiveStrokeSyncState | null>(
-		null,
-		(state) => {
-			void handleActiveStrokeStateChange(state);
-		},
-	);
-	requestStrokeReplay = Networking.NewFunction(
+	const activeStrokeState =
+		Networking.NewVariable<ActiveStrokeSyncState | null>(
+			null,
+			handleActiveStrokeStateChange,
+		);
+
+	const requestStrokeReplay = Networking.NewFunction(
 		async (requesterClientId: number) => {
 			if (requesterClientId === localClientId) {
 				return;
@@ -618,6 +549,65 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 		},
 	);
 
+	async function beginStroke(interactorEntity: Entity) {
+		if (activeInteractor !== null || activeStroke || !nextStroke) {
+			return;
+		}
+
+		const sessionId = ++strokeSessionId;
+		const stroke = nextStroke;
+		nextStroke = null;
+		activeInteractor = interactorEntity;
+		activeStroke = stroke;
+		prepareNextStroke();
+
+		if (
+			strokeSessionId !== sessionId ||
+			activeInteractor !== interactorEntity
+		) {
+			return;
+		}
+
+		await appendTipPoint(true, stroke);
+		activeStrokeState.value = {
+			strokeId: stroke.strokeId,
+			ownerClientId: localClientId,
+		};
+		networkSendAccumulator = 0;
+		await flushNetworkPoints(stroke);
+	}
+
+	async function endStroke(interactorEntity?: Entity) {
+		if (
+			interactorEntity !== undefined &&
+			activeInteractor !== null &&
+			activeInteractor !== interactorEntity
+		) {
+			return;
+		}
+
+		const stroke = activeStroke;
+		strokeSessionId++;
+
+		if (!stroke) {
+			activeInteractor = null;
+			activeStrokeState.value = null;
+			return;
+		}
+
+		await appendTipPoint(true, stroke);
+		await flushNetworkPoints(stroke);
+		await sendStrokeChannelMessage({
+			type: "end",
+			strokeId: stroke.strokeId,
+		});
+		rememberCompletedStroke(stroke.strokeId);
+		activeStroke = null;
+		activeInteractor = null;
+		networkSendAccumulator = 0;
+		activeStrokeState.value = null;
+	}
+
 	await prepareNextStroke();
 
 	await GrabInteractableManager.AddActivatedCallback(
@@ -640,15 +630,22 @@ Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 	);
 
 	if (!isLocalMode) {
-		requestStrokeReplay?.(localClientId);
+		requestStrokeReplay(localClientId);
 	}
 
-	project.ScheduleUpdate(() => {
+	project.ScheduleUpdate(async (timestep) => {
 		if (!activeStroke) {
+			networkSendAccumulator = 0;
 			return;
 		}
 
-		void appendTipPoint(false, activeStroke);
-		flushNetworkPoints(activeStroke, false);
+		await appendTipPoint(false, activeStroke);
+		networkSendAccumulator += timestep;
+		if (networkSendAccumulator < NETWORK_SEND_TIMESTEP) {
+			return;
+		}
+
+		networkSendAccumulator %= NETWORK_SEND_TIMESTEP;
+		await flushNetworkPoints(activeStroke);
 	});
 });

@@ -2,11 +2,11 @@
     "metadata": {
         "name": "Spatial Pen",
         "author": "Adamas Official",
-        "version": "0.2.1",
-        "isPublic": false,
+        "version": "0.2.13",
+        "isPublic": true,
         "description": "Spatial Pen Sample",
         "createdAt": "2026-05-08T05:06:47.054Z",
-        "updateAt": "2026-05-21T22:57:26.346Z"
+        "updateAt": "2026-05-22T04:59:28.696Z"
     },
     "world": {
         "worldEntrance": false,
