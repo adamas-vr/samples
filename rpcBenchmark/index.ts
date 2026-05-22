@@ -727,7 +727,7 @@ function renderLogs(ImGui: typeof import("imgui-adamas/imgui")): void {
 	ImGui.EndChild();
 }
 
-Project.FromBundle(projectBundle).Launch(async () => {
+Project.FromBundle(projectBundle).Launch(async (_, project) => {
 	benchmarkState.panelEntity = await createPanelEntity();
 	benchmarkState.benchmarkEntity = await createBenchmarkEntity();
 	pushLog(
@@ -742,6 +742,7 @@ Project.FromBundle(projectBundle).Launch(async () => {
 	}
 
 	await CreateImGuiWindow(
+		project,
 		{
 			targetEntity: benchmarkState.panelEntity,
 			displayWidth: UI_WIDTH,
