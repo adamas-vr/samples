@@ -1,5 +1,8 @@
 import {
+	AlphaMode,
 	EntityManager,
+	MaterialManager,
+	MaterialProperty,
 	NewQuadMesh,
 	Project,
 	RenderableManager,
@@ -12,7 +15,7 @@ import {
 } from "@adamasvr/sdk";
 import { projectBundle } from "adamasvr:editor";
 import { vec3 } from "gl-matrix";
-import { CreateImGuiWindow } from "imgui-adamas";
+import { CreateImGuiWindow } from "@adamasvr/imgui";
 
 const UI_WIDTH = 960;
 const UI_HEIGHT = 1280;
@@ -53,6 +56,7 @@ const benchmarkState: {
 	settings: BenchmarkSettings;
 	running: boolean;
 	hasAutoRunCompleted: boolean;
+	isWindowCreated: boolean;
 	status: string;
 	logs: string[];
 	latencySamples: LatencySample[];
@@ -72,6 +76,7 @@ const benchmarkState: {
 	},
 	running: false,
 	hasAutoRunCompleted: false,
+	isWindowCreated: false,
 	status: "Idle",
 	logs: [],
 	latencySamples: [],
@@ -197,9 +202,14 @@ async function createPanelEntity(): Promise<Entity> {
 		),
 	);
 	await RenderableManager.Create(entity);
+    const material = await MaterialManager.Create(entity);
+
 	await RenderableManager.SetMesh(entity, await NewQuadMesh());
 	await RenderableManager.SetReceiveShadows(entity, false);
 	await RenderableManager.SetShadowMode(entity, ShadowCastingMode.Off);
+	await MaterialManager.SetAlphaMode(material, AlphaMode.Blend);
+	await MaterialManager.SetFloat(material, MaterialProperty.Culling, 0);
+	await EntityManager.SetActive(entity, false);
 
 	return entity;
 }
@@ -386,17 +396,49 @@ async function runBenchmarks(mode: BenchmarkMode): Promise<void> {
 	}
 }
 
-function maybeStartInitialBenchmarkRun(): void {
+function maybeStartInitialBenchmarkRun(): Promise<void> | null {
 	if (benchmarkState.hasAutoRunCompleted || benchmarkState.running) {
-		return;
+		return null;
 	}
 
 	benchmarkState.hasAutoRunCompleted = true;
 	pushLog("Starting initial automatic benchmark run");
-	void runBenchmarks("all");
+	return runBenchmarks("all");
 }
 
-function renderControls(ImGui: typeof import("imgui-adamas/imgui")): void {
+async function createBenchmarkWindow(project: Project): Promise<void> {
+	if (benchmarkState.isWindowCreated || benchmarkState.panelEntity === null) {
+		return;
+	}
+
+	const panelEntity = benchmarkState.panelEntity;
+	benchmarkState.isWindowCreated = true;
+	await CreateImGuiWindow(
+		project,
+		{
+			targetEntity: panelEntity,
+			displayWidth: UI_WIDTH,
+			displayHeight: UI_HEIGHT,
+			styleColor: "dark",
+			clearColor: [0.05, 0.06, 0.08, 0.96],
+			fontSizePx: 16,
+		},
+		(ImGui) => {
+			renderControls(ImGui);
+			ImGui.Separator();
+			renderLatencyPlot(ImGui, 420);
+			ImGui.Separator();
+			renderThroughputPlot(ImGui, 420);
+			ImGui.Separator();
+			renderSingleCallPlot(ImGui, 420);
+			ImGui.Separator();
+			renderLogs(ImGui);
+		},
+	);
+	await EntityManager.SetActive(panelEntity, true);
+}
+
+function renderControls(ImGui: typeof import("@adamasvr/imgui/imgui")): void {
 	ImGui.Text("Adamas SDK Internal RPC Benchmark");
 	ImGui.Separator();
 	ImGui.Text(
@@ -516,7 +558,7 @@ function renderControls(ImGui: typeof import("imgui-adamas/imgui")): void {
 }
 
 function renderLatencyPlot(
-	ImGui: typeof import("imgui-adamas/imgui"),
+	ImGui: typeof import("@adamasvr/imgui/imgui"),
 	graphWidth: number,
 ): void {
 	const samples = benchmarkState.latencySamples;
@@ -587,7 +629,7 @@ function renderLatencyPlot(
 }
 
 function renderThroughputPlot(
-	ImGui: typeof import("imgui-adamas/imgui"),
+	ImGui: typeof import("@adamasvr/imgui/imgui"),
 	graphWidth: number,
 ): void {
 	const samples = benchmarkState.throughputSamples;
@@ -651,7 +693,7 @@ function renderThroughputPlot(
 }
 
 function renderSingleCallPlot(
-	ImGui: typeof import("imgui-adamas/imgui"),
+	ImGui: typeof import("@adamasvr/imgui/imgui"),
 	graphWidth: number,
 ): void {
 	const samples = benchmarkState.singleCallSamples;
@@ -706,7 +748,7 @@ function renderSingleCallPlot(
 	}
 }
 
-function renderLogs(ImGui: typeof import("imgui-adamas/imgui")): void {
+function renderLogs(ImGui: typeof import("@adamasvr/imgui/imgui")): void {
 	ImGui.Text("Benchmark logs");
 	if (
 		ImGui.BeginChild(
@@ -735,33 +777,18 @@ Project.FromBundle(projectBundle).Launch(async (_, project) => {
 			`and benchmark target entity ${benchmarkState.benchmarkEntity}`,
 	);
 
-	if (!benchmarkState.hasAutoRunCompleted) {
-		benchmarkState.hasAutoRunCompleted = true;
-		pushLog("Starting initial automatic benchmark run");
-		await runBenchmarks("all");
-	}
+	project.ScheduleUpdate(() => {
+		const benchmarkRun = maybeStartInitialBenchmarkRun();
+		if (benchmarkRun === null) {
+			return;
+		}
 
-	await CreateImGuiWindow(
-		project,
-		{
-			targetEntity: benchmarkState.panelEntity,
-			displayWidth: UI_WIDTH,
-			displayHeight: UI_HEIGHT,
-			styleColor: "dark",
-			clearColor: [0.05, 0.06, 0.08, 0.96],
-			fontSizePx: 16,
-		},
-		(ImGui) => {
-			// maybeStartInitialBenchmarkRun();
-			renderControls(ImGui);
-			ImGui.Separator();
-			renderLatencyPlot(ImGui, 420);
-			ImGui.Separator();
-			renderThroughputPlot(ImGui, 420);
-			ImGui.Separator();
-			renderSingleCallPlot(ImGui, 420);
-			ImGui.Separator();
-			renderLogs(ImGui);
-		},
-	);
+		void benchmarkRun
+			.finally(async () => {
+				await createBenchmarkWindow(project);
+			})
+			.catch((error) => {
+				console.error("Failed to create benchmark window", error);
+			});
+	});
 });
