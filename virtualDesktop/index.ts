@@ -19,7 +19,7 @@ import { execFileSync } from "node:child_process";
 import { quat, vec3, vec4 } from "gl-matrix";
 import sharp = require("sharp");
 import robot from "robotjs";
-import { CreateImGuiWindow, adamas_backend } from "imgui-adamas";
+import { CreateImGuiWindow, adamas_backend } from "@adamasvr/imgui";
 
 type Hand = "left" | "right";
 
@@ -156,7 +156,6 @@ let screenTexture: number | undefined;
 let screenTextureWidth = 0;
 let screenTextureHeight = 0;
 let screenMaterial: number | undefined;
-let debugWindowTimer: ReturnType<typeof setInterval> | undefined;
 let debugWindowEntity: Entity | undefined;
 let debugWindowStarting = false;
 let captureLoopScheduled = false;
@@ -827,10 +826,13 @@ function startCaptureLoop(project: Project): void {
 	});
 }
 
-async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
+async function createDebugWindow(
+	sceneGraph: SceneGraph,
+	project: Project,
+): Promise<void> {
 	const controllerEntity = sceneGraph["@controller"].entityId;
 
-	if (debugWindowTimer !== undefined || debugWindowStarting) {
+	if (debugWindowStarting) {
 		return;
 	}
 
@@ -839,7 +841,8 @@ async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
 
 	try {
 		await RenderableManager.SetEnabled(controllerEntity, true);
-		debugWindowTimer = await CreateImGuiWindow(
+		await CreateImGuiWindow(
+			project,
 			{
 				targetEntity: controllerEntity,
 				displayWidth: 640,
@@ -962,11 +965,6 @@ async function createDebugWindow(sceneGraph: SceneGraph): Promise<void> {
 }
 
 async function closeDebugWindow(): Promise<void> {
-	if (debugWindowTimer !== undefined) {
-		clearInterval(debugWindowTimer);
-		debugWindowTimer = undefined;
-	}
-
 	adamas_backend.Shutdown();
 
 	if (debugWindowEntity !== undefined) {
@@ -974,22 +972,28 @@ async function closeDebugWindow(): Promise<void> {
 	}
 }
 
-async function toggleDebugWindow(sceneGraph: SceneGraph): Promise<void> {
-	if (debugWindowTimer !== undefined || debugWindowStarting) {
+async function toggleDebugWindow(
+	sceneGraph: SceneGraph,
+	project: Project,
+): Promise<void> {
+	if (debugWindowStarting) {
 		await closeDebugWindow();
 		return;
 	}
 
-	await createDebugWindow(sceneGraph);
+	await createDebugWindow(sceneGraph, project);
 }
 
-async function initializeDebugButton(sceneGraph: SceneGraph): Promise<void> {
+async function initializeDebugButton(
+	sceneGraph: SceneGraph,
+	project: Project,
+): Promise<void> {
 	const debugButtonEntity = sceneGraph["@Display"]["@debug button"].entityId;
 	debugWindowEntity = sceneGraph["@controller"].entityId;
 
 	await GrabInteractableManager.SetAllowHoverActivate(debugButtonEntity, true);
 	await GrabInteractableManager.AddActivatedCallback(debugButtonEntity, () => {
-		void toggleDebugWindow(sceneGraph).catch((error) => {
+		void toggleDebugWindow(sceneGraph, project).catch((error) => {
 			console.error("Failed to toggle debug ImGui window", error);
 		});
 	});
@@ -1001,9 +1005,9 @@ async function initializeDebugButton(sceneGraph: SceneGraph): Promise<void> {
 
 Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 	await createScreenQuad(sceneGraph);
-	await initializeDebugButton(sceneGraph);
+	await initializeDebugButton(sceneGraph, project);
 	if (showImGuiDebugWindow) {
-		await createDebugWindow(sceneGraph);
+		await createDebugWindow(sceneGraph, project);
 	}
 	await initializeControllerInput();
 	startCursorLoop(project);

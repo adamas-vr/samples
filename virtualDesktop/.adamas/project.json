@@ -1,13 +1,12 @@
 {
     "metadata": {
         "name": "virtualDesktop",
-        "projectId": "v02w9Jt5u1vt79vtJwQRDyUzZu_TVLouskPHh7rWez8",
         "author": "Test T0 Account",
         "version": "0.0.7",
         "isPublic": true,
         "description": "No project description.",
         "createdAt": "2026-04-07T05:28:30.106Z",
-        "updateAt": "2026-05-14T03:49:23.652Z"
+        "updateAt": "2026-05-23T04:09:49.347Z"
     },
     "world": {
         "worldEntrance": false,
