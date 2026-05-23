@@ -1,13 +1,13 @@
 {
     "metadata": {
-        "name": "uiSample",
+        "name": "ImGui UI Sample",
         "projectId": "Agu9Hko-iKGDRnV8djCaRVVrYl2lvoKEPKpT5i_qOkg",
-        "author": "Test Account 0",
-        "version": "0.0.1",
-        "isPublic": false,
-        "description": "No project description.",
+        "author": "Adamas Official",
+        "version": "0.1.3",
+        "isPublic": true,
+        "description": "Dear ImGui sample with a custom Adamas backend.",
         "createdAt": "2026-05-05T19:09:12.404Z",
-        "updateAt": "2026-05-08T04:00:26.643Z"
+        "updateAt": "2026-05-23T01:11:22.255Z"
     },
     "world": {
         "worldEntrance": false,
@@ -109,7 +109,7 @@
                             0.6431253104482858,
                             1
                         ],
-                        "isTransformSync": false
+                        "isTransformSync": true
                     }
                 ],
                 [
@@ -120,8 +120,8 @@
                         "parent": "00000000-0000-0000-0000-000000000000",
                         "children": [],
                         "localPosition": [
-                            -1.0545349682987273,
-                            0.35112461511360005,
+                            -1,
+                            1,
                             0
                         ],
                         "localRotation": [
@@ -130,9 +130,9 @@
                             0
                         ],
                         "localScale": [
-                            1,
-                            1,
-                            1
+                            0.49085764182258235,
+                            0.49085764182258235,
+                            0.49085764182258235
                         ],
                         "isTransformSync": false
                     }
