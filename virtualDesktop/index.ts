@@ -150,7 +150,7 @@ const mouseScaleY = screenHeight / robotScreenSize.height;
 const triggerClickThreshold = 0.8;
 const metricsWindowMs = 1000;
 const metricsHistoryLength = 180;
-const showImGuiDebugWindow = true;
+const showImGuiDebugWindow = false;
 
 let screenTexture: number | undefined;
 let screenTextureWidth = 0;
