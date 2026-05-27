@@ -2,11 +2,12 @@
     "metadata": {
         "name": "RPC Benchmark",
         "author": "Adamas Official",
-        "version": "0.1.5",
+        "version": "1.0.2",
         "isPublic": true,
         "description": "Benchmark the RPC interfacing with the runtime.",
         "createdAt": "2026-05-10T04:42:44.051Z",
-        "updateAt": "2026-05-23T03:52:45.075Z"
+        "updateAt": "2026-05-27T22:28:49.063Z",
+        "previewImagePath": "projects/8NFqsUGBOfTOAnjZOib3m8YxQCv2/1779920928622-033e9485-db51-4a51-9ac3-a399a19b3426.png"
     },
     "world": {
         "worldEntrance": false,

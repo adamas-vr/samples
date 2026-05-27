@@ -2,7 +2,7 @@
     "name": "interaction",
     "version": "0.0.1",
     "dependencies": {
-        "@adamasvr/sdk": "*",
+        "@adamasvr/sdk": "^0.4.3",
         "gl-matrix": "^3.4.4"
     },
     "devDependencies": {

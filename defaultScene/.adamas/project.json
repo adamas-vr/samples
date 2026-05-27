@@ -2,11 +2,12 @@
     "metadata": {
         "name": "Home Space",
         "author": "Adamas Official",
-        "version": "0.1.5",
-        "isPublic": false,
+        "version": "1.0.1",
+        "isPublic": true,
         "description": "The home space.",
         "createdAt": "2026-03-24T16:51:17.472Z",
-        "updateAt": "2026-05-22T23:19:51.754Z"
+        "updateAt": "2026-05-27T15:49:29.440Z",
+        "previewImagePath": "projects/8NFqsUGBOfTOAnjZOib3m8YxQCv2/1778872985802-a1f2a98f-36b8-4e28-924e-0ff822234cbc.png"
     },
     "world": {
         "worldEntrance": true,

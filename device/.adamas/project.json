@@ -2,11 +2,12 @@
     "metadata": {
         "name": "Controller Visualization",
         "author": "Adamas Official",
-        "version": "0.1.0",
-        "isPublic": false,
+        "version": "1.0.1",
+        "isPublic": true,
         "description": "Visualize the VR controllers and actions being activated.",
         "createdAt": "2026-04-02T22:09:06.823Z",
-        "updateAt": "2026-05-20T20:35:13.398Z"
+        "updateAt": "2026-05-27T22:21:55.249Z",
+        "previewImagePath": "projects/8NFqsUGBOfTOAnjZOib3m8YxQCv2/1779920514739-f6f7e0d2-0e32-4299-889f-455863bc0e4e.png"
     },
     "world": {
         "worldEntrance": false,

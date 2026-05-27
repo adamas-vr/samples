@@ -1,12 +1,13 @@
 {
     "metadata": {
         "name": "virtualDesktop",
-        "author": "Test T0 Account",
-        "version": "0.0.7",
+        "author": "Adamas Official",
+        "version": "1.0.4",
         "isPublic": true,
-        "description": "No project description.",
+        "description": "Virtual desktop on Adamas",
         "createdAt": "2026-04-07T05:28:30.106Z",
-        "updateAt": "2026-05-23T04:09:49.347Z"
+        "updateAt": "2026-05-27T22:45:42.923Z",
+        "previewImagePath": "projects/8NFqsUGBOfTOAnjZOib3m8YxQCv2/1779921845272-01a860c4-f577-4573-8a7a-300370fac7c3.png"
     },
     "world": {
         "worldEntrance": false,
