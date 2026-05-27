@@ -2,11 +2,12 @@
     "metadata": {
         "name": "Interaction",
         "author": "Adamas Official",
-        "version": "0.0.2",
-        "isPublic": false,
+        "version": "1.0.1",
+        "isPublic": true,
         "description": "Interaction sample for grabble and collision detection.",
         "createdAt": "2026-05-21T18:14:36.857Z",
-        "updateAt": "2026-05-21T20:55:18.313Z"
+        "updateAt": "2026-05-27T20:28:25.090Z",
+        "previewImagePath": "projects/8NFqsUGBOfTOAnjZOib3m8YxQCv2/1779913704609-e1d9bfaa-000a-49eb-b60d-3a8d603aa054.png"
     },
     "world": {
         "worldEntrance": false,

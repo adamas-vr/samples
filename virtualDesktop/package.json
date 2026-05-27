@@ -2,8 +2,8 @@
 	"name": "virtualDesktop",
 	"version": "0.0.1",
 	"dependencies": {
-		"@adamasvr/imgui": "^1.0.1",
-		"@adamasvr/sdk": "^0.3.7",
+		"@adamasvr/imgui": "^1.0.2",
+		"@adamasvr/sdk": "^0.4.3",
 		"gl-matrix": "^3.4.4",
 		"robotjs": "file:../../robotjs",
 		"sharp": "^0.34.5",

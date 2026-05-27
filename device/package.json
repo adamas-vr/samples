@@ -2,7 +2,7 @@
 	"name": "device",
 	"version": "0.0.1",
 	"dependencies": {
-		"@adamasvr/sdk": "^0.3.7",
+		"@adamasvr/sdk": "^0.4.3",
 		"gl-matrix": "^3.4.4"
 	},
 	"devDependencies": {
