@@ -7,7 +7,6 @@ import {
 	SharedTexture,
 	type Texture,
 	TransformManager,
-	GrabInteractableManager,
 	Device,
 	DevicePath,
 	type DeviceSubscription,
@@ -18,7 +17,6 @@ import { projectBundle } from "adamasvr:editor";
 import { execFileSync } from "node:child_process";
 import { quat, vec3, vec4 } from "gl-matrix";
 import robot from "robotjs";
-import { CreateImGuiWindow, adamas_backend } from "@adamasvr/imgui";
 
 type Hand = "left" | "right";
 
@@ -149,13 +147,9 @@ const mouseScaleY = screenHeight / robotScreenSize.height;
 const triggerClickThreshold = 0.8;
 const metricsWindowMs = 1000;
 const metricsHistoryLength = 180;
-const showImGuiDebugWindow = false;
 
 let screenTexture: Texture | undefined;
 let screenSharedTexture: SharedTexture | undefined;
-let screenMaterial: number | undefined;
-let debugWindowEntity: Entity | undefined;
-let debugWindowStarting = false;
 let captureLoopScheduled = false;
 let cursorLoopScheduled = false;
 let displayState: DisplayState | undefined;
@@ -164,7 +158,6 @@ let rightHandEntity: Entity | undefined;
 let preferredHand: Hand | undefined;
 let vrCursorPosition: ScreenPoint | undefined;
 let primaryButtonDown = false;
-let emissionStrength = 1.0;
 const captureRegionScale = 1.0;
 const deviceSubscriptions: DeviceSubscription[] = [];
 const controllerInput: ControllerInput = {
@@ -244,40 +237,6 @@ function recordCaptureMetrics(
 	);
 }
 
-function getRealtimeCaptureFps(): number {
-	const nowMs = Date.now();
-	pruneOldSamples(nowMs);
-	return (completedCaptureTimesMs.length * 1000) / metricsWindowMs;
-}
-
-function getRpcThroughputBytesPerSecond(): number {
-	const nowMs = Date.now();
-	pruneOldSamples(nowMs);
-	return payloadByteSamples.reduce((total, sample) => total + sample.bytes, 0);
-}
-
-function getLatestPayloadBytes(): number {
-	return payloadByteSamples.length === 0
-		? 0
-		: payloadByteSamples[payloadByteSamples.length - 1].bytes;
-}
-
-function getLatestMetric(history: number[]): number {
-	return history.length === 0 ? 0 : history[history.length - 1];
-}
-
-function getCapturePlotMaxMs(): number {
-	const values = [
-		...captureStageHistory.capture,
-		...captureStageHistory.cursor,
-		...captureStageHistory.prepare,
-		...captureStageHistory.load,
-		...captureStageHistory.total,
-	];
-
-	return Math.max(1, ...values) * 1.2;
-}
-
 function formatBytes(bytes: number): string {
 	if (bytes >= 1024 * 1024) {
 		return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
@@ -291,26 +250,7 @@ function formatBytes(bytes: number): string {
 }
 
 function makeEmissionColor(): vec4 {
-	return vec4.fromValues(
-		emissionStrength,
-		emissionStrength,
-		emissionStrength,
-		1,
-	);
-}
-
-function applyEmissionStrength(): void {
-	if (screenMaterial === undefined) {
-		return;
-	}
-
-	void MaterialManager.SetColor(
-		screenMaterial,
-		MaterialProperty.Emission,
-		makeEmissionColor(),
-	).catch((error) => {
-		console.error("Failed to update emission strength", error);
-	});
+	return vec4.fromValues(1, 1, 1, 1);
 }
 
 function setCapturePixel(
@@ -660,7 +600,6 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 	await TransformManager.SetLocalScale(screenEntity, displayScale);
 
 	const material = await RenderableManager.GetMaterial(screenEntity);
-	screenMaterial = material;
 	screenSharedTexture = await SharedTexture.Create(
 		getRobotCaptureWidth(),
 		getRobotCaptureHeight(),
@@ -742,157 +681,8 @@ function startCaptureLoop(project: Project): void {
 	});
 }
 
-async function createDebugWindow(
-	sceneGraph: SceneGraph,
-	project: Project,
-): Promise<void> {
-	const controllerEntity = sceneGraph["@controller"].entityId;
-
-	if (debugWindowStarting) {
-		return;
-	}
-
-	debugWindowStarting = true;
-	debugWindowEntity = controllerEntity;
-
-	try {
-		await RenderableManager.SetEnabled(controllerEntity, true);
-		await CreateImGuiWindow(
-			project,
-			{
-				targetEntity: controllerEntity,
-				displayWidth: 640,
-				displayHeight: 480,
-				styleColor: "dark",
-				clearColor: [0.02, 0.02, 0.025, 1],
-				fontSizePx: 14,
-			},
-			(ImGui) => {
-				const realtimeFps = getRealtimeCaptureFps();
-				const throughputBytesPerSecond = getRpcThroughputBytesPerSecond();
-				const plotMaxMs = getCapturePlotMaxMs();
-				const latestPayloadBytes = getLatestPayloadBytes();
-				const plotStage = (
-					label: string,
-					history: number[],
-					graphWidth: number,
-				) => {
-					const latestMs = getLatestMetric(history);
-					ImGui.PlotLines(
-						label,
-						history,
-						history.length,
-						0,
-						`${latestMs.toFixed(1)} ms`,
-						0,
-						plotMaxMs,
-						new ImGui.Vec2(graphWidth, 48),
-					);
-				};
-
-				ImGui.Text("Virtual Desktop Capture");
-				ImGui.Separator();
-
-				ImGui.Text("Runtime updates");
-				ImGui.Text(
-					`Realtime FPS: ${realtimeFps.toFixed(1)} ` +
-						`(actual completed capture/upload rate)`,
-				);
-
-				ImGui.Separator();
-				ImGui.Text("RGBA upload");
-				ImGui.Text(
-					`Robot capture: ${getRobotCaptureWidth()}x${getRobotCaptureHeight()}`,
-				);
-				ImGui.Text(
-					`Upload size: ${getRobotCaptureWidth()}x${getRobotCaptureHeight()}`,
-				);
-
-				ImGui.Separator();
-				ImGui.Text("RPC throughput");
-				ImGui.Text(`Payload buffer: ${formatBytes(latestPayloadBytes)}`);
-				ImGui.Text(`Payload rate: ${formatBytes(throughputBytesPerSecond)}/s`);
-
-				ImGui.Separator();
-				ImGui.Text("Visual output");
-				const emissionValue: [number] = [emissionStrength];
-				ImGui.SetNextItemWidth(360);
-				if (
-					ImGui.SliderFloat(
-						"Emission strength",
-						emissionValue,
-						0,
-						3,
-						"%.2f",
-						ImGui.SliderFlags.AlwaysClamp,
-					)
-				) {
-					emissionStrength = clamp(emissionValue[0], 0, 3);
-					applyEmissionStrength();
-				}
-
-				ImGui.Separator();
-				ImGui.Text("Capture stage time");
-				ImGui.Text(`Scale: 0-${plotMaxMs.toFixed(1)} ms`);
-				plotStage("capture", captureStageHistory.capture, 245);
-				ImGui.SameLine();
-				plotStage("cursor", captureStageHistory.cursor, 245);
-				plotStage("prepare", captureStageHistory.prepare, 245);
-				ImGui.SameLine();
-				plotStage("uploadRGBA", captureStageHistory.load, 245);
-				plotStage("total", captureStageHistory.total, 520);
-			},
-		);
-	} finally {
-		debugWindowStarting = false;
-	}
-}
-
-async function closeDebugWindow(): Promise<void> {
-	adamas_backend.Shutdown();
-
-	if (debugWindowEntity !== undefined) {
-		await RenderableManager.SetEnabled(debugWindowEntity, false);
-	}
-}
-
-async function toggleDebugWindow(
-	sceneGraph: SceneGraph,
-	project: Project,
-): Promise<void> {
-	if (debugWindowStarting) {
-		await closeDebugWindow();
-		return;
-	}
-
-	await createDebugWindow(sceneGraph, project);
-}
-
-async function initializeDebugButton(
-	sceneGraph: SceneGraph,
-	project: Project,
-): Promise<void> {
-	const debugButtonEntity = sceneGraph["@Display"]["@debug button"].entityId;
-	debugWindowEntity = sceneGraph["@controller"].entityId;
-
-	await GrabInteractableManager.SetAllowHoverActivate(debugButtonEntity, true);
-	await GrabInteractableManager.AddActivatedCallback(debugButtonEntity, () => {
-		void toggleDebugWindow(sceneGraph, project).catch((error) => {
-			console.error("Failed to toggle debug ImGui window", error);
-		});
-	});
-
-	if (!showImGuiDebugWindow) {
-		await RenderableManager.SetEnabled(debugWindowEntity, false);
-	}
-}
-
 Project.FromBundle(projectBundle).Launch(async (sceneGraph, project) => {
 	await createScreenQuad(sceneGraph);
-	await initializeDebugButton(sceneGraph, project);
-	if (showImGuiDebugWindow) {
-		await createDebugWindow(sceneGraph, project);
-	}
 	await initializeControllerInput();
 	startCursorLoop(project);
 	startCaptureLoop(project);

@@ -6,12 +6,6 @@ declare module "@adamasvr/sdk"{
 export interface SceneGraph
 {
     "@Display": {
-        entityId: Entity,
-        "@debug button": {
-            entityId: Entity
-        }
-    },
-    "@controller": {
         entityId: Entity
     }
 }
