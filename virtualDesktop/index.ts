@@ -4,8 +4,8 @@ import {
 	Project,
 	RenderableManager,
 	SceneGraph,
-	TextureFormat,
-	TextureManager,
+	SharedTexture,
+	type Texture,
 	TransformManager,
 	GrabInteractableManager,
 	Device,
@@ -17,7 +17,6 @@ import {
 import { projectBundle } from "adamasvr:editor";
 import { execFileSync } from "node:child_process";
 import { quat, vec3, vec4 } from "gl-matrix";
-import sharp = require("sharp");
 import robot from "robotjs";
 import { CreateImGuiWindow, adamas_backend } from "@adamasvr/imgui";
 
@@ -51,7 +50,7 @@ type ByteSample = {
 type CaptureStageMetrics = {
 	captureMs: number;
 	cursorMs: number;
-	compressMs: number;
+	prepareMs: number;
 	loadMs: number;
 	totalMs: number;
 };
@@ -59,7 +58,7 @@ type CaptureStageMetrics = {
 type CaptureStageHistory = {
 	capture: number[];
 	cursor: number[];
-	compress: number[];
+	prepare: number[];
 	load: number[];
 	total: number[];
 };
@@ -152,9 +151,8 @@ const metricsWindowMs = 1000;
 const metricsHistoryLength = 180;
 const showImGuiDebugWindow = false;
 
-let screenTexture: number | undefined;
-let screenTextureWidth = 0;
-let screenTextureHeight = 0;
+let screenTexture: Texture | undefined;
+let screenSharedTexture: SharedTexture | undefined;
 let screenMaterial: number | undefined;
 let debugWindowEntity: Entity | undefined;
 let debugWindowStarting = false;
@@ -166,10 +164,8 @@ let rightHandEntity: Entity | undefined;
 let preferredHand: Hand | undefined;
 let vrCursorPosition: ScreenPoint | undefined;
 let primaryButtonDown = false;
-let emissionStrength = 1.1;
-let captureRegionScale = 0.6;
-let jpegQuality = 50;
-let streamRgba = true;
+let emissionStrength = 1.0;
+const captureRegionScale = 1.0;
 const deviceSubscriptions: DeviceSubscription[] = [];
 const controllerInput: ControllerInput = {
 	leftTrigger: 0,
@@ -179,7 +175,7 @@ const completedCaptureTimesMs: number[] = [];
 const captureStageHistory: CaptureStageHistory = {
 	capture: [],
 	cursor: [],
-	compress: [],
+	prepare: [],
 	load: [],
 	total: [],
 };
@@ -225,7 +221,7 @@ function recordCaptureMetrics(
 	completedCaptureTimesMs.push(nowMs);
 	appendMetric(captureStageHistory.capture, stageMetrics.captureMs);
 	appendMetric(captureStageHistory.cursor, stageMetrics.cursorMs);
-	appendMetric(captureStageHistory.compress, stageMetrics.compressMs);
+	appendMetric(captureStageHistory.prepare, stageMetrics.prepareMs);
 	appendMetric(captureStageHistory.load, stageMetrics.loadMs);
 	appendMetric(captureStageHistory.total, stageMetrics.totalMs);
 	payloadByteSamples.push({
@@ -241,7 +237,7 @@ function recordCaptureMetrics(
 			`payload=${formatBytes(payloadBytes)}`,
 			`capture=${stageMetrics.captureMs.toFixed(1)}ms`,
 			`cursor=${stageMetrics.cursorMs.toFixed(1)}ms`,
-			`compress=${stageMetrics.compressMs.toFixed(1)}ms`,
+			`prepare=${stageMetrics.prepareMs.toFixed(1)}ms`,
 			`load=${stageMetrics.loadMs.toFixed(1)}ms`,
 			`total=${stageMetrics.totalMs.toFixed(1)}ms`,
 		].join(" "),
@@ -274,7 +270,7 @@ function getCapturePlotMaxMs(): number {
 	const values = [
 		...captureStageHistory.capture,
 		...captureStageHistory.cursor,
-		...captureStageHistory.compress,
+		...captureStageHistory.prepare,
 		...captureStageHistory.load,
 		...captureStageHistory.total,
 	];
@@ -315,29 +311,6 @@ function applyEmissionStrength(): void {
 	).catch((error) => {
 		console.error("Failed to update emission strength", error);
 	});
-}
-
-async function prepareCaptureUpload(
-	rgba: Buffer,
-	width: number,
-	height: number,
-): Promise<PreparedCaptureUpload> {
-	const jpeg = await sharp(rgba, {
-		raw: {
-			width,
-			height,
-			channels: 4,
-		},
-	})
-		.jpeg({ quality: jpegQuality })
-		.toBuffer();
-
-	return {
-		data: new Uint8Array(jpeg),
-		width,
-		height,
-		payloadBytes: jpeg.byteLength,
-	};
 }
 
 function setCapturePixel(
@@ -433,24 +406,28 @@ function drawCursor(
 	sourceWidth = width,
 	sourceHeight = height,
 ): void {
-	const cursor = getCursorPosition();
+	const cursorPosition = getCursorPosition();
+	const cursor = {
+		x: cursorPosition.x,
+		y: sourceHeight - 1 - cursorPosition.y,
+	};
 	const outline = [
 		{ x: cursor.x, y: cursor.y },
-		{ x: cursor.x, y: cursor.y + 24 },
-		{ x: cursor.x + 6, y: cursor.y + 18 },
-		{ x: cursor.x + 11, y: cursor.y + 27 },
-		{ x: cursor.x + 16, y: cursor.y + 24 },
-		{ x: cursor.x + 11, y: cursor.y + 16 },
-		{ x: cursor.x + 21, y: cursor.y + 16 },
+		{ x: cursor.x, y: cursor.y - 24 },
+		{ x: cursor.x + 6, y: cursor.y - 18 },
+		{ x: cursor.x + 11, y: cursor.y - 27 },
+		{ x: cursor.x + 16, y: cursor.y - 24 },
+		{ x: cursor.x + 11, y: cursor.y - 16 },
+		{ x: cursor.x + 21, y: cursor.y - 16 },
 	];
 	const fill = [
-		{ x: cursor.x + 2, y: cursor.y + 4 },
-		{ x: cursor.x + 2, y: cursor.y + 19 },
-		{ x: cursor.x + 6, y: cursor.y + 14 },
-		{ x: cursor.x + 12, y: cursor.y + 24 },
-		{ x: cursor.x + 13, y: cursor.y + 23 },
-		{ x: cursor.x + 8, y: cursor.y + 13 },
-		{ x: cursor.x + 15, y: cursor.y + 14 },
+		{ x: cursor.x + 2, y: cursor.y - 4 },
+		{ x: cursor.x + 2, y: cursor.y - 19 },
+		{ x: cursor.x + 6, y: cursor.y - 14 },
+		{ x: cursor.x + 12, y: cursor.y - 24 },
+		{ x: cursor.x + 13, y: cursor.y - 23 },
+		{ x: cursor.x + 8, y: cursor.y - 13 },
+		{ x: cursor.x + 15, y: cursor.y - 14 },
 	];
 	const scaleX = width / sourceWidth;
 	const scaleY = height / sourceHeight;
@@ -684,13 +661,11 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 
 	const material = await RenderableManager.GetMaterial(screenEntity);
 	screenMaterial = material;
-	screenTexture = await TextureManager.Create2D(
-		screenWidth,
-		screenHeight,
-		TextureFormat.RGBA32,
+	screenSharedTexture = await SharedTexture.Create(
+		getRobotCaptureWidth(),
+		getRobotCaptureHeight(),
 	);
-	screenTextureWidth = screenWidth;
-	screenTextureHeight = screenHeight;
+	screenTexture = screenSharedTexture.textureHandle;
 	await MaterialManager.SetTexture(
 		material,
 		MaterialProperty.BaseColorMap,
@@ -708,58 +683,11 @@ async function createScreenQuad(sceneGraph: SceneGraph): Promise<void> {
 	);
 }
 
-async function ensureRgbaTextureSize(
-	width: number,
-	height: number,
-): Promise<number> {
-	if (
-		screenTexture !== undefined &&
-		screenTextureWidth === width &&
-		screenTextureHeight === height
-	) {
-		return screenTexture;
-	}
-
-	if (screenMaterial === undefined) {
-		throw new Error("Screen material is not initialized");
-	}
-
-	const previousTexture = screenTexture;
-	const texture = await TextureManager.Create2D(
-		width,
-		height,
-		TextureFormat.RGBA32,
-	);
-	screenTexture = texture;
-	screenTextureWidth = width;
-	screenTextureHeight = height;
-
-	await MaterialManager.SetTexture(
-		screenMaterial,
-		MaterialProperty.BaseColorMap,
-		texture,
-	);
-	await MaterialManager.SetTexture(
-		screenMaterial,
-		MaterialProperty.EmissionMap,
-		texture,
-	);
-
-	if (previousTexture !== undefined) {
-		void TextureManager.Destroy(previousTexture).catch((error) => {
-			console.error("Failed to destroy previous screen texture", error);
-		});
-	}
-
-	return texture;
-}
-
 async function captureDesktopFrame(): Promise<void> {
-	if (screenTexture === undefined) {
+	if (screenSharedTexture === undefined) {
 		return;
 	}
 
-	let texture = screenTexture;
 	const totalStartMs = performance.now();
 	const captureStartMs = performance.now();
 	const capture = robot.screen.capture(
@@ -778,34 +706,22 @@ async function captureDesktopFrame(): Promise<void> {
 		screenHeight,
 	);
 	const cursorEndMs = performance.now();
-	const compressStartMs = performance.now();
-	const upload = streamRgba
-		? {
-				data: new Uint8Array(capture.image),
-				width: capture.width,
-				height: capture.height,
-				payloadBytes: capture.image.byteLength,
-			}
-		: await prepareCaptureUpload(capture.image, capture.width, capture.height);
-	const compressEndMs = performance.now();
+	const prepareStartMs = performance.now();
+	const upload: PreparedCaptureUpload = {
+		data: new Uint8Array(capture.image),
+		width: capture.width,
+		height: capture.height,
+		payloadBytes: capture.image.byteLength,
+	};
+	const prepareEndMs = performance.now();
 
 	const loadStartMs = performance.now();
-	if (streamRgba) {
-		texture = await ensureRgbaTextureSize(upload.width, upload.height);
-		await TextureManager.LoadRGBAImage(
-			texture,
-			upload.data,
-			upload.width,
-			upload.height,
-		);
-	} else {
-		await TextureManager.LoadImage(texture, upload.data);
-	}
+	await screenSharedTexture.uploadRGBA(upload.data);
 	const loadEndMs = performance.now();
 	recordCaptureMetrics(upload.payloadBytes, {
 		captureMs: captureEndMs - captureStartMs,
 		cursorMs: cursorEndMs - cursorStartMs,
-		compressMs: compressEndMs - compressStartMs,
+		prepareMs: prepareEndMs - prepareStartMs,
 		loadMs: loadEndMs - loadStartMs,
 		totalMs: loadEndMs - totalStartMs,
 	});
@@ -884,39 +800,7 @@ async function createDebugWindow(
 				);
 
 				ImGui.Separator();
-				ImGui.Text("JPEG upload");
-				const streamRgbaValue: [boolean] = [streamRgba];
-				if (ImGui.Checkbox("Stream raw RGBA", streamRgbaValue)) {
-					streamRgba = streamRgbaValue[0];
-				}
-				const qualityValue: [number] = [jpegQuality];
-				ImGui.SetNextItemWidth(360);
-				if (
-					ImGui.SliderFloat(
-						"Quality",
-						qualityValue,
-						10,
-						95,
-						"%.0f",
-						ImGui.SliderFlags.AlwaysClamp,
-					)
-				) {
-					jpegQuality = Math.round(clamp(qualityValue[0], 10, 95));
-				}
-				const captureRegionValue: [number] = [captureRegionScale];
-				ImGui.SetNextItemWidth(360);
-				if (
-					ImGui.SliderFloat(
-						"Robot capture scale",
-						captureRegionValue,
-						0.25,
-						1,
-						"%.2f",
-						ImGui.SliderFlags.AlwaysClamp,
-					)
-				) {
-					captureRegionScale = clamp(captureRegionValue[0], 0.25, 1);
-				}
+				ImGui.Text("RGBA upload");
 				ImGui.Text(
 					`Robot capture: ${getRobotCaptureWidth()}x${getRobotCaptureHeight()}`,
 				);
@@ -953,9 +837,9 @@ async function createDebugWindow(
 				plotStage("capture", captureStageHistory.capture, 245);
 				ImGui.SameLine();
 				plotStage("cursor", captureStageHistory.cursor, 245);
-				plotStage("encode", captureStageHistory.compress, 245);
+				plotStage("prepare", captureStageHistory.prepare, 245);
 				ImGui.SameLine();
-				plotStage("loadImage", captureStageHistory.load, 245);
+				plotStage("uploadRGBA", captureStageHistory.load, 245);
 				plotStage("total", captureStageHistory.total, 520);
 			},
 		);
